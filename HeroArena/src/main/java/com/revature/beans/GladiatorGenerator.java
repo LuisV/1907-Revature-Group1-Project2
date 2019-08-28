@@ -13,7 +13,7 @@ public class GladiatorGenerator {
 			gg = new GladiatorGenerator();
 		return gg;
 	}
-	public static Gladiator getGladiator(int star) {
+	public static Gladiator generateGladiator(String name, int star) {
 		int strength = 0, dexterity = 0, vitality = 0;
 		int numberOfPoints = 6 + 2 * star;
 		int selection = 0;
@@ -27,7 +27,7 @@ public class GladiatorGenerator {
 			}
 			numberOfPoints--;
 		}
-		Gladiator g = new Gladiator(strength, dexterity, vitality);
+		Gladiator g = new Gladiator(name, strength, dexterity, vitality);
 		return g;
 	}
 }
