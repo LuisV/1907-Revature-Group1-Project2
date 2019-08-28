@@ -1,5 +1,7 @@
 package com.revature.services.hibernate;
 
-public class UserServiceHibernate {
+import com.revature.services.UserService;
+
+public class UserServiceHibernate  implements UserService{
 
 }
