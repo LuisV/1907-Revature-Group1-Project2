@@ -39,7 +39,7 @@ public class PlayerHibernate implements PlayerDAO{
 		Session s = hu.getSession();
 		Player p = s.get(Player.class, player.getId());
 		if (p == null) {
-			
+			//String query = fr
 		}
 		s.close();
 		return null;
