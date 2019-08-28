@@ -5,14 +5,15 @@ public class Gladiator {
 	private Integer dexterity;
 	private Integer vitality;
 	private Integer experience;
-	private Integer health;
+	private Integer currentHealth;
+	private Integer maxHealth;
 	
 	public Gladiator() {
 		super();
 		this.strength = 2;
 		this.dexterity = 2;
 		this.vitality = 0;
-		this.health = 5;
+		this.maxHealth = 5;
 		this.experience = 0;
 	}
 	
@@ -21,7 +22,7 @@ public class Gladiator {
 		this.strength = 2 + strength;
 		this.dexterity = 2 + dexterity;
 		this.vitality = vitality;
-		this.health = 5 + health;
+		this.maxHealth = 5 + (2*vitality);
 		this.experience = 0;
 		
 	}
@@ -43,6 +44,7 @@ public class Gladiator {
 	}
 	public void setVitality(Integer vitality) {
 		this.vitality = vitality;
+		reconfigureHealth();
 	}
 	public Integer getExperience() {
 		return experience;
@@ -50,11 +52,16 @@ public class Gladiator {
 	public void setExperience(Integer experience) {
 		this.experience = experience;
 	}
-	public Integer getHealth() {
-		return health;
+	public void reconfigureHealth() {
+		this.maxHealth = 5 + (2*vitality);
 	}
-	public void setHealth(Integer health) {
-		this.health = health;
+
+	public Integer getCurrentHealth() {
+		return currentHealth;
+	}
+
+	public void setCurrentHealth(Integer currentHealth) {
+		this.currentHealth = currentHealth;
 	}
 	
 	

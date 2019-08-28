@@ -20,18 +20,11 @@ public class GladiatorGenerator {
 		while (numberOfPoints > 0) {
 			selection = r.nextInt(3);
 			switch (selection) {
-			case 0:
-				strength++;
-				break;
-			case 1:
-				dexterity++;
-				break;
-			case 2:
-				vitality++;
-				break;
+			case 0: strength++; break;
+			case 1: dexterity++; break;
+			case 2: vitality++; break;
 			default:
 			}
-			
 			numberOfPoints--;
 		}
 		Gladiator g = new Gladiator(strength, dexterity, vitality);
