@@ -22,6 +22,7 @@ export class AuthenticateService {
   }
 
   getUser(){
-    return this.http.get('jsonplaceholder.typicode.com/users');
+    // replace with actual http from the backend java
+    return this.http.get('https://jsonplaceholder.typicode.com/users');
   }
 }
