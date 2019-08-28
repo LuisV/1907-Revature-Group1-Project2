@@ -3,6 +3,7 @@ package com.revature.data.hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.revature.beans.User;
 import com.revature.data.UserDAO;
@@ -31,8 +32,15 @@ public class UserHibernate implements UserDAO {
 	}
 
 	public User getUser(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = hu.getSession();
+		// "from Users u" maybe?
+		String query = "from User u where u.username=:username and u.password=:password";
+		Query<User> q = s.createQuery(query, User.class);
+		q.setParameter("username", username);
+		q.setParameter("password", password);
+		User u = q.uniqueResult();
+		s.close();
+		return u;
 	}
 
 	public User banUser(User u) {
