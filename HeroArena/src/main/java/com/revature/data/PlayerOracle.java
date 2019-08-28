@@ -1,5 +1,5 @@
 package com.revature.data;
 
-public class PlayerOracle {
+public class PlayerOracle implements PlayerDAO{
 
 }
