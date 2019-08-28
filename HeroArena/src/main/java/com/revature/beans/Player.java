@@ -11,9 +11,13 @@ public class Player extends User{
 		roster = new HashSet<Gladiator>();
 	}
 
-	public Player(String username, String password) {
-		super(username, password);
+	public Player(Integer id, String username, String password) {
+		super(id, username, password);
 		roster = new HashSet<Gladiator>();
+	}
+
+	public Player(int i) {
+		super(i);
 	}
 	
 }

@@ -5,8 +5,8 @@ public class Admin extends User{
 		super();
 	}
 
-	public Admin(String username, String password) {
-		super(username, password);
+	public Admin(Integer id, String username, String password) {
+		super(id, username, password);
 	}
 	
 	public void banUser(User user) {
