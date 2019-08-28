@@ -21,10 +21,8 @@ public class RequestDispatcher {
 	{
 		delegateMap = new HashMap<String, FrontControllerDelegate>();
 		/*
-		delegateMap.put("books", new BookDelegate());
-		delegateMap.put("genres", new GenreDelegate());
-		delegateMap.put("authors", new AuthorDelegate());
-		delegateMap.put("login", new LoginDelegate());
+		delegateMap.put("", new  Delegate());
+		
 		*/
 	}
 	public FrontControllerDelegate dispatch(HttpServletRequest req, HttpServletResponse resp)
@@ -36,17 +34,11 @@ public class RequestDispatcher {
 				// We already added the cors headers and are now done.
 				return (r1, r2) -> {}; // empty delegate.
 			}
-			// Input: "BookStore/books"
-			// Input: "BookStore/books/1"
-			// Input: "BookStore/books/"
+			
 			StringBuilder switchString = new StringBuilder(req.getRequestURI());
 			// remove context path
 			switchString.replace(0, req.getContextPath().length()+1, "");
-			/*
-			 * books
-			 * books/1
-			 * books/
-			 */
+			
 			// remove the first part of the string ending with /
 			if(switchString.indexOf("/")!=-1) {
 				// save the remains of the sting for later use in the delegates
@@ -62,9 +54,7 @@ public class RequestDispatcher {
 		// TODO: to change the second argument
 		resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 		resp.addHeader("Vary", "Origin");
-		//if I don't care about getting my cookie, this will work
-		//response.addHeader("Access-Control-Allow-Origin", "*");
-        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+		resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
         resp.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
         resp.addHeader("Access-Control-Allow-Credentials", "true");
         resp.addHeader("Access-Control-Max-Age", "1728000");
