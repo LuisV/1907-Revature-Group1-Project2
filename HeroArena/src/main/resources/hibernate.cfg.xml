@@ -3,19 +3,23 @@
 <hibernate-configuration>
     <session-factory>
         <!-- JDBC set up -->
-        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
         <property name="hibernate.connection.url">jdbc:oracle:thin:@rev-db.csd4chwvp1mn.us-east-2.rds.amazonaws.com:1521:ORCL</property>
         <property name="hibernate.connection.username">heroarena</property>
         <property name="hibernate.connection.password">p4ssw0rd</property>
+        <property name="hibernate.connection.pool_size">35</property>
 
         <!-- Hibernate set up -->
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
         <property name="show_sql">true</property>
-        <property name="hibernate.format.sql">true</property>
+        <property name="hibernate.format_sql">true</property>
         <property name="use_sql_comments">true</property>
 
-        <!-- Annotation mappings -->
+        <!-- Backwards compatibility for id generation -->
+        <property name="hibernate.id.new_generator_mappings">false</property>
 
+        <!-- Annotation mappings -->
+        <mapping class="com.revature.beans.User"/>
 
     </session-factory>
 </hibernate-configuration>
