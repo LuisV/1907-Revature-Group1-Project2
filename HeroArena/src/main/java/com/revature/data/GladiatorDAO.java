@@ -10,6 +10,7 @@ public interface GladiatorDAO {
 	
 	public Gladiator getGladiator(int i);
 	
-	public Set<Gladiator> getGladiators(Player p);
+	public Set<Gladiator> getGladiatorsForPlayer(Player p);
+
 	
 }
