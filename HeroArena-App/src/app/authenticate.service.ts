@@ -23,6 +23,7 @@ export class AuthenticateService {
 
   getUser(){
     // replace with actual http from the backend java
-    return this.http.get('https://18.221.9.229:8080/HeroArena/login/');
+    //return this.http.get('https://18.221.9.229:8080/HeroArena/login/');
+    return this.http.get('https://localhost:8080/login/');
   }
 }

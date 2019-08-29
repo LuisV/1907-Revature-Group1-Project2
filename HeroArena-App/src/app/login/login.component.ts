@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate(){
-    console.log("getting here");
     this.authent.getUser().subscribe((userObj: Object)=>{
       console.log(userObj);
 
