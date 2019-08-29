@@ -14,7 +14,7 @@ import com.revature.data.PlayerDAO;
 import com.revature.utils.HibernateUtil;
 
 public class PlayerHibernate implements PlayerDAO{
-	private HibernateUtil hu = HibernateUtil.getInstance();
+	private HibernateUtil hu;
 	private Logger log = Logger.getLogger(PlayerHibernate.class);
 	
 	@Override

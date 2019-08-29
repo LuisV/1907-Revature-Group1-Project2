@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.beans.User;
 import com.revature.services.UserService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value="/login")
@@ -17,21 +18,23 @@ public class LoginController {
 	@Autowired
 	private UserService us;
 
+	@ResponseBody
 	@RequestMapping(method=RequestMethod.GET)
-	public String goLogin(HttpSession session) {
+	public User goLogin(HttpSession session) {
 		User u = (User) session.getAttribute("user");
-		if(u != null)
-			return "redirect: home";
-		return "static/login.html";
+		if(u == null)
+			return null;
+		return u;
 	}
-	
+
+	@ResponseBody
 	@PostMapping
-	public String login(String username, String password, HttpSession session) {
+	public User login(String username, String password, HttpSession session) {
 		System.out.println(username+"/"+password);
 		User u = us.login(username, password);
 		if(u == null)
-			return "redirect:login";
+			return null;
 		session.setAttribute("user", u);
-		return "redirect:home";
+		return u;
 	}
 }
