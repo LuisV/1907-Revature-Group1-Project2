@@ -23,6 +23,6 @@ export class AuthenticateService {
 
   getUser(){
     // replace with actual http from the backend java
-    return this.http.get('https://jsonplaceholder.typicode.com/users');
+    return this.http.get('https://18.221.9.229:8080/HeroArena/login/');
   }
 }
