@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const baseURL = '';
+const baseURL = 'http://localhost:8080/';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class AuthenticateService {
     formdata.append('password', password);
     const options = {responseType: 'text' as 'text'};
 
-    return this.http.post(baseURL+"login", formdata, options)
+    return this.http.post(baseURL+"login?username="+username+"&password="+password, formdata, options)
   }
 
   getUser(){

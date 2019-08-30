@@ -29,6 +29,7 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- JDBC HOOK: DO NOT REMOVE -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
