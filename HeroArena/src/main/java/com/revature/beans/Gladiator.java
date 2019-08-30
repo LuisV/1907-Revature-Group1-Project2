@@ -31,10 +31,12 @@ public class Gladiator {
 		this.level = 1;
 		this.maxHealth = 5;
 		this.currentHealth = this.maxHealth;
+		this.reconfigureHealth();
+
 	}
 	
 	public Gladiator(Integer strength, Integer dexterity, Integer vitality) {
-		super();
+		this();
 		this.name = "str/dex/vit";
 		this.strength = 2 + strength;
 		this.dexterity = 2 + dexterity;
@@ -42,15 +44,17 @@ public class Gladiator {
 		this.maxHealth = 5 + (2*vitality);
 		this.currentHealth = this.maxHealth;
 		this.experience = 0;
-		
+		this.reconfigureHealth();
+
 	}
 
 	public Gladiator(String name, Integer strength, Integer dexterity, Integer vitality) {
-		super();
+		this(strength, dexterity, vitality);
 		this.name = name;
-		this.strength = strength;
-		this.dexterity = dexterity;
-		this.vitality = vitality;
+		//this.strength = strength;
+		//this.dexterity = dexterity;
+		//this.vitality = vitality;
+		this.reconfigureHealth();
 	}
 
 	public Integer getStrength() {
