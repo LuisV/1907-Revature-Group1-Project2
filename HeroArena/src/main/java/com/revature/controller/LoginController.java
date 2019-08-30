@@ -16,7 +16,7 @@ import com.revature.beans.User;
 import com.revature.services.UserService;
 
 @Controller
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping(value="/login")
 public class LoginController {
 
