@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from './user';
+import { map } from 'rxjs/operators';
 
-const baseURL = '';
+const baseURL = 'http://localhost:8080/HeroArena/login';
+//const baseURL = 'http://18.221.9.229:8080/HeroArena/login';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +16,18 @@ export class AuthenticateService {
 
   ngOnInit(){}
 
-  checkUser(username, password){
-    const formdata = new FormData
-    formdata.append('username', username);
-    formdata.append('password', password);
-    const options = {responseType: 'text' as 'text'};
+  checkUser(): Observable<User>{
+    const username = (<HTMLInputElement>document.getElementById('username')).value;
+    const password = (<HTMLInputElement>document.getElementById('password')).value;
+    const formdata = `username=${username}&password=${password}`;
+    console.log(formdata);
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
 
-    return this.http.post(baseURL+"login", formdata, options)
+    return this.http.post(baseURL, formdata, {headers: headers, withCredentials: true}).pipe(map(resp => resp as User));
   }
 
   getUser(){
     // replace with actual http from the backend java
-    //return this.http.get('https://18.221.9.229:8080/HeroArena/login/');
-    return this.http.get('https://localhost:8080/login/');
+    return this.http.get('https://jsonplaceholder.typicode.com/users');
   }
 }
