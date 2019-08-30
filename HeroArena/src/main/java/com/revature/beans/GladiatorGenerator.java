@@ -8,7 +8,7 @@ public class GladiatorGenerator {
 	private GladiatorGenerator() {
 		r = new Random();
 	}
-	public static GladiatorGenerator getGladiatorGenerator(int stars) {
+	public static GladiatorGenerator getGladiatorGenerator() {
 		if (gg == null)
 			gg = new GladiatorGenerator();
 		return gg;
