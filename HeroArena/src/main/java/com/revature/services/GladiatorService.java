@@ -14,7 +14,6 @@ public class GladiatorService {
 	public Gladiator getGladiator() {
 		return null;
 	}
-	@Autowired
-	private GladiatorDAO gd;
+	
 	
 }
