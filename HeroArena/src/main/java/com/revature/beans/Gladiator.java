@@ -57,6 +57,38 @@ public class Gladiator {
 		this.reconfigureHealth();
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public Integer getMaxHealth() {
+		return maxHealth;
+	}
+
+	public void setMaxHealth(Integer maxHealth) {
+		this.maxHealth = maxHealth;
+	}
+
 	public Integer getStrength() {
 		return strength;
 	}
