@@ -15,10 +15,7 @@ import com.revature.beans.GladiatorGenerator;
 @CrossOrigin
 @RequestMapping(value="/gladiator/generate")
 public class GladiatorGeneratorController {
-	private GladiatorGenerator gg;
-	{
-		gg = new GladiatorGenerator();
-	}
+	
 
 	private GladiatorGenerator gg = GladiatorGenerator.getGladiatorGenerator();
 	
