@@ -15,13 +15,16 @@ import com.revature.beans.GladiatorGenerator;
 @CrossOrigin
 @RequestMapping(value="/gladiator/generate")
 public class GladiatorGeneratorController {
+	
 
 	private GladiatorGenerator gg = GladiatorGenerator.getGladiatorGenerator();
 	
+
 	@ResponseBody
 	@RequestMapping(method=RequestMethod.GET)
 	public Gladiator generateGladiator(HttpSession session) {
 		Integer star = 4;
+
 		return GladiatorGenerator.generateGladiator("Testgladiator", star);
 	}
 	
