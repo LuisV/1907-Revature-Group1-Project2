@@ -19,11 +19,15 @@ public class GladiatorGeneratorController {
 	{
 		gg = new GladiatorGenerator();
 	}
+
+	private GladiatorGenerator gg = GladiatorGenerator.getGladiatorGenerator();
+	
+
 	@ResponseBody
 	@RequestMapping(method=RequestMethod.GET)
 	public Gladiator generateGladiator(HttpSession session) {
 		Integer star = 4;
-		
+
 		return GladiatorGenerator.generateGladiator("Testgladiator", star);
 	}
 	
