@@ -10,7 +10,28 @@ import com.revature.data.UserDAO;
 public class UserService {
 	@Autowired
 	private UserDAO ud;
+
 	public User login(String username, String password) {
 		return ud.getUser(username, password);
+	}
+
+	public User registerUser(String username, String password)
+	{
+		if (username == null || password == null || username.length() < 3 || password.length() < 6)
+			return null;
+
+		User newUser = new User();
+		newUser.setUsername(username);
+		newUser.setPassword(password);
+		newUser.setRole(1);
+
+		int key = ud.addUser(newUser);
+		newUser.setId(key);
+
+		// Registration failed
+		if (key < 1)
+			return null;
+
+		return newUser;
 	}
 }
