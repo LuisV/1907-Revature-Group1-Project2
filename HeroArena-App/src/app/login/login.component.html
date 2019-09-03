@@ -1,9 +1,9 @@
-<div *ngIf="this.authent.getUser().id == -1 && !registering">
+<div *ngIf="this.authent.getUser().id == -1 && !isRegistering()">
   <div style="text-align:center">
 
     <br>
     <div style="text-align:right; margin-right: 20px">
-      <button type="submit" class="btn btn-primary emp-btn" id="registerbtn" (click)="register()">Register</button>
+      <button type="submit" class="btn btn-primary emp-btn" id="registerbtn" (click)="setRegister()">Register</button>
     </div>
 
     <h1 style="font-size: 60px; margin: auto">
@@ -39,7 +39,7 @@
   </div>
 </div>
 
-<div *ngIf="this.authent.getUser().id != -1 && !registering">
+<div *ngIf="this.authent.getUser().id != -1 && !isRegistering()">
   <br>
   <div style="text-align:right; margin-right: 20px">
     <button type="submit" class="btn btn-primary emp-btn" id="logoutbtn" (click)="logout()">Log Out</button>
@@ -48,6 +48,50 @@
   <app-mainpage></app-mainpage>
 </div>
 
-<div *ngIf="registering">
+<div *ngIf="isRegistering()">
+  <div style="text-align:center">
+    <br>
+    <div style="text-align:right; margin-right: 20px">
+      <button type="submit" class="btn btn-primary emp-btn" id="backbtn" (click)="back()">Back</button>
+    </div>
 
+    <h1 style="font-size: 30px; margin: auto">
+      <br>
+      &nbsp;Please Register
+
+      <br>
+      <br>
+      <br>
+    </h1>
+
+    <div class="formgroup" style="text-align:left; width: 15%; margin: auto">
+      <label for="username" style="text-align:left">Username:<br></label> <input class="form-control simple-book"
+        type="text" id="username" />
+      <br>
+    </div>
+
+    <div class="formgroup" style="text-align:left; width: 15%; margin: auto">
+      <label for="password1">Password:<br></label> <input class="form-control simple-book" type="text" id="password1" />
+      <br>
+    </div>
+
+    <div class="formgroup" style="text-align:left; width: 15%; margin: auto">
+      <label for="password2">Password:<br></label> <input class="form-control simple-book" type="text" id="password2" />
+      <br>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+      <button type="submit" class="btn btn-primary emp-btn" id="submitbtn" (click)="register()">Submit</button>
+    </div>
+
+    <br>
+    <br>
+
+    <div *ngIf="!getPassMatch()">
+      Passwords did not match, please re-enter.
+    </div>
+  </div>
 </div>
