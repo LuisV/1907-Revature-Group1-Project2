@@ -24,7 +24,10 @@ CREATE TABLE gladiator (
     strength number(4),
     dexterity number(4),
     vitality number(4),
+    level number(4),
+    current_health number(4),
     max_health number(4),
+    experience number(4),
     rarity number(5,2)
 );
 
