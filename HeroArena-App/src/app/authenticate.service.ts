@@ -38,4 +38,10 @@ export class AuthenticateService {
   setUser(inUser){
     user = inUser;
   }
+
+  addPlayer(registerString): Observable<User>{
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+    return this.http.post(baseURL, registerString, {headers: headers, withCredentials: true}).pipe(map(resp => resp as User));
+  }
 }
