@@ -14,4 +14,6 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<!-- set up a static resources folder -->
+	<!-- <bean name="/gladiator/generate" 
+        class="com.revature.controller.GladiatorGeneratorController" /> -->
 </beans>

@@ -4,13 +4,18 @@ import java.util.Set;
 
 import com.revature.beans.Gladiator;
 import com.revature.beans.Player;
+import com.revature.beans.User;
 
 public interface GladiatorDAO {
+	// CREATE - Insert
 	public int addGladiator(Gladiator g);
-	
-	public Gladiator getGladiator(int i);
-	
-	public Set<Gladiator> getGladiatorsForPlayer(Player p);
+	// READ - select
+	public Gladiator getGladiator(Integer id);
+	public Set<Gladiator> getGladiatorsForUser(User u);
+	// Update - Update
+	void updateGladiator(Gladiator g);
+	// Delete
+	void deleteGladiator(Gladiator g);
 
 	
 }
