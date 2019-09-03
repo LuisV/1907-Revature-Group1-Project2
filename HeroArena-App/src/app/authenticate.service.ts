@@ -4,8 +4,11 @@ import { Observable } from 'rxjs';
 import { User } from './user';
 import { map } from 'rxjs/operators';
 
-const baseURL = 'http://localhost:8080/HeroArena/login';
-//const baseURL = 'http://18.221.9.229:8080/HeroArena/login';
+var user = new User();
+user.id = -1;
+
+//const baseURL = 'http://localhost:8080/HeroArena/login';
+const baseURL = 'http://18.221.9.229:8080/HeroArena/login';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +31,11 @@ export class AuthenticateService {
 
   getUser(){
     // replace with actual http from the backend java
-    return this.http.get('https://jsonplaceholder.typicode.com/users');
+    //return this.http.get('https://jsonplaceholder.typicode.com/users');
+    return user;
+  }
+
+  setUser(inUser){
+    user = inUser;
   }
 }
