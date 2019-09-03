@@ -9,7 +9,7 @@ public class Gladiator {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gladiator")
 	@SequenceGenerator(name="gladiator", sequenceName="gladiator_seq", allocationSize=1)
 	private Integer id;
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="player_id")
 	private User player;
 	private String name;
