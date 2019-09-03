@@ -20,15 +20,17 @@ CREATE TABLE users (
 
 CREATE TABLE gladiator (
     id number(20) PRIMARY KEY,
-    name varchar2(36),
-    strength number(4),
-    dexterity number(4),
-    vitality number(4),
-    level number(4),
-    current_health number(4),
-    max_health number(4),
-    experience number(4),
-    rarity number(5,2)
+    player_id number(20) NOT NULL,
+    name varchar2(36) NOT NULL,
+    strength number(4) NOT NULL,
+    dexterity number(4) NOT NULL,
+    vitality number(4) NOT NULL,
+    current_level number(4) DEFAULT 1,
+    current_health number(4) NOT NULL,
+    max_health number(4) NOT NULL,
+    experience number(4) DEFAULT 0,
+    rarity number(1) NOT NULL,
+    CONSTRAINT gladiator_player_fk FOREIGN KEY (player_id) REFERENCES users (id)
 );
 
 CREATE TABLE items (

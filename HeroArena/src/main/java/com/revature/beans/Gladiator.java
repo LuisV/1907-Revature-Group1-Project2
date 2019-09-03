@@ -1,24 +1,27 @@
 package com.revature.beans;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="book")
+@Table
 public class Gladiator {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gladiator")
+	@SequenceGenerator(name="gladiator", sequenceName="gladiator_seq", allocationSize=1)
 	private Integer id;
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="player_id")
+	private User player;
 	private String name;
 	private Integer strength;
 	private Integer dexterity;
 	private Integer vitality;
 	private Integer experience;
+	@Column(name="current_level")
 	private Integer level;
+	@Column(name="current_health")
 	private Integer currentHealth;
+	@Column(name="max_health")
 	private Integer maxHealth;
 	
 	public Gladiator() {
@@ -63,6 +66,16 @@ public class Gladiator {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public User getPlayer()
+	{
+		return player;
+	}
+
+	public void setPlayer(User player)
+	{
+		this.player = player;
 	}
 
 	public String getName() {
@@ -114,6 +127,7 @@ public class Gladiator {
 	public void setExperience(Integer experience) {
 		this.experience = experience;
 	}
+
 	public void reconfigureHealth() {
 		this.maxHealth = 5 + (2*vitality);
 	}
@@ -127,85 +141,56 @@ public class Gladiator {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((currentHealth == null) ? 0 : currentHealth.hashCode());
-		result = prime * result + ((dexterity == null) ? 0 : dexterity.hashCode());
-		result = prime * result + ((experience == null) ? 0 : experience.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((level == null) ? 0 : level.hashCode());
-		result = prime * result + ((maxHealth == null) ? 0 : maxHealth.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((strength == null) ? 0 : strength.hashCode());
-		result = prime * result + ((vitality == null) ? 0 : vitality.hashCode());
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Gladiator gladiator = (Gladiator) o;
+
+		if (id != null ? !id.equals(gladiator.id) : gladiator.id != null) return false;
+		//if (player != null ? !player.equals(gladiator.player) : gladiator.player != null) return false;
+		if (name != null ? !name.equals(gladiator.name) : gladiator.name != null) return false;
+		if (strength != null ? !strength.equals(gladiator.strength) : gladiator.strength != null) return false;
+		if (dexterity != null ? !dexterity.equals(gladiator.dexterity) : gladiator.dexterity != null) return false;
+		if (vitality != null ? !vitality.equals(gladiator.vitality) : gladiator.vitality != null) return false;
+		if (experience != null ? !experience.equals(gladiator.experience) : gladiator.experience != null) return false;
+		if (level != null ? !level.equals(gladiator.level) : gladiator.level != null) return false;
+		if (currentHealth != null ? !currentHealth.equals(gladiator.currentHealth) : gladiator.currentHealth != null)
+			return false;
+		return maxHealth != null ? maxHealth.equals(gladiator.maxHealth) : gladiator.maxHealth == null;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = id != null ? id.hashCode() : 0;
+		//result = 31 * result + (player != null ? player.hashCode() : 0);
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (strength != null ? strength.hashCode() : 0);
+		result = 31 * result + (dexterity != null ? dexterity.hashCode() : 0);
+		result = 31 * result + (vitality != null ? vitality.hashCode() : 0);
+		result = 31 * result + (experience != null ? experience.hashCode() : 0);
+		result = 31 * result + (level != null ? level.hashCode() : 0);
+		result = 31 * result + (currentHealth != null ? currentHealth.hashCode() : 0);
+		result = 31 * result + (maxHealth != null ? maxHealth.hashCode() : 0);
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Gladiator other = (Gladiator) obj;
-		if (currentHealth == null) {
-			if (other.currentHealth != null)
-				return false;
-		} else if (!currentHealth.equals(other.currentHealth))
-			return false;
-		if (dexterity == null) {
-			if (other.dexterity != null)
-				return false;
-		} else if (!dexterity.equals(other.dexterity))
-			return false;
-		if (experience == null) {
-			if (other.experience != null)
-				return false;
-		} else if (!experience.equals(other.experience))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (level == null) {
-			if (other.level != null)
-				return false;
-		} else if (!level.equals(other.level))
-			return false;
-		if (maxHealth == null) {
-			if (other.maxHealth != null)
-				return false;
-		} else if (!maxHealth.equals(other.maxHealth))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (strength == null) {
-			if (other.strength != null)
-				return false;
-		} else if (!strength.equals(other.strength))
-			return false;
-		if (vitality == null) {
-			if (other.vitality != null)
-				return false;
-		} else if (!vitality.equals(other.vitality))
-			return false;
-		return true;
+	public String toString()
+	{
+		return "Gladiator{" +
+				"id=" + id +
+				", player_id=" + (player != null ? player.getId() : null) +
+				", name='" + name + '\'' +
+				", strength=" + strength +
+				", dexterity=" + dexterity +
+				", vitality=" + vitality +
+				", experience=" + experience +
+				", level=" + level +
+				", currentHealth=" + currentHealth +
+				", maxHealth=" + maxHealth +
+				'}';
 	}
-
-	@Override
-	public String toString() {
-		return "Gladiator [id=" + id + ", name=" + name + ", strength=" + strength + ", dexterity=" + dexterity
-				+ ", vitality=" + vitality + ", experience=" + experience + ", level=" + level + ", currentHealth="
-				+ currentHealth + ", maxHealth=" + maxHealth + "]";
-	}
-	
-	
-	
 }
