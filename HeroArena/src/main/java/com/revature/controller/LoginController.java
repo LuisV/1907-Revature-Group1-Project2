@@ -6,25 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.revature.beans.User;
 import com.revature.services.UserService;
 
 @Controller
 @CrossOrigin
-@RequestMapping(value="/login")
 public class LoginController {
 
 	@Autowired
 	private UserService us;
 
 	@ResponseBody
-	@RequestMapping(method=RequestMethod.GET)
+	@GetMapping(value="/login")
 	public User goLogin(HttpSession session) {
 		User u = (User) session.getAttribute("user");
 		if(u == null)
@@ -33,7 +28,7 @@ public class LoginController {
 	}
 
 	@ResponseBody
-	@PostMapping
+	@PostMapping(value="/login")
 	public User login(String username, String password, HttpSession session) {
 		System.out.println(username+"/"+password);
 		User u = us.login(username, password);
@@ -43,4 +38,14 @@ public class LoginController {
 		return u;
 	}
 
+	@ResponseBody
+	@PostMapping(value="/register")
+	public User register(String username, String password, HttpSession session)
+	{
+		User u = us.registerUser(username, password);
+		if(u == null)
+			return null;
+		session.setAttribute("user", u);
+		return u;
+	}
 }
