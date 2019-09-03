@@ -29,7 +29,6 @@ public class GladiatorController {
 	@ResponseBody
 	public Set<Gladiator> getGladiatorsByUser(@PathVariable("play") Integer id) {
 		User u = ud.getUser(id);
-		System.out.println(u);
 		return gd.getGladiatorsForUser(u);
 	}
 }
