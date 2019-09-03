@@ -20,6 +20,8 @@
 
         <!-- Annotation mappings -->
         <mapping class="com.revature.beans.User"/>
+        <mapping class="com.revature.beans.Item"/>
+        <mapping class="com.revature.beans.Gladiator"/>
 
     </session-factory>
 </hibernate-configuration>
