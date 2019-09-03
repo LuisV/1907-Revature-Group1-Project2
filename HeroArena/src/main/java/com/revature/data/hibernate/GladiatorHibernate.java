@@ -38,6 +38,7 @@ public class GladiatorHibernate implements GladiatorDAO {
 	// not testing atm
 	@Override
 	public Gladiator getGladiator(Integer id) {
+		System.out.println("calling getGladiator");
 		Session s = hu.getSession();
 		String query = "from Gladiator g where g.id=:id";
 		Query<Gladiator> q = s.createQuery(query, Gladiator.class);
@@ -49,6 +50,7 @@ public class GladiatorHibernate implements GladiatorDAO {
 
 	@Override
 	public Set<Gladiator> getGladiatorsForUser(User u) {
+		System.out.println("calling getGladiatorForUser");
 		Session s = hu.getSession();
 		String query = "from Gladiator g where g.id=:id";
 		Query<Gladiator> q = s.createQuery(query, Gladiator.class);
