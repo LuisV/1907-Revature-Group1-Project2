@@ -50,7 +50,7 @@ public class GladiatorHibernate implements GladiatorDAO {
 	@Override
 	public Set<Gladiator> getGladiatorsForUser(User u) {
 		Session s = hu.getSession();
-		String query = "from Gladiators g where g.id=:id";
+		String query = "from Gladiator g where g.id=:id";
 		Query<Gladiator> q = s.createQuery(query, Gladiator.class);
 		q.setParameter("id", u.getId());
 		List<Gladiator> gladList = q.getResultList();
