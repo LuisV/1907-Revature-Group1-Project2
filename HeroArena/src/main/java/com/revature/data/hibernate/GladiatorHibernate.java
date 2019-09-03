@@ -1,5 +1,7 @@
 package com.revature.data.hibernate;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -33,6 +35,7 @@ public class GladiatorHibernate implements GladiatorDAO {
 		return 0;
 	}
 
+	// not testing atm
 	@Override
 	public Gladiator getGladiator(Integer id) {
 		Session s = hu.getSession();
@@ -46,8 +49,15 @@ public class GladiatorHibernate implements GladiatorDAO {
 
 	@Override
 	public Set<Gladiator> getGladiatorsForUser(User u) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = hu.getSession();
+		String query = "from Gladiators g where g.id=:id";
+		Query<Gladiator> q = s.createQuery(query, Gladiator.class);
+		q.setParameter("id", u.getId());
+		List<Gladiator> gladList = q.getResultList();
+		Set<Gladiator> gladSet = new HashSet<Gladiator>();
+		gladSet.addAll(gladList);
+		s.close();
+		return gladSet;
 	}
 
 	@Override
