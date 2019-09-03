@@ -7,11 +7,15 @@ INSERT INTO users (id, username, password, role)
 
 
 -- Gladiators
-INSERT INTO gladiator (id, name, strength, dexterity, vitality, max_health, rarity)
-    SELECT gladiator_seq.nextVal, 'King Cobra',  5, 3, 0, 15, .3 FROM dual;
+INSERT INTO gladiator (id, player_id, name, strength, dexterity, vitality, current_level, current_health, max_health, experience, rarity)
+    SELECT gladiator_seq.nextVal,
+           (SELECT id FROM users WHERE username = 'player'),
+           'King Cobra',  5, 3, 1, 1, 10, 15, 0, 3 FROM dual;
     
-INSERT INTO gladiator (id, name, strength, dexterity, vitality, max_health, rarity)
-    SELECT gladiator_seq.nextVal, 'Shadow Lord',  3, 5, 0, 12, .3 FROM dual;
+INSERT INTO gladiator (id, player_id, name, strength, dexterity, vitality, current_level, current_health, max_health, experience, rarity)
+    SELECT gladiator_seq.nextVal,
+           (SELECT id FROM users WHERE username = 'player'),
+           'Shadow Lord',  3, 5, 1, 4, 12, 12, 5, 3 FROM dual;
 
 
 -- Items
