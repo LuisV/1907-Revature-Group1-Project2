@@ -8,7 +8,7 @@ var user = new User();
 user.id = -1;
 
 //const baseURL = 'http://localhost:8080/HeroArena/login';
-const baseURL = 'http://18.221.9.229:8080/HeroArena/login';
+const baseURL = 'http://18.221.9.229:8080/HeroArena/';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class AuthenticateService {
     console.log(formdata);
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
 
-    return this.http.post(baseURL, formdata, {headers: headers, withCredentials: true}).pipe(map(resp => resp as User));
+    return this.http.post(baseURL + 'login', formdata, {headers: headers, withCredentials: true}).pipe(map(resp => resp as User));
   }
 
   getUser(){
@@ -42,6 +42,6 @@ export class AuthenticateService {
   addPlayer(registerString): Observable<User>{
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
 
-    return this.http.post(baseURL, registerString, {headers: headers, withCredentials: true}).pipe(map(resp => resp as User));
+    return this.http.post(baseURL + 'register', registerString, {headers: headers, withCredentials: true}).pipe(map(resp => resp as User));
   }
 }
