@@ -47,7 +47,7 @@ public class GladiatorHibernate implements GladiatorDAO {
 		s.close();
 		return g;
 	}
-
+	/*
 	@Override
 	public Set<Gladiator> getGladiatorsForUser(User u) {
 		System.out.println("calling getGladiatorForUser");
@@ -61,6 +61,23 @@ public class GladiatorHibernate implements GladiatorDAO {
 		s.close();
 		return gladSet;
 	}
+	*/
+	@Override
+	public Set<Gladiator> getGladiatorsForUser(User u) {
+		System.out.println("calling getGladiatorForUser in gladiatorHibernate");
+		Session s = hu.getSession();
+		String query = "from Gladiator g where g.player=:i";
+		Query<Gladiator> q = s.createQuery(query, Gladiator.class);
+		//q.setParameter("id", u.getId());
+		q.setParameter("i", u);
+		List<Gladiator> gladList = q.getResultList();
+		System.out.println(gladList);
+		Set<Gladiator> gladSet = new HashSet<Gladiator>();
+		gladSet.addAll(gladList);
+		s.close();
+		return gladSet;
+	}
+	
 
 	@Override
 	public void updateGladiator(Gladiator g) {
