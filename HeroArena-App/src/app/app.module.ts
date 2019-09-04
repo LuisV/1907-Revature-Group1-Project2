@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
+import { RosterService } from './roster.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { MainpageComponent } from './mainpage/mainpage.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [RosterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
