@@ -17,18 +17,17 @@ import com.revature.data.UserDAO;
 
 @Controller
 @CrossOrigin
-@RequestMapping(value="/gladiator")
-public class GladiatorController {
-	
-	@Autowired
-	private GladiatorDAO gd;
+@RequestMapping(value="/user/roster")
+public class UserController {
 	@Autowired
 	private UserDAO ud;
+	@Autowired
+	private GladiatorDAO gd;
 	
-	// this actually gets the gladiator by gladiator id
 	@GetMapping("{play}")
 	@ResponseBody
-	public Set<Gladiator> getGladiatorsByUser(@PathVariable("play") Integer id) {
+	public Set<Gladiator> getRoster(@PathVariable("play") Integer id) {
+		System.out.println("getRoster in UserController");
 		User u = ud.getUser(id);
 		return gd.getGladiatorsForUser(u);
 	}

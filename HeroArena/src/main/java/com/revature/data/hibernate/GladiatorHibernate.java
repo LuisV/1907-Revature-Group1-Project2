@@ -38,6 +38,7 @@ public class GladiatorHibernate implements GladiatorDAO {
 	// not testing atm
 	@Override
 	public Gladiator getGladiator(Integer id) {
+		System.out.println("calling getGladiator");
 		Session s = hu.getSession();
 		String query = "from Gladiator g where g.id=:id";
 		Query<Gladiator> q = s.createQuery(query, Gladiator.class);
@@ -46,11 +47,12 @@ public class GladiatorHibernate implements GladiatorDAO {
 		s.close();
 		return g;
 	}
-
+	/*
 	@Override
 	public Set<Gladiator> getGladiatorsForUser(User u) {
+		System.out.println("calling getGladiatorForUser");
 		Session s = hu.getSession();
-		String query = "from Gladiators g where g.id=:id";
+		String query = "from Gladiator g where g.id=:id";
 		Query<Gladiator> q = s.createQuery(query, Gladiator.class);
 		q.setParameter("id", u.getId());
 		List<Gladiator> gladList = q.getResultList();
@@ -59,6 +61,23 @@ public class GladiatorHibernate implements GladiatorDAO {
 		s.close();
 		return gladSet;
 	}
+	*/
+	@Override
+	public Set<Gladiator> getGladiatorsForUser(User u) {
+		System.out.println("calling getGladiatorForUser in gladiatorHibernate");
+		Session s = hu.getSession();
+		String query = "from Gladiator g where g.player=:i";
+		Query<Gladiator> q = s.createQuery(query, Gladiator.class);
+		//q.setParameter("id", u.getId());
+		q.setParameter("i", u);
+		List<Gladiator> gladList = q.getResultList();
+		System.out.println(gladList);
+		Set<Gladiator> gladSet = new HashSet<Gladiator>();
+		gladSet.addAll(gladList);
+		s.close();
+		return gladSet;
+	}
+	
 
 	@Override
 	public void updateGladiator(Gladiator g) {

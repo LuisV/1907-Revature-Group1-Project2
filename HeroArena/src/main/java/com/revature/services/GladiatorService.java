@@ -8,12 +8,10 @@ import com.revature.beans.Gladiator;
 import com.revature.data.GladiatorDAO;
 
 @Service
-public class GladiatorService {
+public interface GladiatorService {
 	//@Autowired
-	private GladiatorDAO gd;
-	public Gladiator getGladiator() {
-		return null;
-	}
+	//private GladiatorDAO gd;
+	public Gladiator getGladiator() ;
 	
 	
 }
