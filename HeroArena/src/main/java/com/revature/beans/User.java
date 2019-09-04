@@ -1,11 +1,7 @@
 package com.revature.beans;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -17,7 +13,12 @@ public class User {
 	private String username;
 	private String password;
 	private Integer role;
-	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="player_items",
+			   joinColumns=@JoinColumn(name="player_id"),
+		       inverseJoinColumns=@JoinColumn(name="item_id"))
+	private List<Item> items;
+
 	public User() {
 		super();
 	}
