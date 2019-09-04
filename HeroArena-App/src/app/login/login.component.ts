@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
     this.authent.checkUser().subscribe((userObj: Object) => {
       console.log(userObj);
 
-      this.authent.setUser(userObj);
-      // Call user interface
+      if (userObj != null)
+        this.authent.setUser(userObj);
     })
   }
 
