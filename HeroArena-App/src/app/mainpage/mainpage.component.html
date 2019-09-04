@@ -1,6 +1,8 @@
 <table style="width: 100%; height: 100%; margin: auto">
     <tr>
-        <td><h1>Gladiator Arena <br><br></h1></td>
+        <td>
+            <h1>Gladiator Arena <br><br></h1>
+        </td>
     </tr>
     <tr>
         <td class="vertical-menu" valign="top">
@@ -8,8 +10,16 @@
             <a (click)="showEquip()">Equip Heroes</a>
             <a (click)="showBattle()">Battle</a>
         </td>
-        <td id="interactive-menu" valign="top">
+        <td>
+            <div *ngIf="getState() == 1">
 
+            </div>
+            <div *ngIf="getState() == 2">
+
+            </div>
+            <div *ngIf="getState() == 3">
+                <app-battle></app-battle>
+            </div>
         </td>
     </tr>
 </table>

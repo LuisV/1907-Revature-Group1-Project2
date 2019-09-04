@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RosterService } from '../roster.service';
+import { Statement } from '@angular/compiler';
 
 @Component({
   selector: 'app-mainpage',
@@ -7,8 +8,9 @@ import { RosterService } from '../roster.service';
   styleUrls: ['./mainpage.component.css']
 })
 export class MainpageComponent implements OnInit {
-
+  
   constructor(private rs: RosterService) { }
+  state = 0;
 
   ngOnInit() {
   }
@@ -18,5 +20,14 @@ export class MainpageComponent implements OnInit {
 
     console.log('showHeroes() called');
     this.rs.getGladiators();
+    this.state = 1;
+  }
+
+  showBattle(){
+    this.state = 3;
+  }
+
+  getState(){
+    return this.state;
   }
 }
