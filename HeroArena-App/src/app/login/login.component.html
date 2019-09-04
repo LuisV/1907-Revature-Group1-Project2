@@ -25,7 +25,8 @@
       <br>
     </div>
     <div class="formgroup" style="text-align:left; width: 15%; margin: auto">
-      <label for="password">Password:<br></label> <input class="form-control simple-book" type="password" id="password" />
+      <label for="password">Password:<br></label> <input class="form-control simple-book" type="password"
+        id="password" />
       <br>
     </div>
 
@@ -35,6 +36,11 @@
     <div>
       <button type="submit" class="btn btn-primary emp-btn" id="submitbtn" (click)="authenticate()">Submit</button>
     </div>
+
+    <br>
+    <br>
+
+    <div [innerHTML]="errorString"></div>
 
   </div>
 </div>
@@ -90,8 +96,6 @@
     <br>
     <br>
 
-    <div *ngIf="!getPassMatch()">
-      Passwords did not match, please re-enter.
-    </div>
+    <div [innerHTML]="errorString"></div>
   </div>
 </div>

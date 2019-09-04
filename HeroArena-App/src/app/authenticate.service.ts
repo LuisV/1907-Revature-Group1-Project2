@@ -19,10 +19,7 @@ export class AuthenticateService {
 
   ngOnInit(){}
 
-  checkUser(): Observable<User>{
-    const username = (<HTMLInputElement>document.getElementById('username')).value;
-    const password = (<HTMLInputElement>document.getElementById('password')).value;
-    const formdata = `username=${username}&password=${password}`;
+  checkUser(formdata): Observable<User>{
     console.log(formdata);
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
 
