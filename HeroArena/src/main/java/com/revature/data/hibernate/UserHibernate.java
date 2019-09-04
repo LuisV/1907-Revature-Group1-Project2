@@ -21,7 +21,7 @@ import com.revature.utils.LogUtil;
 @Component
 public class UserHibernate implements UserDAO {
 	@Autowired
-	private HibernateUtil hu;// = HibernateUtil.getInstance();
+	private HibernateUtil hu;
 	@Override
 	public int addUser(User user) {
 		Session s = hu.getSession();
