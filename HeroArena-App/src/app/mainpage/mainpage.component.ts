@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RosterService } from '../roster.service';
+import { RosterDisplayComponent } from '../roster-display/roster-display.component';
+import { RosterService} from '../roster.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -14,9 +15,7 @@ export class MainpageComponent implements OnInit {
   ngOnInit() {
   }
 
-
   showHeroes() {
-
     console.log('showHeroes() called');
     this.rs.getGladiators();
     this.state = 1;
