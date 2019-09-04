@@ -5,39 +5,20 @@ import { longStackSupport } from 'q';
 
 import { AuthenticateService } from './authenticate.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
 
-// Need to be able to take in a value at '2'
-
 const baseUrl = 'http://localhost:8080/HeroArena/user/roster/';
-
-
-//const baseUrl = 'http://localhost:8080/HeroArena/user/roster/2';
-
-let userId = 0;
 
 export class RosterService {
 
   constructor(private http: HttpClient, private auth: AuthenticateService) { }
 
-  // gladiators: Array<Gladiator> = [];
   gladiators: Array<Gladiator> = [];
 
 
   userId = this.auth.getUser()['id'];
-  // console.log(userId);
-
-
-  createGladiator(o): Gladiator {
-    let g = new Gladiator();
-    g.name = o['name'];
-    // TODO
-    return g;
-  }
-
 
   createGladiator(o): Gladiator {
     let g = new Gladiator();
@@ -47,28 +28,15 @@ export class RosterService {
   }
   getGladiators() {
     // const header = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-
-    console.log(baseUrl + this.userId);
+    // console.log(baseUrl + this.userId);
     const msg = this.http.get(baseUrl + this.userId, {withCredentials: true});
-    // console.log('msg: ' + msg);
+
     // console.log('userId' + (Object.keys(msg)[0])); // [0][1]['player']['id']);
-    // console.log('userId: ');
-    // console.log(this.userId);
-    console.log(msg);
-    console.log('userId' + (Object.keys(msg)[0])); // [0][1]['player']['id']);
 
     msg.forEach(element => {
       console.log(element);
       let g = new Gladiator();
-      // element = Object.entries(element);
-      // console.log(element);
-
-      // userId = element[0][1]['player']['id'];
-      // console.log(this.userId);
-
-      //userId = element[0][1]['player']['id'];
-      //console.log(userId);
-      // console.log(element[0][1]);
+      // tslint:disable-next-line: forin
       for (let e in element) {
         console.log(element[e][1]);
         g = this.createGladiator(element[e][1]);
