@@ -23,55 +23,34 @@ export class RosterService {
 
   constructor(private http: HttpClient, private auth: AuthenticateService) { }
 
-  // gladiators: Array<Gladiator> = [];
   gladiators: Array<Gladiator> = [];
 
 
   userId = this.auth.getUser()['id'];
-  // console.log(userId);
-
-
-  createGladiator(o): Gladiator {
-    let g = new Gladiator();
-    g.name = o['name'];
-    // TODO
-    return g;
-  }
-
 
   /*getGladiators() {
     // const header = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-
-    console.log(baseUrl + this.userId);
+    // console.log(baseUrl + this.userId);
     const msg = this.http.get(baseUrl + this.userId, {withCredentials: true});
-    // console.log('msg: ' + msg);
+
     // console.log('userId' + (Object.keys(msg)[0])); // [0][1]['player']['id']);
-    // console.log('userId: ');
-    // console.log(this.userId);
-    console.log(msg);
-    console.log('userId' + (Object.keys(msg)[0])); // [0][1]['player']['id']);
 
     msg.forEach(element => {
-      console.log(element);
-      let g = new Gladiator();
-      // element = Object.entries(element);
+      // console.log('element:');
       // console.log(element);
-
-      // userId = element[0][1]['player']['id'];
-      // console.log(this.userId);
-
-      //userId = element[0][1]['player']['id'];
-      //console.log(userId);
-      // console.log(element[0][1]);
+      let g = new Gladiator();
+      // tslint:disable-next-line: forin
       for (let e in element) {
-        console.log(element[e][1]);
-        g = this.createGladiator(element[e][1]);
+        // console.log('element[e]:');
+        // console.log(element[e]);
+        g = this.createGladiator(element[e]);
         this.gladiators.push(g);
       }
-      console.log(this.gladiators);
+      // console.log('this.gladiators:');
+      // console.log(this.gladiators);
 
       // this works to get the userId
-      //console.log(element[0][1]['player']['id']);
+      // console.log(element[0][1]['player']['id']);
     });
   }*/
 
