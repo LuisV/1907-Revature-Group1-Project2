@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { RosterService } from './roster.service';
+import { BattleComponent } from './battle/battle.component';
 import { RosterDisplayComponent } from './roster-display/roster-display.component';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { RosterDisplayComponent } from './roster-display/roster-display.componen
     AppComponent,
     LoginComponent,
     MainpageComponent,
+    BattleComponent,
     RosterDisplayComponent
   ],
   imports: [

@@ -7,8 +7,8 @@ import { map } from 'rxjs/operators';
 var user = new User();
 user.id = -1;
 
-//const baseURL = 'http://localhost:8080/HeroArena/login';
-const baseURL = 'http://18.221.9.229:8080/HeroArena/';
+const baseURL = 'http://localhost:8080/HeroArena/';
+//const baseURL = 'http://18.221.9.229:8080/HeroArena/';
 
 @Injectable({
   providedIn: 'root'

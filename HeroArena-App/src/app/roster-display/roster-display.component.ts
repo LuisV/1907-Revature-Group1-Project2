@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RosterService } from '../roster.service';
+import { AuthenticateService } from '../authenticate.service';
 
 @Component({
   selector: 'app-roster-display',
@@ -14,10 +15,14 @@ function makeGladiatorBox() {
 */
 export class RosterDisplayComponent implements OnInit {
 
-  constructor(private rs: RosterService) { }
+  constructor(private rs: RosterService, private as: AuthenticateService) { }
 
   ngOnInit() {
-    this.rs.getGladiators();
+    //this.rs.getGladiators();
+    this.rs.getUserGladiators(this.as.getUser().id).subscribe((userObj: Object) => {
+      console.log(userObj);
+      this.rs.setGladiators(userObj);
+    })
     // this.makeBox();
   }
 /*
