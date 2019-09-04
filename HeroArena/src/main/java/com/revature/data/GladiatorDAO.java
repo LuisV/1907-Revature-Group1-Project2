@@ -12,6 +12,7 @@ public interface GladiatorDAO {
 	// READ - select
 	public Gladiator getGladiator(Integer id);
 	public Set<Gladiator> getGladiatorsForUser(User u);
+	public Set<Gladiator> getAllGladiators();
 	// Update - Update
 	void updateGladiator(Gladiator g);
 	// Delete
