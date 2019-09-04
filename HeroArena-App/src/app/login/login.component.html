@@ -25,7 +25,8 @@
       <br>
     </div>
     <div class="formgroup" style="text-align:left; width: 15%; margin: auto">
-      <label for="password">Password:<br></label> <input class="form-control simple-book" type="password" id="password" />
+      <label for="password">Password:<br></label> <input class="form-control simple-book" type="password"
+        id="password" />
       <br>
     </div>
 
@@ -89,9 +90,17 @@
 
     <br>
     <br>
+    <!--<div>{{ errorString }}</div>-->
+    <!--<div [innerHTML]="errorString"></div>-->
 
-    <div *ngIf="!getPassMatch()">
+    <div *ngIf="getPassError(4) == 4">
+      Your username needs to be at least 3 characters.
+    </div>
+    <div *ngIf="getPassError(1) == 1">
       Passwords did not match, please re-enter.
+    </div>
+    <div *ngIf="getPassError(2) == 2">
+      The password needs to be at least 6 characters.
     </div>
   </div>
 </div>
