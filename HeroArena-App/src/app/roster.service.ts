@@ -39,7 +39,7 @@ export class RosterService {
   }
 
 
-  getGladiators() {
+  /*getGladiators() {
     // const header = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
 
     console.log(baseUrl + this.userId);
@@ -73,8 +73,11 @@ export class RosterService {
       // this works to get the userId
       //console.log(element[0][1]['player']['id']);
     });
-  }
+  }*/
 
+  setGladiators(gladiatorList){
+    this.gladiators = gladiatorList;
+  }
   
   getUserGladiators(userID) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});

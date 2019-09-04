@@ -17,7 +17,7 @@ export class MainpageComponent implements OnInit {
 
   showHeroes() {
     console.log('showHeroes() called');
-    this.rs.getGladiators();
+    //this.rs.getGladiators();
     this.state = 1;
   }
 
