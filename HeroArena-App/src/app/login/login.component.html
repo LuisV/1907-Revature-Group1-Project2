@@ -37,6 +37,11 @@
       <button type="submit" class="btn btn-primary emp-btn" id="submitbtn" (click)="authenticate()">Submit</button>
     </div>
 
+    <br>
+    <br>
+
+    <div [innerHTML]="errorString"></div>
+
   </div>
 </div>
 
@@ -90,17 +95,7 @@
 
     <br>
     <br>
-    <!--<div>{{ errorString }}</div>-->
-    <!--<div [innerHTML]="errorString"></div>-->
 
-    <div *ngIf="getPassError(4) == 4">
-      Your username needs to be at least 3 characters.
-    </div>
-    <div *ngIf="getPassError(1) == 1">
-      Passwords did not match, please re-enter.
-    </div>
-    <div *ngIf="getPassError(2) == 2">
-      The password needs to be at least 6 characters.
-    </div>
+    <div [innerHTML]="errorString"></div>
   </div>
 </div>

@@ -11,18 +11,32 @@ var passError = 0;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  private errorString = '';
   constructor(private authent: AuthenticateService) { }
 
   ngOnInit() {
   }
 
   authenticate() {
-    this.authent.checkUser().subscribe((userObj: Object) => {
+    const username = (<HTMLInputElement>document.getElementById('username')).value;
+    const password = (<HTMLInputElement>document.getElementById('password')).value;
+    const formdata = `username=${username}&password=${password}`;
+
+    this.errorString = '';
+
+    this.authent.checkUser(formdata).subscribe((userObj: Object) => {
       console.log(userObj);
 
-      if (userObj != null)
+      if (userObj != null) {
         this.authent.setUser(userObj);
+
+        if (this.authent.getUser().id == -2) {
+          this.errorString = 'You are banned.';
+          this.authent.getUser().id = -1;
+        }
+      }
+      else
+        this.errorString = 'Invalid username or password.';
     })
   }
 
@@ -50,6 +64,8 @@ export class LoginComponent implements OnInit {
     const password = (<HTMLInputElement>document.getElementById('password1')).value;
     const password2 = (<HTMLInputElement>document.getElementById('password2')).value;
 
+    this.errorString = '';
+
     if (password == password2 && password.length >= 6 && username.length >= 3) {
       passError = 0;
       const registerString = `username=${username}&password=${password}`;
@@ -60,35 +76,18 @@ export class LoginComponent implements OnInit {
         registering = false;
       })
     }
-    
-    console.log((passError & 1) + ' ' + (passError & 2) + ' ' + (passError & 4));
-    if (password != password2){
-      passError = passError | 1;
-    }
-    else{
-      passError = (passError & 2) + (passError & 4);
-    }
-    console.log(passError);
 
-    if (password.length < 6){
-      passError = passError | 2;
-    }
-    else{
-      passError = (passError & 1) + (passError & 4);
-    }
-    console.log(passError);
 
-    if (username.length < 3){
-      passError = passError | 4;
-    }
-    else{
-      passError = (passError & 1) + (passError & 2);
+    if (username.length < 3) {
+      this.errorString += 'Your username needs to be at least 3 characters.';
     }
 
-    console.log(passError);
-  }
+    if (password != password2) {
+      this.errorString += '<br>Passwords did not match, please re-enter.';
+    }
 
-  getPassError(flag){
-    return passError & flag;
+    if (password.length < 6) {
+      this.errorString += '<br>The password needs to be at least 6 characters.';
+    }
   }
 }
