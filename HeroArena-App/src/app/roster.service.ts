@@ -34,14 +34,17 @@ export class RosterService {
     // console.log('userId' + (Object.keys(msg)[0])); // [0][1]['player']['id']);
 
     msg.forEach(element => {
+      console.log('element:');
       console.log(element);
       let g = new Gladiator();
       // tslint:disable-next-line: forin
       for (let e in element) {
-        console.log(element[e][1]);
-        g = this.createGladiator(element[e][1]);
+        console.log('element[e]:');
+        console.log(element[e]);
+        g = this.createGladiator(element[e]);
         this.gladiators.push(g);
       }
+      console.log('this.gladiators:');
       console.log(this.gladiators);
 
       // this works to get the userId
