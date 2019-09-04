@@ -15,7 +15,7 @@ import { AuthenticateService } from './authenticate.service';
 const baseUrl = 'http://localhost:8080/HeroArena/user/roster/';
 
 
-const baseUrl = 'http://localhost:8080/HeroArena/user/roster/2';
+//const baseUrl = 'http://localhost:8080/HeroArena/user/roster/2';
 
 let userId = 0;
 
