@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { RosterService } from './roster.service';
+import { RosterDisplayComponent } from './roster-display/roster-display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainpageComponent
+    MainpageComponent,
+    RosterDisplayComponent
   ],
   imports: [
     BrowserModule,
