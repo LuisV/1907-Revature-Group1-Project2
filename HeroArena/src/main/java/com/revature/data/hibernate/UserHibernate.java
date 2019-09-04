@@ -69,7 +69,7 @@ public class UserHibernate implements UserDAO {
 	}
 
 	
-	@RequestMapping(value="/user/roster")
+	//@RequestMapping(value="/user/roster")
 	public Set<Gladiator> getRoster(User u) {
 		Session s = hu.getSession();
 		String query = "from Gladiator g where g.id=:id";
