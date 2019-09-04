@@ -57,6 +57,10 @@ export class RosterService {
   setGladiators(gladiatorList){
     this.gladiators = gladiatorList;
   }
+
+  getGladiators(){
+    return this.gladiators;
+  }
   
   getUserGladiators(userID) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});

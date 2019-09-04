@@ -22,6 +22,7 @@ export class RosterDisplayComponent implements OnInit {
     this.rs.getUserGladiators(this.as.getUser().id).subscribe((userObj: Object) => {
       console.log(userObj);
       this.rs.setGladiators(userObj);
+      console.log(this.rs.getGladiators());
     })
     // this.makeBox();
   }
