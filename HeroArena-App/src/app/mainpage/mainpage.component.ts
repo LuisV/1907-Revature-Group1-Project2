@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RosterService } from '../roster.service';
-import { Statement } from '@angular/compiler';
 
 @Component({
   selector: 'app-mainpage',
@@ -30,4 +29,5 @@ export class MainpageComponent implements OnInit {
   getState(){
     return this.state;
   }
+  
 }
