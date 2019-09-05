@@ -27,6 +27,9 @@ export class MainpageComponent implements OnInit {
 
   getState(){
     return this.state;
+  }  
+
+  setState(inState){
+    this.state = inState;
   }
-  
 }

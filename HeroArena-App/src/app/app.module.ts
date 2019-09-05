@@ -28,7 +28,7 @@ import { CharacterItemComponent } from './character-list/character-item/characte
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [RosterService, CharacterService],
+  providers: [RosterService, CharacterService, HTMLCanvasElement],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
