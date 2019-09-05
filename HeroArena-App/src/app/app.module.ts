@@ -12,6 +12,7 @@ import { BattleComponent } from './battle/battle.component';
 import { RosterDisplayComponent } from './roster-display/roster-display.component';
 import { CharacterListComponent } from './character-list/character-list.component';
 import { CharacterItemComponent } from './character-list/character-item/character-item.component';
+import { LevelUpComponent } from './level-up/level-up.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CharacterItemComponent } from './character-list/character-item/characte
     BattleComponent,
     RosterDisplayComponent,
     CharacterListComponent,
-    CharacterItemComponent
+    CharacterItemComponent,
+    LevelUpComponent
   ],
   imports: [
     BrowserModule,

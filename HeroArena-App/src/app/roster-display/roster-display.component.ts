@@ -48,6 +48,7 @@ export class RosterDisplayComponent implements OnInit {
         return obj.id === gid;
     })[0];
     console.log(this.selectedGladiator);
+    console.log(this.selectedGladiator['name']);
   }
 
 /*
