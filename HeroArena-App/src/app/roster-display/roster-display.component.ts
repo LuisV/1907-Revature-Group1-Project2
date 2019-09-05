@@ -38,6 +38,7 @@ export class RosterDisplayComponent implements OnInit {
 
       console.log(this.rs.getGladiators());
     });
+
     // this.makeBox();
   }
 
