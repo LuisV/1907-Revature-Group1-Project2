@@ -28,6 +28,7 @@ export class RosterService {
 
   userId = this.auth.getUser()['id'];
 
+  // This was some preliminary code to get the Gladiators in an unsafe manner.
   /*getGladiators() {
     // const header = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     // console.log(baseUrl + this.userId);
@@ -54,14 +55,15 @@ export class RosterService {
     });
   }*/
 
-  setGladiators(gladiatorList){
+  setGladiators(gladiatorList) {
     this.gladiators = gladiatorList;
   }
 
-  getGladiators(){
+  getGladiators() : Array <Gladiator>{
     return this.gladiators;
   }
-  
+
+
   getUserGladiators(userID) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     return this.http.post(url + 'gladiator', 'id=' + userID, {headers: headers, withCredentials: true}).pipe(map(resp => resp as Gladiator[]));
