@@ -30,11 +30,14 @@ export class RosterDisplayComponent implements OnInit {
       this.gladiators = userObj;
 
       // console.log(userObj[0]);
-    });
+    //});
     // this.gladiators = this.rs.getGladiators();
 
     // console.log('this.gladiators');
     // console.log(this.gladiators);
+
+      console.log(this.rs.getGladiators());
+    });
     // this.makeBox();
   }
 

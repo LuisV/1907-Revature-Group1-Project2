@@ -62,6 +62,12 @@ export class RosterService {
     return this.gladiators;
   }
 
+/*
+  getGladiators(){
+    return this.gladiators;
+  }
+*/
+
   getUserGladiators(userID) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     return this.http.post(url + 'gladiator', 'id=' + userID, {headers: headers, withCredentials: true}).pipe(map(resp => resp as Gladiator[]));
