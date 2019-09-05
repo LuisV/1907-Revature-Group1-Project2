@@ -1,0 +1,13 @@
+
+<div class = "card-deck justify-content-center" >
+  <app-character-item *ngFor=" let char of chars;"
+  [id]="char.id"
+  [name]="char.name"
+  [description]="char.description"
+  [health]="char.currentHealth"
+  [strength]="char.strength"
+  [dexterity]="char.dexterity"
+  [rarity]="char.rarity"
+  >
+  </app-character-item>
+</div>
