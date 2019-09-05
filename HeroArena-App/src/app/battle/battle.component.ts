@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { MainpageComponent} from '../mainpage/mainpage.component';
+import { PagestateService} from '../pagestate.service';
 
 
 @Component({
@@ -13,7 +13,7 @@ export class BattleComponent implements OnInit {
   //@ViewChild('canvasId', {static: false}) myCanvas: ElementRef;
   private context: CanvasRenderingContext2D;
 
-  constructor(private mc: MainpageComponent) {
+  constructor(private pss: PagestateService) {
   }
 
   private x = 0;
@@ -36,7 +36,7 @@ export class BattleComponent implements OnInit {
     this.context.fillRect(0, 0, this.width, this.height);
     this.context.drawImage(image, this.x, this.y);
 
-    if (this.mc.getState() == 3)
+    if (this.pss.getState() == 3)
       window.requestAnimationFrame(() => this.draw());
   }
 

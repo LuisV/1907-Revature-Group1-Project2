@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RosterDisplayComponent } from '../roster-display/roster-display.component';
 import { RosterService} from '../roster.service';
+import { PagestateService} from '../pagestate.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -9,8 +10,7 @@ import { RosterService} from '../roster.service';
 })
 export class MainpageComponent implements OnInit {
   
-  constructor(private rs: RosterService) { }
-  state = 0;
+  constructor(private rs: RosterService, private pss: PagestateService) { }
 
   ngOnInit() {
   }
@@ -18,18 +18,10 @@ export class MainpageComponent implements OnInit {
   showHeroes() {
     console.log('showHeroes() called');
     //this.rs.getGladiators();
-    this.state = 1;
+    this.pss.setState(1);
   }
 
   showBattle(){
-    this.state = 3;
-  }
-
-  getState(){
-    return this.state;
-  }  
-
-  setState(inState){
-    this.state = inState;
+    this.pss.setState(3);
   }
 }

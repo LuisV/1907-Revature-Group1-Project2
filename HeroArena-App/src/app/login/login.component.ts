@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from '../authenticate.service';
 import { User } from '../user';
+import { PagestateService} from '../pagestate.service';
 
 var registering = false;
-var passError = 0;
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ var passError = 0;
 })
 export class LoginComponent implements OnInit {
   private errorString = '';
-  constructor(private authent: AuthenticateService) { }
+  constructor(private authent: AuthenticateService, private pss: PagestateService) { }
 
   ngOnInit() {
   }
@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
   logout() {
     var user = new User();
     user.id = -1;
+    this.pss.setState(1);
     this.authent.setUser(user);
   }
 
@@ -67,7 +68,6 @@ export class LoginComponent implements OnInit {
     this.errorString = '';
 
     if (password == password2 && password.length >= 6 && username.length >= 3) {
-      passError = 0;
       const registerString = `username=${username}&password=${password}`;
       console.log(registerString);
 

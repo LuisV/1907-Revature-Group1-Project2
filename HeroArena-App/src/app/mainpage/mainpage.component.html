@@ -12,13 +12,13 @@
             <a (click)="showBattle()">Battle</a>
         </td>
         <td style = "margin: auto">
-            <div *ngIf="getState() == 1">
+            <div *ngIf="this.pss.getState() == 1">
                 <app-roster-display></app-roster-display>
             </div>
-            <div *ngIf="getState() == 2">
+            <div *ngIf="this.pss.getState() == 2">
 
             </div>
-            <div *ngIf="getState() == 3">
+            <div *ngIf="this.pss.getState() == 3">
                 <app-battle></app-battle>
             </div>
         </td>
