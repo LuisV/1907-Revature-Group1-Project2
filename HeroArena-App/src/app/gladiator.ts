@@ -8,4 +8,5 @@ export class Gladiator {
     currentHealth: number;
     maxHealth: number;
     experience: number;
+    justLeveledUp = true;
 }
