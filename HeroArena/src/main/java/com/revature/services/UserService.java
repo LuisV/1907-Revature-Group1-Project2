@@ -34,4 +34,7 @@ public class UserService {
 
 		return newUser;
 	}
+	public User getUser(Integer id){
+		return ud.getUser(id);
+	}
 }

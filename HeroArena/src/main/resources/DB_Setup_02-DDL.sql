@@ -1,11 +1,13 @@
 -- Start with a clean slate
 DROP TABLE users CASCADE CONSTRAINTS;
 DROP TABLE gladiator CASCADE CONSTRAINTS;
+DROP TABLE character CASCADE CONSTRAINTS;
 DROP TABLE items CASCADE CONSTRAINTS;
 DROP TABLE player_items CASCADE CONSTRAINTS;
 
 DROP SEQUENCE user_seq;
 DROP SEQUENCE gladiator_seq;
+DROP SEQUENCE character_seq;
 DROP SEQUENCE item_seq;
 
 
@@ -18,9 +20,20 @@ CREATE TABLE users (
     role NUMBER(1) DEFAULT 1 NOT NULL   -- For now,  0 == admin, 1 == player
 );
 
+  CREATE TABLE character(
+    "ID" NUMBER(20,0) PRIMARY KEY, 
+	"NAME" VARCHAR2(32 BYTE), 
+	"DESCRIPTION" VARCHAR2(128 BYTE), 
+	"BASE_HEALTH" NUMBER(4,0), 
+	"BASE_STRENGTH" NUMBER(4,0), 
+	"BASE_DEXTERITY" NUMBER(4,0), 
+	"BASE_VITALITY" NUMBER(4,0), 
+	"RARITY" VARCHAR2(24 BYTE) DEFAULT 'common');
+
 CREATE TABLE gladiator (
     id number(20) PRIMARY KEY,
     player_id number(20) NOT NULL,
+    character_id number(20) DEFAULT NULL,
     name varchar2(36) NOT NULL,
     strength number(4) NOT NULL,
     dexterity number(4) NOT NULL,
@@ -29,7 +42,7 @@ CREATE TABLE gladiator (
     current_health number(4) NOT NULL,
     max_health number(4) NOT NULL,
     experience number(4) DEFAULT 0,
-    rarity number(1) NOT NULL,
+    CONSTRAINT gladiator_character_fk FOREIGN KEY (character_id) REFERENCES character (id),
     CONSTRAINT gladiator_player_fk FOREIGN KEY (player_id) REFERENCES users (id)
 );
 
@@ -50,5 +63,6 @@ CREATE TABLE player_items (
 
 -- Create sequences to generate primary keys
 CREATE SEQUENCE user_seq INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE Gladiator_Seq INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE gladiator_seq INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE character_seq INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE item_seq INCREMENT BY 1 START WITH 1;

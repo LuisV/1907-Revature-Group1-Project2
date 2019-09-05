@@ -5,17 +5,30 @@ INSERT INTO users (id, username, password, role)
 INSERT INTO users (id, username, password, role)
     SELECT user_seq.nextVal, 'player', 'p4ssw0rd', 1 FROM dual;
 
+--Characters
+INSERT INTO character (id, name, description, base_strength, base_dexterity, base_vitality, base_health, rarity)
+    SELECT gladiator_seq.nextVal,
+           'King Cobra','The most feared king in all of Egypt. Rules with an iron fist!',  6, 4, 0, 14, 'Rare' FROM dual;
+
+INSERT INTO character (id, name, description, base_strength, base_dexterity, base_vitality, base_health, rarity)
+    SELECT gladiator_seq.nextVal,
+           'Shadow Lord','You wont see him coming. Attacks from the void!',  5, 6, 0, 10, 'Rare' FROM dual;
+           
+
+INSERT INTO character (id, name, description, base_strength, base_dexterity, base_vitality, base_health, rarity)
+    SELECT gladiator_seq.nextVal,
+           'Iron Giant','Big Giant guy made of Iron! What more could you want?',  7, 2, 0, 18, 'Epic' FROM dual;
 
 -- Gladiators
-INSERT INTO gladiator (id, player_id, name, strength, dexterity, vitality, current_level, current_health, max_health, experience, rarity)
+INSERT INTO gladiator (id, player_id, name, strength, dexterity, vitality, current_level, current_health, max_health, experience)
     SELECT gladiator_seq.nextVal,
            (SELECT id FROM users WHERE username = 'player'),
-           'King Cobra',  5, 3, 1, 1, 10, 15, 0, 3 FROM dual;
+           'King Cobra',  6, 4, 1, 1, 10, 15, 0 FROM dual;
     
-INSERT INTO gladiator (id, player_id, name, strength, dexterity, vitality, current_level, current_health, max_health, experience, rarity)
+INSERT INTO gladiator (id, player_id, name, strength, dexterity, vitality, current_level, current_health, max_health, experience)
     SELECT gladiator_seq.nextVal,
            (SELECT id FROM users WHERE username = 'player'),
-           'Shadow Lord',  3, 5, 1, 4, 12, 12, 5, 3 FROM dual;
+           'Shadow Lord',  3, 5, 1, 4, 12, 12, 5 FROM dual;
 
 
 -- Items

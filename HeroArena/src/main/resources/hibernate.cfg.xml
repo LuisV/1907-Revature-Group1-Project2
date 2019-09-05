@@ -21,6 +21,9 @@
         <!-- Annotation mappings -->
         <mapping class="com.revature.beans.User"/>
         <mapping class="com.revature.beans.Gladiator"/>
+        <mapping class="com.revature.beans.Character"/>
+        <mapping class="com.revature.beans.Item"/>
+        <mapping class="com.revature.beans.UserItemStock"/>
 
     </session-factory>
 </hibernate-configuration>

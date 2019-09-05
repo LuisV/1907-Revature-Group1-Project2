@@ -77,7 +77,19 @@ public class GladiatorHibernate implements GladiatorDAO {
 		s.close();
 		return gladSet;
 	}
-	
+
+	@Override
+	public Set<Gladiator> getAllGladiators() {
+		System.out.println("calling getAllGladiators");
+		Session s = hu.getSession();
+		String query = "from Gladiator";
+		Query<Gladiator> q = s.createQuery(query, Gladiator.class);
+		Set<Gladiator> allGlad =  new HashSet<>(q.getResultList());
+
+		s.close();
+		return allGlad;
+	}
+
 
 	@Override
 	public void updateGladiator(Gladiator g) {
