@@ -23,7 +23,7 @@ import { RosterDisplayComponent } from './roster-display/roster-display.componen
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [RosterService],
+  providers: [RosterService, HTMLCanvasElement],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

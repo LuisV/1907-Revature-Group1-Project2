@@ -1,7 +1,7 @@
 <table style="width: 100%; height: 100%; margin: auto">
     <tr>
         <td>
-            <h1>Gladiator Arena <br><br></h1>
+           <br> <br>
         </td>
     </tr>
     <tr>
@@ -11,7 +11,7 @@
             <a (click)="showEquip()">Equip Heroes</a>
             <a (click)="showBattle()">Battle</a>
         </td>
-        <td>
+        <td style = "margin: auto">
             <div *ngIf="getState() == 1">
                 <app-roster-display></app-roster-display>
             </div>
