@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { RosterService } from '../roster.service';
+import { RosterDisplayComponent } from '../roster-display/roster-display.component';
+
 @Component({
   selector: 'app-level-up',
   templateUrl: './level-up.component.html',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LevelUpComponent implements OnInit {
 
-  constructor() { }
+  points = 2;
+
+  levelUpGladiator = null;
+
+  constructor(private rdc: RosterDisplayComponent) {
+    this.levelUpGladiator = this.rdc.selectedGladiator;
+    console.log('in level-up-component: ')
+    console.log(this.levelUpGladiator);
+  }
 
   ngOnInit() {
   }
+
+
+  assignPoints(pointIn) {
+    console.log(pointIn);
+    while (this.points >= 0) {
+      this.points--;
+      console.log(this.points);
+    }
+  }
+
 
 }
