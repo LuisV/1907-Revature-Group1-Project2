@@ -24,12 +24,13 @@ export class LevelUpComponent implements OnInit {
   }
 
 
-  assignPoints(pointIn) {
-    console.log(pointIn);
-    while (this.points >= 0) {
-      this.points--;
-      console.log(this.points);
-    }
+  assignPoints(glad) {
+    glad['strength'] += 1;
+    this.points--;
+    // console.log(pointIn);
+
+    console.log(this.points);
+
   }
 
 
