@@ -1,3 +1,19 @@
 <p>roster-display works!</p>
 
-{{ gladiators }}
+
+<ul class="roster">
+    <!-- <li class="roster" *ngFor="let g of gladiators" (click)="selectGladiator(gid)"><span class="badge">{{ g.id }}</span>{{ g.name }}</li> -->
+    <li class="roster" *ngFor="let g of gladiators" (click)="selectGladiator(g.id)"><span class="badge">{{ g.id }}</span>{{ g.name }}</li>
+
+</ul>
+
+<div align="center" vertical-align="top" *ngIf="selectedGladiator">
+    <div>{{ selectedGladiator.name }}</div>
+    <div>Level {{ selectedGladiator.level }}</div>
+    <div>{{ selectedGladiator.currentHealth }} / {{ selectedGladiator.maxHealth }}</div>
+    <div>{{ selectedGladiator.strength }}</div>
+
+
+
+</div>
+

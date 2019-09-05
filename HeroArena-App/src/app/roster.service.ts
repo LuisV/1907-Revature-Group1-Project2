@@ -54,10 +54,14 @@ export class RosterService {
     });
   }*/
 
-  setGladiators(gladiatorList){
+  setGladiators(gladiatorList) {
     this.gladiators = gladiatorList;
   }
-  
+
+  getGladiators() : Array <Gladiator>{
+    return this.gladiators;
+  }
+
   getUserGladiators(userID) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     return this.http.post(url + 'gladiator', 'id=' + userID, {headers: headers, withCredentials: true}).pipe(map(resp => resp as Gladiator[]));
