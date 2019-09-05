@@ -2,9 +2,7 @@
 
 <div>
     STR:
-    <input type="button" value="+" id="strengthButton" onclick='(this.assignPoints(this.levelUpGladiator))'>
-
-    <input type="button" value="+" id="strengthButton" onclick='(this.assignPoints(this.levelUpGladiator.strength))'>
+    <input type="button" value="+" id="strengthButton" (click)="(this.assignPoints(this.levelUpGladiator))">
     {{ levelUpGladiator.strength }}
     <input type="button" value="-" id="strengthButton" click=(assignPoints)>
 </div>
