@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RosterDisplayComponent } from '../roster-display/roster-display.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import {ChangeDetectorRef} from '@angular.core';
+//import {ChangeDetectorRef} from '@angular.core';
 import { Gladiator } from '../gladiator';
 import { RosterService } from '../roster.service';
 
