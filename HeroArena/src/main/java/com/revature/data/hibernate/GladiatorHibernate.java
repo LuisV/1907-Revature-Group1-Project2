@@ -98,7 +98,7 @@ public class GladiatorHibernate implements GladiatorDAO {
 		System.out.println("calling updateGladiator in the Hibernate");
 		System.out.println(g);
 		
-		Session s = hu.getSession();
+		
 		//String query = "UPDATE Gladiator setg where g.id=:i";
 		/*
 		String query = "UPDATE Gladiator set strength=:strength," + 
@@ -112,9 +112,20 @@ public class GladiatorHibernate implements GladiatorDAO {
 		q.setParameter("dexterity", g.getDexterity());
 		q.executeUpdate();
 		*/
-		s.update(g);
 		
-		s.close();
+		Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			s.update(g);
+			tx.commit();
+		} catch (Exception e) {
+			 //log.warn("Failed to update user item: " + userItem);
+			if (tx != null)
+				tx.rollback();
+		} finally {
+			s.close();
+		}
 	}
 
 	@Override
