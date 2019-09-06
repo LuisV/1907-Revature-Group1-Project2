@@ -3,19 +3,19 @@
 <div>
     STR:
     <!--  <input type="button" value="+" id="strengthButton" (click)="(this.assignPoints(this.levelUpGladiator))"> -->
-    <input type="button" value="+" id="strengthButton" (click)="(this.addPoints(this.levelUpGladiator, 'strength'))">
+    <input type="button" value="+" id="strengthPlusButton" (click)="(this.addPoints(this.levelUpGladiator, 'strength'))">
     {{ levelUpGladiator.strength }}
-    <input type="button" value="-" id="strengthButton" (click)="(this.subtractPoints(this.levelUpGladiator, 'strength'))">
+    <input type="button" value="-" id="strengthMinusButton" (click)="(this.subtractPoints(this.levelUpGladiator, 'strength'))">
     DEX:
     <!--  <input type="button" value="+" id="strengthButton" (click)="(this.assignPoints(this.levelUpGladiator))"> -->
-    <input type="button" value="+" id="strengthButton" (click)="(this.addPoints(this.levelUpGladiator, 'dexterity'))">
+    <input type="button" value="+" id="dexterityPlusButton" (click)="(this.addPoints(this.levelUpGladiator, 'dexterity'))">
     {{ levelUpGladiator.dexterity }}
-    <input type="button" value="-" id="strengthButton" (click)="(this.subtractPoints(this.levelUpGladiator, 'dexterity'))"> 
+    <input type="button" value="-" id="dexterityMinusButton" (click)="(this.subtractPoints(this.levelUpGladiator, 'dexterity'))"> 
     VIT:
     <!--  <input type="button" value="+" id="strengthButton" (click)="(this.assignPoints(this.levelUpGladiator))"> -->
-    <input type="button" value="+" id="strengthButton" (click)="(this.addPoints(this.levelUpGladiator, 'vitality'))">
+    <input type="button" value="+" id="vitalityPlusButton" (click)="(this.addPoints(this.levelUpGladiator, 'vitality'))">
     {{ levelUpGladiator.vitality }}
-    <input type="button" value="-" id="strengthButton" (click)="(this.subtractPoints(this.levelUpGladiator, 'vitality'))">
+    <input type="button" value="-" id="vitalityMinusButton" (click)="(this.subtractPoints(this.levelUpGladiator, 'vitality'))">
 </div>
 
 
@@ -23,4 +23,4 @@
 
 
 
-<input type="button" value="Submit">
+<input type="button" value="Submit"  (click)='submitChanges(this.levelUpGladiator)'> 

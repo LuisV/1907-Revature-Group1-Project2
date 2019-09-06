@@ -26,4 +26,10 @@ public class GladiatorService {
 	public Set<Gladiator> getAllGladiators(){
 		return gd.getAllGladiators();
 	}
+	
+	public Gladiator updateGladiator(Gladiator g) {
+		System.out.println("calling updateGladiator in GladiatorService");
+		gd.updateGladiator(g);
+		return g;
+	}
 }
