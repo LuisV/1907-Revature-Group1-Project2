@@ -20,7 +20,7 @@ CREATE TABLE users (
     role NUMBER(1) DEFAULT 1 NOT NULL   -- For now,  0 == admin, 1 == player
 );
 
-  CREATE TABLE character(
+CREATE TABLE character(
     "ID" NUMBER(20,0) PRIMARY KEY, 
 	"NAME" VARCHAR2(32 BYTE), 
 	"DESCRIPTION" VARCHAR2(128 BYTE), 
@@ -49,7 +49,10 @@ CREATE TABLE gladiator (
 CREATE TABLE items (
     id NUMBER(20) PRIMARY KEY,
     name VARCHAR2(30) NOT NULL,
-    description VARCHAR2(150) NOT NULL
+    description VARCHAR2(150) NOT NULL,
+    effect_health NUMBER(3) DEFAULT 0 NOT NULL,
+    effect_xp NUMBER(3) DEFAULT 0 NOT NULL,
+    price NUMBER(10) CHECK (price >= 0) NOT NULL
 );
 
 CREATE TABLE player_items (

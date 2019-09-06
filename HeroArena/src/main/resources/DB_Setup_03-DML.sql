@@ -32,14 +32,17 @@ INSERT INTO gladiator (id, player_id, name, strength, dexterity, vitality, curre
 
 
 -- Items
-INSERT INTO items (id, name, description)
-    SELECT item_seq.nextVal, 'Small Healing Potion', 'Restores 30% health to a hero of your choice.' FROM dual;
+INSERT INTO items (id, name, description, effect_health, effect_xp, price)
+    SELECT item_seq.nextVal, 'Small Healing Potion', 'Restores 30% health to a hero of your choice.',
+    30, 0, 10 FROM dual;
 
-INSERT INTO items (id, name, description)
-    SELECT item_seq.nextVal, 'Medium Healing Potion', 'Restores 65% health to a hero of your choice.' FROM dual;
+INSERT INTO items (id, name, description, effect_health, effect_xp, price)
+    SELECT item_seq.nextVal, 'Medium Healing Potion', 'Restores 65% health to a hero of your choice.',
+    65, 0, 20 FROM dual;
 
-INSERT INTO items (id, name, description)
-    SELECT item_seq.nextVal, 'Large Healing Potion', 'Completely restores the health of a hero of your choice.' FROM dual;
+INSERT INTO items (id, name, description, effect_health, effect_xp, price)
+    SELECT item_seq.nextVal, 'Large Healing Potion', 'Completely restores the health of a hero of your choice.',
+    100, 0, 30 FROM dual;
 
 
 -- Player items
