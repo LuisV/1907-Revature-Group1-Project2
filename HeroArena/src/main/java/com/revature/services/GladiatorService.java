@@ -18,7 +18,12 @@ public class GladiatorService {
 	@Autowired
 	private UserDAO ud;
 
-	public Set<Gladiator> getGladiatorByUser( Integer id){
+	public Gladiator getGladiatorById(Integer id)
+	{
+		return gd.getGladiator(id);
+	}
+
+	public Set<Gladiator> getGladiatorsByUser( Integer id){
 		User u = ud.getUser(id);
 		return gd.getGladiatorsForUser(u);
 	};

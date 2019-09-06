@@ -1,8 +1,7 @@
 package com.revature.beans;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name="users")
@@ -14,8 +13,6 @@ public class User {
 	private String username;
 	private String password;
 	private Integer role;
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="user")
-	private List<UserItemStock> items = new ArrayList<UserItemStock>();
 
 	public User() {
 		super();
@@ -68,18 +65,6 @@ public class User {
 		this.role = role;
 	}
 
-	public List<UserItemStock> getItems()
-	{
-		return items;
-	}
-
-	public void setItems(List<UserItemStock> itemStocks)
-	{
-	    if (itemStocks == null)
-	        itemStocks = new ArrayList<UserItemStock>();
-		this.items = itemStocks;
-	}
-
 	@Override
 	public boolean equals(Object o)
 	{
@@ -91,8 +76,7 @@ public class User {
 		if (id != null ? !id.equals(user.id) : user.id != null) return false;
 		if (username != null ? !username.equals(user.username) : user.username != null) return false;
 		if (password != null ? !password.equals(user.password) : user.password != null) return false;
-		if (role != null ? !role.equals(user.role) : user.role != null) return false;
-		return items != null ? items.equals(user.items) : user.items == null;
+		return role != null ? role.equals(user.role) : user.role == null;
 	}
 
 	@Override
@@ -102,7 +86,6 @@ public class User {
 		result = 31 * result + (username != null ? username.hashCode() : 0);
 		result = 31 * result + (password != null ? password.hashCode() : 0);
 		result = 31 * result + (role != null ? role.hashCode() : 0);
-		result = 31 * result + (items != null ? items.hashCode() : 0);
 		return result;
 	}
 
@@ -114,7 +97,6 @@ public class User {
 				", username='" + username + '\'' +
 				", password='" + password + '\'' +
 				", role=" + role +
-				", items=" + items +
 				'}';
 	}
 

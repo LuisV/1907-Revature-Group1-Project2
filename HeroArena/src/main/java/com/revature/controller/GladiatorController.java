@@ -43,7 +43,7 @@ public class GladiatorController {
 	@PostMapping(value="/gladiator")
 	public Set<Gladiator> getGladiatorsByUser(String id) {
 		User u = us.getUser(Integer.parseInt(id));
-		return gs.getGladiatorByUser(u.getId());
+		return gs.getGladiatorsByUser(u.getId());
 	}
 
 	@GetMapping("all")
