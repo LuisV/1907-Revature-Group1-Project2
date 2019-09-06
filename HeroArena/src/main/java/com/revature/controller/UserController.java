@@ -47,7 +47,7 @@ public class UserController {
 		log.trace("Getting items for user '" + user.getUsername() + "'");
 		Set<UserItemStock> items = itemServ.getItemsOfUser(user);
 
-		return ResponseEntity.ok(user.getItems());
+		return ResponseEntity.ok(items);
 	}
 
 	@PutMapping(value="/user/items/{item}")
@@ -69,6 +69,7 @@ public class UserController {
 		if (item == null)
 			return ResponseEntity.status(400).build();
 
+		itemServ.useItem(user, item, glad);
 		return ResponseEntity.ok(glad);
 	}
 }

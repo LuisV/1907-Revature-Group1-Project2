@@ -80,11 +80,12 @@ public class ItemService
             if (isSuccess)
             {
                 int maxHealth = target.getMaxHealth();
-                int health = target.getCurrentHealth() + (maxHealth * item.getHealthOffset());
+                int health = target.getCurrentHealth() + Math.round(maxHealth * (item.getHealthOffset() / 100.0f));
                 health = Math.min(maxHealth, health);
 
                 target.setCurrentHealth(health);
                 gladDao.updateGladiator(target);
+                // TODO: Add check to see if update was successful and revert health if update failed.
             }
         }
     }
