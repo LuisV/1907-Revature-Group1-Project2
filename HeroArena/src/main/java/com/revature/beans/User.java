@@ -1,8 +1,7 @@
 package com.revature.beans;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name="users")
@@ -15,7 +14,7 @@ public class User {
 	private String password;
 	private Integer role;
 	@OneToMany(fetch=FetchType.EAGER, mappedBy="user")
-	private List<UserItemStock> items = new ArrayList<UserItemStock>();
+	private Set<UserItemStock> items = new HashSet<UserItemStock>();
 
 	public User() {
 		super();
@@ -68,15 +67,15 @@ public class User {
 		this.role = role;
 	}
 
-	public List<UserItemStock> getItems()
+	public Set<UserItemStock> getItems()
 	{
 		return items;
 	}
 
-	public void setItems(List<UserItemStock> itemStocks)
+	public void setItems(Set<UserItemStock> itemStocks)
 	{
 	    if (itemStocks == null)
-	        itemStocks = new ArrayList<UserItemStock>();
+	        itemStocks = new HashSet<UserItemStock>();
 		this.items = itemStocks;
 	}
 

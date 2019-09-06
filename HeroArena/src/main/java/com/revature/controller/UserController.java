@@ -2,33 +2,73 @@ package com.revature.controller;
 
 import java.util.Set;
 
+import com.revature.beans.Item;
+import com.revature.beans.UserItemStock;
+import com.revature.services.GladiatorService;
+import com.revature.services.ItemService;
+import com.revature.services.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.revature.beans.Gladiator;
 import com.revature.beans.User;
-import com.revature.data.GladiatorDAO;
-import com.revature.data.UserDAO;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @CrossOrigin
-@RequestMapping(value="/user/roster")
 public class UserController {
 	@Autowired
-	private UserDAO ud;
+	private UserService userServ;
 	@Autowired
-	private GladiatorDAO gd;
+	private GladiatorService gladServ;
+	@Autowired
+	private ItemService itemServ;
+	private Logger log = Logger.getLogger(UserController.class);
 	
-	@GetMapping("{play}")
+	@GetMapping(value="/user/roster/{play}")
 	@ResponseBody
 	public Set<Gladiator> getRoster(@PathVariable("play") Integer id) {
 		System.out.println("getRoster in UserController");
-		User u = ud.getUser(id);
-		return gd.getGladiatorsForUser(u);
+		return gladServ.getGladiatorsByUser(id);
+	}
+
+	@GetMapping(value="/user/items")
+	@ResponseBody
+	public ResponseEntity<Set<UserItemStock>> getItems(HttpSession session)
+	{
+		User user = (User) session.getAttribute("user");
+		if (user == null)
+		    return ResponseEntity.status(403).build();
+
+		log.trace("Getting items for user '" + user.getUsername() + "'");
+		Set<UserItemStock> items = itemServ.getItemsOfUser(user);
+
+		return ResponseEntity.ok(user.getItems());
+	}
+
+	@PutMapping(value="/user/items/{item}")
+	@ResponseBody
+	public ResponseEntity<Gladiator> useItem(@PathVariable("item") Integer itemId, @RequestParam Integer gladiatorId, HttpSession session)
+	{
+		User user = (User) session.getAttribute("user");
+		if (user == null)
+
+			return ResponseEntity.status(403).build();
+
+		log.trace("Getting items for user '" + user.getUsername() + "'");
+
+		Gladiator glad = gladServ.getGladiatorById(gladiatorId);
+		if (glad == null || itemId == null)
+			return ResponseEntity.status(400).build();
+
+		Item item = itemServ.getItemById(itemId);
+		if (item == null)
+			return ResponseEntity.status(400).build();
+
+		return ResponseEntity.ok(glad);
 	}
 }
