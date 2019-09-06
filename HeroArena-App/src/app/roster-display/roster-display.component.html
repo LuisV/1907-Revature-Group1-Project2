@@ -1,18 +1,27 @@
-<ul class="roster">
-    <!-- <li class="roster" *ngFor="let g of gladiators" (click)="selectGladiator(gid)"><span class="badge">{{ g.id }}</span>{{ g.name }}</li> -->
-    <li class="roster" *ngFor="let g of gladiators" (click)="selectGladiator(g.id)"><span class="badge">{{ g.id }}</span>{{ g.name }}</li>
+<div id="container">
+    <div>
+        <ul class="roster" >
+            <!-- <li class="roster" *ngFor="let g of gladiators" (click)="selectGladiator(gid)"><span class="badge">{{ g.id }}</span>{{ g.name }}</li> -->
+            <li class="roster" *ngFor="let g of gladiators" (click)="selectGladiator(g.id)"><span class="badge">{{ g.id }}</span>{{ g.name }}</li>
 
-</ul>
+        </ul>
+    </div>
+    <!-- <div style="margin-left:auto;" align="center" vertical-align="top" *ngIf="selectedGladiator"> -->
+    <div *ngIf="!selectedGladiator">nothing here!</div>
+    <div  align="center" vertical-align="top" *ngIf="selectedGladiator">
 
-<div align="center" vertical-align="top" *ngIf="selectedGladiator">
-    <div>{{ selectedGladiator.name }}</div>
-    <div>Level {{ selectedGladiator.level }}</div>
-    <div>{{ selectedGladiator.currentHealth }} / {{ selectedGladiator.maxHealth }}</div>
-    <div>STR: {{ selectedGladiator.strength }}</div>
-    <div>DEX: {{ selectedGladiator.dexterity }}</div>
-    <div></div>
+        <div>{{ selectedGladiator.name }}</div>
+        <div>Level {{ selectedGladiator.level }}</div>
+        <div>{{ selectedGladiator.currentHealth }} / {{ selectedGladiator.maxHealth }}</div>
+        <div>STR: {{ selectedGladiator.strength }}</div>
+        <div>DEX: {{ selectedGladiator.dexterity }}</div>
+        <div>VIT: {{ selectedGladiator.vitality }}</div>
 
+        </div>
+    <div align="center" *ngIf="!levelUp">nothing here!</div>
 
-
+    <div style="margin-left:auto;" align="right" *ngIf="levelUp">
+        <app-level-up></app-level-up>
+    </div>
 </div>
 

@@ -19,6 +19,8 @@ export class RosterDisplayComponent implements OnInit {
 
   constructor(private rs: RosterService, private as: AuthenticateService) { }
 
+  levelUp = false;
+
   selectedGladiator = '';
   // gladiators: Array<Gladiator> = [];
   gladiators: any = [];
@@ -48,13 +50,15 @@ export class RosterDisplayComponent implements OnInit {
         return obj.id === gid;
     })[0];
     console.log(this.selectedGladiator);
+    console.log(this.selectedGladiator['name']);
+    this.levelUp = this.determineLevelUp(this.selectedGladiator);
   }
 
-/*
-  makeBox() {
-    console.log('makeBox');
-    return;
+
+  determineLevelUp(glad) {
+    let totalExpForNextLevel = Math.floor(5 * (Math.pow((glad['level'] + 1), 3)) / 4);
+    return glad['experience'] > totalExpForNextLevel;
+
   }
-*/
 
 }
