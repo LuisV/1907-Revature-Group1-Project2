@@ -1,0 +1,6 @@
+#stack {
+    position:relative;
+    }
+#stack > canvas {
+    position:relative;
+    }
