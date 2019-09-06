@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { PagestateService} from '../pagestate.service';
+import { PagestateService } from '../pagestate.service';
 
 
 @Component({
@@ -23,6 +23,7 @@ export class BattleComponent implements OnInit {
   private playery = 0;
   private playerimagex = 0;
   private playerimagey = -520;
+  public playerImage = new Image();
 
   makeCanvas(canvas: HTMLCanvasElement) {
     this.context = canvas.getContext('2d');
@@ -46,9 +47,10 @@ export class BattleComponent implements OnInit {
   }
 
   drawPlayer() {
-    let image = new Image();
-    image.src = 'assets/shadowlord.png';
-    this.playerContext.drawImage(image, this.playerimagex, this.playerimagey);
+    console.log(this.playerx + ", " + this.playery);
+    this.playerContext.fillStyle = "ffffff";
+    this.playerContext.fillRect(0, 0, this.width, this.height);
+    this.playerContext.drawImage(this.playerImage, this.playerimagex, this.playerimagey);
     (<HTMLCanvasElement>document.getElementById('player')).style.top = this.playery + "px";
     (<HTMLCanvasElement>document.getElementById('player')).style.left = this.playerx + "px";
 
@@ -58,6 +60,7 @@ export class BattleComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.playerImage.src = 'assets/shadowlord.png';
     const canvas = <HTMLCanvasElement>document.getElementById('canvasId');
     this.makeCanvas(canvas);
     const playerCanvas = <HTMLCanvasElement>document.getElementById('player');
@@ -68,16 +71,44 @@ export class BattleComponent implements OnInit {
     //console.log(event);
 
     if (event.key === "ArrowUp") {
-      this.playery -= 20;
+      this.playerimagey = -520;
+
+      if (this.playerimagex > -390)
+        this.playerimagex -= 64;
+      else
+        this.playerimagex = 0;
+
+      this.playery -= 10;
     }
     if (event.key === "ArrowDown") {
-      this.playery += 20;
-    }
-    if (event.key === "ArrowLeft") {
-      this.playerx -= 20;
+      this.playerimagey = -650;
+
+      if (this.playerimagex > -390)
+        this.playerimagex -= 64;
+      else
+        this.playerimagex = 0;
+
+      this.playery += 10;
     }
     if (event.key === "ArrowRight") {
-      this.playerx += 20;
+      this.playerimagey = -715;
+
+      if (this.playerimagex > -390)
+        this.playerimagex -= 64;
+      else
+        this.playerimagex = 0;
+
+      this.playerx += 10;
+    }
+    if (event.key === "ArrowLeft") {
+      this.playerimagey = -585;
+
+      if (this.playerimagex > -390)
+        this.playerimagex -= 64;
+      else
+        this.playerimagex = 0;
+        
+      this.playerx -= 10;
     }
   }
 }
