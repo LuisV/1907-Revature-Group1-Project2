@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RosterService } from '../roster.service';
 import { RosterDisplayComponent } from '../roster-display/roster-display.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import {ChangeDetectorRef} from '@angular.core';
 import { Gladiator } from '../gladiator';
+import { RosterService } from '../roster.service';
+
 
 const baseURL = 'http://localhost:8080/HeroArena/';
 
@@ -69,14 +71,10 @@ export class LevelUpComponent implements OnInit {
 
   submitChanges(gl: Gladiator){
     const hdrs = new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
-
-    // const hdrs = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    /*
-    this.http.put<Gladiator>(  baseURL + '/gladiator',
-                    gl,
-                    {headers: hdrs}).pipe(map(resp => resp as Gladiator));
-    */
     console.log(gl);
+    if (this.points === 0){
+      gl.level++;
+    }
     this.http.put<Gladiator>(  baseURL + 'gladiator/update',
                     gl,
                     {headers: hdrs})
@@ -84,6 +82,13 @@ export class LevelUpComponent implements OnInit {
                       val => {
                           console.log("PUT call successful value returned in body", 
                                       val);
+                          /* //attempt 1
+                          if (this.points === 0) {
+                            location.reload();
+                          }
+                          */
+                        // atempt 2
+                      // this.router.navigateByUrl('/gladiator', {skipLocationChange: true}).then(() => this.router.navigate(["roster"])); 
                       },
                       response => {
                           console.log("PUT call in error", response);
@@ -92,7 +97,7 @@ export class LevelUpComponent implements OnInit {
                           console.log("The PUT observable is now completed.");
                       }
                   );
-    console.log('got here');
+
   }
 
 
