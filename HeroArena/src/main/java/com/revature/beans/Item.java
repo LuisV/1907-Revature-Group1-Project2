@@ -12,6 +12,11 @@ public class Item
     private Integer id;
     private String name;
     private String description;
+    @Column(name="effect_health")
+    private Integer healthOffset;
+    @Column(name="effect_xp")
+    private Integer xpOffset;
+    private Integer price;
 
     public Item()
     {
@@ -47,6 +52,36 @@ public class Item
         this.description = description;
     }
 
+    public Integer getHealthOffset()
+    {
+        return healthOffset;
+    }
+
+    public void setHealthOffset(Integer healthOffset)
+    {
+        this.healthOffset = healthOffset;
+    }
+
+    public Integer getXpOffset()
+    {
+        return xpOffset;
+    }
+
+    public void setXpOffset(Integer xpOffset)
+    {
+        this.xpOffset = xpOffset;
+    }
+
+    public Integer getPrice()
+    {
+        return price;
+    }
+
+    public void setPrice(Integer price)
+    {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o)
     {
@@ -57,7 +92,10 @@ public class Item
 
         if (id != null ? !id.equals(item.id) : item.id != null) return false;
         if (name != null ? !name.equals(item.name) : item.name != null) return false;
-        return description != null ? description.equals(item.description) : item.description == null;
+        if (description != null ? !description.equals(item.description) : item.description != null) return false;
+        if (healthOffset != null ? !healthOffset.equals(item.healthOffset) : item.healthOffset != null) return false;
+        if (xpOffset != null ? !xpOffset.equals(item.xpOffset) : item.xpOffset != null) return false;
+        return price != null ? price.equals(item.price) : item.price == null;
     }
 
     @Override
@@ -66,6 +104,9 @@ public class Item
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (healthOffset != null ? healthOffset.hashCode() : 0);
+        result = 31 * result + (xpOffset != null ? xpOffset.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;
     }
 
@@ -76,6 +117,9 @@ public class Item
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", healthOffset=" + healthOffset +
+                ", xpOffset=" + xpOffset +
+                ", price=" + price +
                 '}';
     }
 }
