@@ -70,6 +70,11 @@ export class LevelUpComponent implements OnInit {
       console.log(this.points);
     }
   }
+  
+  setLevelUp(lu) {
+    lu != lu;
+    return lu;
+  }
 
   submitChanges(gl: Gladiator){
     const hdrs = new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
@@ -86,6 +91,7 @@ export class LevelUpComponent implements OnInit {
         // this.levelUp = false;
         this.levelUp = false;
         console.log(this.levelUp);
+        this.setLevelUp(this.levelUp);
 
         console.log('PUT call successful value returned in body', val);
           // this.parent.ngOnInit();

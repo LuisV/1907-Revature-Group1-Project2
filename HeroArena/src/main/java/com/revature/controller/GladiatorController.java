@@ -60,7 +60,11 @@ public class GladiatorController {
 	@ResponseBody
 	public void updateGladiator(@RequestBody Gladiator g) {
 		System.out.println("calling updateGladiator in GladiatorController");
+<<<<<<< HEAD
 		// g.reconfigureHealth();
+=======
+		g.reconfigureHealth();
+>>>>>>> e485b012b714bea467006828b28a335bd269934b
 		gs.updateGladiator(g);
 	}
 	
