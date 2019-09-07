@@ -96,11 +96,11 @@ export class LevelUpComponent implements OnInit {
         console.log('PUT call successful value returned in body', val);
           // this.parent.ngOnInit();
           // attempt 1
-          /*
-          if (this.points === 0) {
-            location.reload();
-          }
-          */
+          
+        if (this.points === 0) {
+          location.reload();
+        }
+          
 
         // attempt 2
       // this.router.navigateByUrl('/gladiator', {skipLocationChange: true}).then(() => this.router.navigate(["roster"])); 
