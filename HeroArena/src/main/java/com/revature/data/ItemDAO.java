@@ -9,7 +9,7 @@ public interface ItemDAO
 {
     Integer addItem(Item item);
     Item getItemById(int id);
-    //Set<UserItemStock> getItemsByUser(User user);
+    Set<Item> getAllItems();
     boolean deleteItem(Item item);
     boolean updateItem(Item item);
 }
