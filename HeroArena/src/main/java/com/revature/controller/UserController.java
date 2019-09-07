@@ -49,7 +49,7 @@ public class UserController {
 		return ResponseEntity.ok(items);
 	}
 
-	@PutMapping(value="/user/items/{item}")
+	@DeleteMapping(value="/user/items/{item}")
 	public ResponseEntity<Gladiator> useItem(@PathVariable("item") Integer itemId, @RequestParam Integer gladiatorId, HttpSession session)
 	{
 		User user = (User) session.getAttribute("user");

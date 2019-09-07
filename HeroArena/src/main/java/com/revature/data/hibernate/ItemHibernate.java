@@ -9,6 +9,9 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Component
 public class ItemHibernate implements ItemDAO
 {
@@ -55,6 +58,19 @@ public class ItemHibernate implements ItemDAO
         sess.close();
 
         return item;
+    }
+
+    @Override
+    public Set<Item> getAllItems()
+    {
+        log.trace("Retrieving all items");
+        String qStr = "FROM Item";
+
+        Session sess = hiberUtil.getSession();
+        Set<Item> items = new HashSet<Item>(sess.createQuery(qStr).list());
+        sess.close();
+
+        return items;
     }
 
     @Override

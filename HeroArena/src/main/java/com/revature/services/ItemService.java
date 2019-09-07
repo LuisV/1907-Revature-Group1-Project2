@@ -34,6 +34,11 @@ public class ItemService
         return itemDao.getItemById(id);
     }
 
+    public Set<Item> getAllItems()
+    {
+        return itemDao.getAllItems();
+    }
+
     public Set<UserItemStock> getItemsOfUser(User user)
     {
         Set<UserItemStock> results = invDao.getUserItemsByUser(user);

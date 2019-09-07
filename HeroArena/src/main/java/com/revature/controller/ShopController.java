@@ -4,6 +4,7 @@ import com.revature.beans.Gladiator;
 import com.revature.beans.Item;
 import com.revature.beans.User;
 import com.revature.beans.UserItemStock;
+import com.revature.services.GladiatorService;
 import com.revature.services.ItemService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Set;
 
 @Controller
 @CrossOrigin
@@ -22,7 +24,7 @@ public class ShopController
     @Autowired
     private ItemService itemServ;
 
-    @PostMapping(value="/shop/items/{item}")
+    @PutMapping(value="/shop/items/{item}")
     public ResponseEntity<UserItemStock> purchaseItem(@PathVariable("item") Integer itemId, HttpSession session)
     {
         log.trace("Attempting to purchase an item.");
@@ -40,5 +42,9 @@ public class ShopController
         return ResponseEntity.ok(itemServ.addToInventory(user, item, 1));
     }
 
-
+    @GetMapping(value="/shop/items")
+    public ResponseEntity<Set<Item>> getAvailableItems()
+    {
+        return ResponseEntity.ok(itemServ.getAllItems());
+    }
 }
