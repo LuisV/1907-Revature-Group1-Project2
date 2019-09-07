@@ -90,4 +90,24 @@ export class LoginComponent implements OnInit {
       this.errorString += '<br>The password needs to be at least 6 characters.';
     }
   }
+
+  onKeydownRegister(event) {
+    //console.log(event);
+
+    if (event.key === "Enter") {
+      this.register();
+    }
+
+    //console.log(this.keys);
+  }
+
+  onKeydownLogin(event) {
+    //console.log(event);
+
+    if (event.key === "Enter") {
+      this.authenticate();
+    }
+
+    //console.log(this.keys);
+  }
 }
