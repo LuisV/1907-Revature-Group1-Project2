@@ -10,12 +10,14 @@ import javax.persistence.*;
 public class UserItemStock
 {
     @EmbeddedId
-    private UserItemStockId id;
+    private UserItemStockId id = new UserItemStockId();
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="player_id", insertable=false, updatable=false)
+    @MapsId("playerId")
     private User user;
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="item_id", insertable=false, updatable=false)
+    @MapsId("itemId")
     private Item item;
     private Integer amount;
 
