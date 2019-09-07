@@ -7,31 +7,29 @@ import java.io.Serializable;
 @Embeddable
 public class UserItemStockId implements Serializable
 {
-    @Column(name="player_id")
-    private long playerId;
-    @Column(name="item_id")
-    private long itemId;
+    private Integer playerId;
+    private Integer itemId;
 
     public UserItemStockId()
     {
     }
 
-    public long getPlayerId()
+    public Integer getPlayerId()
     {
         return playerId;
     }
 
-    public void setPlayerId(long playerId)
+    public void setPlayerId(Integer playerId)
     {
         this.playerId = playerId;
     }
 
-    public long getItemId()
+    public Integer getItemId()
     {
         return itemId;
     }
 
-    public void setItemId(long itemId)
+    public void setItemId(Integer itemId)
     {
         this.itemId = itemId;
     }
@@ -44,15 +42,15 @@ public class UserItemStockId implements Serializable
 
         UserItemStockId that = (UserItemStockId) o;
 
-        if (playerId != that.playerId) return false;
-        return itemId == that.itemId;
+        if (playerId != null ? !playerId.equals(that.playerId) : that.playerId != null) return false;
+        return itemId != null ? itemId.equals(that.itemId) : that.itemId == null;
     }
 
     @Override
     public int hashCode()
     {
-        int result = (int) (playerId ^ (playerId >>> 32));
-        result = 31 * result + (int) (itemId ^ (itemId >>> 32));
+        int result = playerId != null ? playerId.hashCode() : 0;
+        result = 31 * result + (itemId != null ? itemId.hashCode() : 0);
         return result;
     }
 

@@ -92,6 +92,7 @@ export class LevelUpComponent implements OnInit {
         this.levelUp = false;
         console.log(this.levelUp);
         this.setLevelUp(this.levelUp);
+
         console.log('PUT call successful value returned in body', val);
           // this.parent.ngOnInit();
           // attempt 1
