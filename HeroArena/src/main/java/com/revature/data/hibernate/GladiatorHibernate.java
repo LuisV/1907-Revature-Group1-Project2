@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -17,6 +18,7 @@ import com.revature.utils.HibernateUtil;
 
 @Component
 public class GladiatorHibernate implements GladiatorDAO {
+	private Logger log = Logger.getLogger(GladiatorHibernate.class);
 	@Autowired
 	private HibernateUtil hu;
 	
@@ -76,6 +78,23 @@ public class GladiatorHibernate implements GladiatorDAO {
 		gladSet.addAll(gladList);
 		s.close();
 		return gladSet;
+	}
+
+	@Override
+	public Set<Gladiator> getGladiatorsNotOwnedBy(User user)
+	{
+		log.trace("Getting all gladiators not owned by a given user");
+		log.trace(" > " + user);
+
+		String qStr = "from Gladiator g where g.player.id != :userId";
+		Session s = hu.getSession();
+		Query<Gladiator> query = s.createQuery(qStr, Gladiator.class);
+		query.setParameter("userId", user.getId());
+		Set<Gladiator> results = new HashSet<Gladiator>(query.list());
+
+		s.close();
+
+		return results;
 	}
 
 	@Override

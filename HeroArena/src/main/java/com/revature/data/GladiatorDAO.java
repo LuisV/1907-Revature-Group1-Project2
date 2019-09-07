@@ -8,11 +8,12 @@ import com.revature.beans.User;
 
 public interface GladiatorDAO {
 	// CREATE - Insert
-	public int addGladiator(Gladiator g);
+	int addGladiator(Gladiator g);
 	// READ - select
-	public Gladiator getGladiator(Integer id);
-	public Set<Gladiator> getGladiatorsForUser(User u);
-	public Set<Gladiator> getAllGladiators();
+	Gladiator getGladiator(Integer id);
+	Set<Gladiator> getGladiatorsForUser(User u);
+	Set<Gladiator> getAllGladiators();
+	Set<Gladiator> getGladiatorsNotOwnedBy(User u);
 	// Update - Update
 	void updateGladiator(Gladiator g);
 	// Delete

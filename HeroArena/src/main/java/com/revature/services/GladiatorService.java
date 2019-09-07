@@ -28,6 +28,11 @@ public class GladiatorService {
 		return gd.getGladiatorsForUser(u);
 	};
 
+	public Set<Gladiator> getAllGladiatorsNotOwnedBy(User user)
+	{
+		return gd.getGladiatorsNotOwnedBy(user);
+	}
+
 	public Set<Gladiator> getAllGladiators(){
 		return gd.getAllGladiators();
 	}
