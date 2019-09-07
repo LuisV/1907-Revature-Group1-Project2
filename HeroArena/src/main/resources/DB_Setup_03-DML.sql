@@ -30,6 +30,10 @@ INSERT INTO gladiator (id, player_id, name, strength, dexterity, vitality, curre
            (SELECT id FROM users WHERE username = 'player'),
            'Shadow Lord',  3, 5, 1, 4, 12, 12, 157 FROM dual;
 
+INSERT INTO gladiator (id, player_id, name, strength, dexterity, vitality, current_level, current_health, max_health, experience)
+    SELECT gladiator_seq.nextVal,
+            (SELECT id FROM users WHERE username = 'player'),
+           'Doom Candidate',  4, 3, 7, 5, 20, 20, 429 FROM dual;
 
 -- Items
 INSERT INTO items (id, name, description, effect_health, effect_xp, price)

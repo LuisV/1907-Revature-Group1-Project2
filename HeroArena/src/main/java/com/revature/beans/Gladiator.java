@@ -118,8 +118,9 @@ public class Gladiator {
 		return vitality;
 	}
 	public void setVitality(Integer vitality) {
+		// int oldVitality = this.vitality;
 		this.vitality = vitality;
-		reconfigureHealth();
+		// this.maxHealth = this.maxHealth + ((this.vitality - oldVitality)*2);
 	}
 	public Integer getExperience() {
 		return experience;
@@ -139,7 +140,7 @@ public class Gladiator {
 	public void setCurrentHealth(Integer currentHealth) {
 		this.currentHealth = currentHealth;
 	}
-
+	
 	@Override
 	public boolean equals(Object o)
 	{
