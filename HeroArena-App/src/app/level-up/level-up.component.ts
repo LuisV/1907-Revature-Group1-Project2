@@ -105,3 +105,4 @@ export class LevelUpComponent implements OnInit {
   );
 
 }
+}

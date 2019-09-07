@@ -21,12 +21,12 @@
 
     <div class="formgroup" style="text-align:left; width: 15%; margin: auto">
       <label for="username" style="text-align:left">Username:<br></label> <input class="form-control simple-book"
-        type="text" id="username" />
+        type="text" id="username" (keydown)="onKeydownLogin($event)"/>
       <br>
     </div>
     <div class="formgroup" style="text-align:left; width: 15%; margin: auto">
       <label for="password">Password:<br></label> <input class="form-control simple-book" type="password"
-        id="password" />
+        id="password" (keydown)="onKeydownLogin($event)"/>
       <br>
     </div>
 
@@ -81,17 +81,17 @@
 
     <div class="formgroup" style="text-align:left; width: 15%; margin: auto">
       <label for="username" style="text-align:left">Username:<br></label> <input class="form-control simple-book"
-        type="text" id="username" />
+        type="text" id="username" (keydown)="onKeydownRegister($event)"/>
       <br>
     </div>
 
     <div class="formgroup" style="text-align:left; width: 15%; margin: auto">
-      <label for="password1">Password:<br></label> <input class="form-control simple-book" type="text" id="password1" />
+      <label for="password1">Password:<br></label> <input class="form-control simple-book" type="text" id="password1" (keydown)="onKeydownRegister($event)"/>
       <br>
     </div>
 
     <div class="formgroup" style="text-align:left; width: 15%; margin: auto">
-      <label for="password2">Password:<br></label> <input class="form-control simple-book" type="text" id="password2" />
+      <label for="password2">Password:<br></label> <input class="form-control simple-book" type="text" id="password2" (keydown)="onKeydownRegister($event)"/>
       <br>
     </div>
 
