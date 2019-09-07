@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { RosterDisplayComponent } from '../roster-display/roster-display.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -16,9 +16,11 @@ const baseURL = 'http://localhost:8080/HeroArena/';
   templateUrl: './level-up.component.html',
   styleUrls: ['./level-up.component.css']
 })
-
+// @Input() parent: Component;
 
 export class LevelUpComponent implements OnInit {
+
+  @Input() levelUp: boolean;
 
   points = 2;
 
@@ -34,11 +36,11 @@ export class LevelUpComponent implements OnInit {
     this.originalStats['dexterity'] = this.levelUpGladiator['dexterity'];
     this.originalStats['vitality'] = this.levelUpGladiator['vitality'];
     console.log(this.originalStats);
+    console.log(this.levelUp);
   }
 
   ngOnInit() {
   }
-
 
   addPoints(glad, attr) {
     if (this.points <= 0) {
@@ -49,7 +51,7 @@ export class LevelUpComponent implements OnInit {
       this.points--;
       // console.log(pointIn);
       console.log(glad[attr]);
-      console.log(typeof glad);
+      console.log('levelUp: ' + this.levelUp);
       console.log(this.points);
     }
   }
@@ -72,33 +74,34 @@ export class LevelUpComponent implements OnInit {
   submitChanges(gl: Gladiator){
     const hdrs = new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
     console.log(gl);
-    if (this.points === 0){
+    if (this.points === 0) {
       gl.level++;
     }
-    this.http.put<Gladiator>(  baseURL + 'gladiator/update',
-                    gl,
-                    {headers: hdrs})
-                    .subscribe(
-                      val => {
-                          console.log("PUT call successful value returned in body", 
-                                      val);
-                          /* //attempt 1
-                          if (this.points === 0) {
-                            location.reload();
-                          }
-                          */
-                        // atempt 2
-                      // this.router.navigateByUrl('/gladiator', {skipLocationChange: true}).then(() => this.router.navigate(["roster"])); 
-                      },
-                      response => {
-                          console.log("PUT call in error", response);
-                      },
-                      () => {
-                          console.log("The PUT observable is now completed.");
-                      }
-                  );
+    this.http.put<Gladiator>( baseURL + 'gladiator/update',
+                              gl,
+                              {headers: hdrs})
+    .subscribe(
+      val => {
+        
+        this.levelUp = false;
+        console.log('PUT call successful value returned in body', val);
+          // this.parent.ngOnInit();
+          // attempt 1
+          /*
+          if (this.points === 0) {
+            location.reload();
+          }
+          */
 
-  }
-
+        // attempt 2
+      // this.router.navigateByUrl('/gladiator', {skipLocationChange: true}).then(() => this.router.navigate(["roster"])); 
+      },
+      response => {
+          console.log('PUT call in error', response);
+      },
+      () => {
+          console.log('The PUT observable is now completed.');
+      }
+  );
 
 }
