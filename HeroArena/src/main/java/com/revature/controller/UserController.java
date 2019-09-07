@@ -19,6 +19,7 @@ import com.revature.beans.User;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@ResponseBody
 @CrossOrigin
 public class UserController {
 	@Autowired
@@ -30,14 +31,12 @@ public class UserController {
 	private Logger log = Logger.getLogger(UserController.class);
 	
 	@GetMapping(value="/user/roster/{play}")
-	@ResponseBody
 	public Set<Gladiator> getRoster(@PathVariable("play") Integer id) {
 		System.out.println("getRoster in UserController");
 		return gladServ.getGladiatorsByUser(id);
 	}
 
 	@GetMapping(value="/user/items")
-	@ResponseBody
 	public ResponseEntity<Set<UserItemStock>> getItems(HttpSession session)
 	{
 		User user = (User) session.getAttribute("user");
@@ -50,24 +49,28 @@ public class UserController {
 		return ResponseEntity.ok(items);
 	}
 
-	@PutMapping(value="/user/items/{item}")
-	@ResponseBody
+	@DeleteMapping(value="/user/items/{item}")
 	public ResponseEntity<Gladiator> useItem(@PathVariable("item") Integer itemId, @RequestParam Integer gladiatorId, HttpSession session)
 	{
 		User user = (User) session.getAttribute("user");
 		if (user == null)
-
 			return ResponseEntity.status(403).build();
 
-		log.trace("Getting items for user '" + user.getUsername() + "'");
+		log.trace("Attempting to use an item");
 
 		Gladiator glad = gladServ.getGladiatorById(gladiatorId);
 		if (glad == null || itemId == null)
+		{
+			log.trace(" > Specified target gladiator not found");
 			return ResponseEntity.status(400).build();
+		}
 
 		Item item = itemServ.getItemById(itemId);
 		if (item == null)
+		{
+			log.trace(" > Specified item not found");
 			return ResponseEntity.status(400).build();
+		}
 
 		itemServ.useItem(user, item, glad);
 		return ResponseEntity.ok(glad);

@@ -63,7 +63,6 @@ public class UserItemsHibernate implements UserItemsDAO
     {
         log.trace("Getting user item by id (item = " + item + ", user = " + user + ")");
 
-
         Session sess = hiberUtil.getSession();
         String query = "from UserItemStock ustock where ustock.user.id=:user and ustock.item.id=:item";
         Query<UserItemStock> qry = sess.createQuery(query, UserItemStock.class);
@@ -84,8 +83,6 @@ public class UserItemsHibernate implements UserItemsDAO
         log.trace(" > " + user);
 
         Session sess = hiberUtil.getSession();
-
-        //User tempUser = sess.get(User.class, user.getId());
 
         String query = "from UserItemStock ustock where ustock.user.id=:user";
         Query<UserItemStock> qry = sess.createQuery(query, UserItemStock.class);

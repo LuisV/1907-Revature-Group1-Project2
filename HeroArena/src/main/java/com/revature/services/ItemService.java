@@ -34,6 +34,11 @@ public class ItemService
         return itemDao.getItemById(id);
     }
 
+    public Set<Item> getAllItems()
+    {
+        return itemDao.getAllItems();
+    }
+
     public Set<UserItemStock> getItemsOfUser(User user)
     {
         Set<UserItemStock> results = invDao.getUserItemsByUser(user);
@@ -90,6 +95,8 @@ public class ItemService
         }
     }
 
+    // Always returns a UserItemStock. If failed, returns previous item stock if player
+    // owns any of the item.  Otherwise, returns a UserItemStock with a negative amount.
     public UserItemStock addToInventory(User user, Item item, int amount)
     {
         log.trace("Adding item to user's inventory");
@@ -110,11 +117,25 @@ public class ItemService
             log.trace(" > Verified that user already owns " + prevAmount + " of the item.");
 
             available.setAmount(prevAmount + amount);
-            available = (invDao.updateUserItem(available) ? available : null);
+            if (invDao.updateUserItem(available))
+                log.trace(" > Item amount successfully updated");
+            else
+            {
+                log.trace(" > Failed to update item amount");
+                available.setAmount(prevAmount);
+            }
         }
         else
         {
             available = invDao.addUserItem(item, user);
+            if (available == null)
+            {
+                log.trace(" > Failed to add new item to user's inventory");
+                available = new UserItemStock();
+                available.setItem(item);
+                available.setUser(user);
+                available.setAmount(-1);
+            }
         }
 
         return available;

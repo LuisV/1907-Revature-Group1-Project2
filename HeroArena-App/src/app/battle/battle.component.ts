@@ -22,6 +22,8 @@ export class BattleComponent implements OnInit {
 
   private width = 1100;
   private height = 600;
+  public playerImage = new Image();
+  public enemyImage = new Image();
 
   private playerx = new Array<number>(2);
   private playery = new Array<number>(2);
@@ -36,9 +38,6 @@ export class BattleComponent implements OnInit {
 
 
   private keys = new Set();
-
-  public playerImage = new Image();
-  public enemyImage = new Image();
 
   makeCanvas(canvas: HTMLCanvasElement) {
     this.context = canvas.getContext('2d');
@@ -94,10 +93,6 @@ export class BattleComponent implements OnInit {
         this.aggro(canvas, playerContext, 0, index);
         break;
     }
-
-    //if (index != 0) {
-    //  this.aggro(0, index);
-    //}
 
     if (this.pss.getState() == 3)
       window.requestAnimationFrame(() => this.drawPlayer(canvas, playerContext, index));
@@ -162,7 +157,7 @@ export class BattleComponent implements OnInit {
         anim = -585;
     }
 
-    console.log(this.playerDamaging[comIndex]);
+    //console.log(this.playerDamaging[comIndex]);
 
     if ((Math.abs(ydif) + Math.abs(xdif)) > 40) {
       movex = (this.playerspeed[comIndex] * xdif) / (Math.abs(ydif) + Math.abs(xdif));
@@ -185,9 +180,8 @@ export class BattleComponent implements OnInit {
   async waitDamage(canvas, playerContext, attackerIndex, defenderIndex, originalY, i) {
     let image = this.playerImage;
 
-    // Do something after the sleep!
-    console.log("x = " + this.playerimagex[attackerIndex])
-    console.log("y = " + this.playerimagey[attackerIndex])
+    //console.log("x = " + this.playerimagex[attackerIndex])
+    //console.log("y = " + this.playerimagey[attackerIndex])
 
     switch (attackerIndex) {
       case 0:

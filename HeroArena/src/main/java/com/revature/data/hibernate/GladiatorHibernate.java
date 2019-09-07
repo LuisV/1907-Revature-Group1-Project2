@@ -95,6 +95,37 @@ public class GladiatorHibernate implements GladiatorDAO {
 	public void updateGladiator(Gladiator g) {
 		// TODO Auto-generated method stub
 		
+		System.out.println("calling updateGladiator in the Hibernate");
+		System.out.println(g);
+		
+		
+		//String query = "UPDATE Gladiator setg where g.id=:i";
+		/*
+		String query = "UPDATE Gladiator set strength=:strength," + 
+				" dexterity=:dexterity, vitality=:vitality " + 
+				"where id=:id";
+		*/
+		/*
+		Query q = s.createQuery(query);
+		q.setParameter("id", g.getId());
+		q.setParameter("strength", g.getStrength());
+		q.setParameter("dexterity", g.getDexterity());
+		q.executeUpdate();
+		*/
+		
+		Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			s.update(g);
+			tx.commit();
+		} catch (Exception e) {
+			 //log.warn("Failed to update user item: " + userItem);
+			if (tx != null)
+				tx.rollback();
+		} finally {
+			s.close();
+		}
 	}
 
 	@Override
