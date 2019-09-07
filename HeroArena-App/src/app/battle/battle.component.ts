@@ -205,11 +205,23 @@ export class BattleComponent implements OnInit {
     }
 
     this.playerimagey[attackerIndex] = originalY;
-    this.playerimagex[attackerIndex] = -64.5 * i;
+
+    switch (this.playerimagey[attackerIndex]) {
+      case -975:
+        this.playerimagex[attackerIndex] = -66 * i;
+        break;
+      case -845:
+        this.playerimagex[attackerIndex] = -63 * i;
+        break;
+      default:
+        this.playerimagex[attackerIndex] = -64.5 * i;
+        break;
+    }
+
     playerContext.clearRect(0, 0, canvas.width, canvas.height);
     playerContext.drawImage(image, this.playerimagex[attackerIndex], this.playerimagey[attackerIndex]);
 
-    await this.sleep(100);
+    await this.sleep(50);
 
     i++;
 
@@ -234,7 +246,6 @@ export class BattleComponent implements OnInit {
   damagePlayer(canvas, playerContext, attackerIndex, defenderIndex) {
     this.playerDamaging[attackerIndex] = true;
     let originalY = this.playerimagey[attackerIndex];
-    this.playerimagex[attackerIndex] = 0;
 
     this.waitDamage(canvas, playerContext, attackerIndex, defenderIndex, originalY - 260, 0);
   }
@@ -282,8 +293,8 @@ export class BattleComponent implements OnInit {
       this.keys.add("ArrowRight");
     }
 
-    if (event.key === "Enter") {
-
+    if (event.key === " ") {
+      this.damagePlayer(<HTMLCanvasElement>document.getElementById('player'), (<HTMLCanvasElement>document.getElementById('player')).getContext('2d'), 0, 1);
     }
 
     //console.log(this.keys);
