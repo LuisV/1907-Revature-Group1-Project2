@@ -16,6 +16,14 @@ public class CharacterService {
     public Set<Character> getAllCharacters(){
         return cd.getAllCharacters();
     }
-
+    public Character addCharacter(Character c){
+        return cd.addCharacter(c);
+    }
+    public Character updateCharacter(Character c){
+        return cd.updateCharacter(c);
+    }
+    public void deleteCharacter(Character c){
+        cd.deleteCharacter(c);
+    }
 
 }

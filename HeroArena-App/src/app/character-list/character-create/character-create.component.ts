@@ -1,13 +1,13 @@
 import { CharacterService } from './../../character.service';
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Character } from 'src/app/character';
+
 @Component({
-  selector: 'app-character-item',
-  templateUrl: './character-item.component.html',
-  styleUrls: ['./character-item.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-character-create',
+  templateUrl: './character-create.component.html',
+  styleUrls: ['./character-create.component.css']
 })
-export class CharacterItemComponent implements OnInit {
+export class CharacterCreateComponent implements OnInit {
 
   @Input() public id: number;
   @Input() public name: string;
@@ -20,16 +20,18 @@ export class CharacterItemComponent implements OnInit {
 
   constructor( private cs: CharacterService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
   }
 
   onSubmit() {
     const ch = new Character(this.id, this.name, this.description,
       this.strength, this.dexterity, this.vitality, this.health, this.rarity);
     console.log(ch);
-    this.cs.updateCharacter(ch).subscribe((obj: Object) => {
+    this.cs.createCharacter(ch).subscribe((obj: Object) => {
     console.log(obj);
 
   });
   }
+
 }
