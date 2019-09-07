@@ -4,6 +4,7 @@ import com.revature.beans.Character;
 import com.revature.data.CharacterDAO;
 import com.revature.utils.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,5 +26,64 @@ public class CharacterHibernate implements CharacterDAO {
 
         s.close();
         return allChars;
+    }
+
+    @Override
+    public Character updateCharacter(Character c) {
+        Session s = hu.getSession();
+        Transaction t = null;
+        try{
+            t= s.beginTransaction();
+
+            s.update(c);
+            t.commit();
+        } catch (Exception e){
+            if(t != null)
+                t.rollback();
+            e.printStackTrace();
+        } finally {
+            s.close();
+        }
+
+        return c;
+    }
+
+    @Override
+    public Character addCharacter(Character c) {
+        Session s = hu.getSession();
+        Transaction t = null;
+        Integer i = 0;
+        try{
+            t= s.beginTransaction();
+            i= (Integer) s.save(c);
+            t.commit();
+        } catch (Exception e){
+            if(t != null)
+                t.rollback();
+            e.printStackTrace();
+        } finally {
+            s.close();
+        }
+         c.setId(i);
+        return c;
+    }
+
+    @Override
+    public void deleteCharacter(Character c) {
+        Session s = hu.getSession();
+        Transaction t = null;
+
+        try{
+            t= s.beginTransaction();
+           s.delete(c);
+            t.commit();
+        } catch (Exception e){
+            if(t != null)
+                t.rollback();
+            e.printStackTrace();
+        } finally {
+            s.close();
+        }
+
     }
 }

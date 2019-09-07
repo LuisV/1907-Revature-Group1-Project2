@@ -5,6 +5,7 @@ import com.revature.beans.Gladiator;
 import com.revature.services.CharacterService;
 import com.revature.services.GladiatorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,23 @@ public class CharacterController {
 
     @GetMapping("all")
     @ResponseBody
-    public Set<Character> getAllCharacters() {
-        return cs.getAllCharacters();
+    public ResponseEntity<Set<Character>> getAllCharacters() {
+        return ResponseEntity.ok(cs.getAllCharacters());
+    }
+
+    @PostMapping
+    public ResponseEntity<Character> updateCharacter( @RequestBody Character c){
+        return ResponseEntity.ok(cs.updateCharacter(c));
+    }
+
+    @PutMapping
+    public ResponseEntity<Character> addCharacter( @RequestBody Character c){
+        return ResponseEntity.ok(cs.addCharacter(c));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Character> deleteCharacter( @RequestBody Character c){
+       cs.deleteCharacter(c);
+       return ResponseEntity.status(405).build();
     }
 }
