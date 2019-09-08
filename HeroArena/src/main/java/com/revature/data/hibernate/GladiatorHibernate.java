@@ -23,18 +23,32 @@ public class GladiatorHibernate implements GladiatorDAO {
 	private HibernateUtil hu;
 	
 	@Override
-	public int addGladiator(Gladiator g) {
-		/*
-		Session s = hu.getSession();
-		Transaction t = null;
-		Integer i = 0;
-		t = s.beginTransaction();
-		i = (Integer) s.save(g);
-		t.commit();
-		
-		return i;
-		*/
-		return 0;
+	public Integer addGladiator(Gladiator g) {
+		log.trace("Adding gladiator to database");
+		log.trace(" > " + g);
+
+		Integer id = null;
+		Session sess = hu.getSession();
+		Transaction tx = null;
+		try
+		{
+			tx = sess.beginTransaction();
+			id = (Integer) sess.save(g);
+			tx.commit();
+			log.trace(" > Gladiator successfully added! data=" + g);
+			log.trace(g + "   ----- id=" + id);
+		} catch (Exception e)
+		{
+			log.warn("Failed to add gladiator to database");
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally
+		{
+			sess.close();
+		}
+
+		return id;
 	}
 
 	// not testing atm
