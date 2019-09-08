@@ -1,0 +1,15 @@
+
+<div style="margin:auto;" class="card w-50 justify-content-md-center ">
+  <div class="card-header">
+    {{id}}
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit(charForm)" #userForm = "ngForm">
+      <div>Username: <input style= "width: 50%; display: inline;" type="text" name="name" class="form-control-plaintext" required [(ngModel)]="username"></div>
+      <div>Banned: <input style= "width: 50%; display: inline;" type="number" name="banned" class="form-control-plaintext" required [(ngModel)]="banned"></div>
+      <div>Role: <input style= "width: 50%; display: inline;" type="number" name="role" class="form-control-plaintext" required [(ngModel)]="role"></div>
+      <input type="submit">
+
+    </form>
+  </div>
+</div>

@@ -14,6 +14,9 @@ import { CharacterListComponent } from './character-list/character-list.componen
 import { CharacterItemComponent } from './character-list/character-item/character-item.component';
 import { LevelUpComponent } from './level-up/level-up.component';
 import { CharacterCreateComponent } from './character-list/character-create/character-create.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserService } from './user.service';
+import { UserItemComponent } from './user-list/user-item/user-item.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { CharacterCreateComponent } from './character-list/character-create/char
     CharacterListComponent,
     CharacterItemComponent,
     LevelUpComponent,
-    CharacterCreateComponent
+    CharacterCreateComponent,
+    UserListComponent,
+    UserItemComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,7 @@ import { CharacterCreateComponent } from './character-list/character-create/char
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [RosterService, CharacterService, HTMLCanvasElement],
+  providers: [RosterService, UserService, CharacterService, HTMLCanvasElement],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

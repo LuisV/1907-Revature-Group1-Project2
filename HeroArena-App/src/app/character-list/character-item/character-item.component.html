@@ -27,7 +27,6 @@
             </div>
           </div>
           <input type="number" class="form-control" name="strength" required [(ngModel)]="strength"  >
-        {{strength}}
         </div></li>
       <li class="list-group-item"><div class="input-group mb-2">
           <div class="input-group-prepend">
@@ -40,6 +39,7 @@
     <div class="card-body ">
       <h4><input type="text"  class="form-control-plaintext" name="rarity" required [(ngModel)]="rarity"></h4>
       <input type="submit" [disabled]="!charForm.form.valid">
+      <button (click) = "delete()">Delete</button>
     </div>
 
     </form>

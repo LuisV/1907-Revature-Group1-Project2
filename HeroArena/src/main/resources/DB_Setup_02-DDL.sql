@@ -17,6 +17,7 @@ CREATE TABLE users (
     id NUMBER(20) PRIMARY KEY,
     username VARCHAR2(25) UNIQUE NOT NULL,
     password VARCHAR2(25) NOT NULL,
+    banned number(1) default 0,
     role NUMBER(1) DEFAULT 1 NOT NULL   -- For now,  0 == admin, 1 == player
 );
 

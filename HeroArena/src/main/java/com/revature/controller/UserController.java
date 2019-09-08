@@ -71,8 +71,18 @@ public class UserController {
 			log.trace(" > Specified item not found");
 			return ResponseEntity.status(400).build();
 		}
-
 		itemServ.useItem(user, item, glad);
 		return ResponseEntity.ok(glad);
+	}
+
+	@GetMapping(value="/user/all")
+	public ResponseEntity<Set<User>> getAllUsers()
+	{
+		log.trace("Getting all users");
+		return ResponseEntity.ok(userServ.getAllUsers());
+	}
+	@PostMapping(value="/user")
+	public ResponseEntity<User> editUser(@RequestBody User u){
+		return ResponseEntity.ok(userServ.editUser(u));
 	}
 }
