@@ -1,0 +1,8 @@
+<app-shop-item (submitted)="handleUse(item.item.id)" *ngFor= "let item of inventory"
+  [id]= item.item.id
+  [name]= item.item.name
+  [description]= item.item.description
+  [price] = item.item.price
+  [quantity] = item.amount
+  [purchaseString]= "'Use'"
+></app-shop-item>

@@ -20,6 +20,7 @@ import { UserService } from './user.service';
 import { UserItemComponent } from './user-list/user-item/user-item.component';
 import { ShopListComponent } from './shop-list/shop-list.component';
 import { ShopItemComponent } from './shop-list/shop-item/shop-item.component';
+import { InventoryListComponent } from './inventory-list/inventory-list.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ShopItemComponent } from './shop-list/shop-item/shop-item.component';
     UserListComponent,
     UserItemComponent,
     ShopListComponent,
-    ShopItemComponent
+    ShopItemComponent,
+    InventoryListComponent
   ],
   imports: [
     BrowserModule,

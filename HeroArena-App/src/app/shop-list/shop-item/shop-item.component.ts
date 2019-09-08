@@ -1,5 +1,5 @@
 import { InventoryShopService } from './../../inventory-shop.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { EventEmitter, Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-shop-item',
@@ -13,15 +13,16 @@ export class ShopItemComponent implements OnInit {
 @Input() public price: number;
 @Input() public amount: number;
 @Input() public purchaseString: string;
+@Input() public quantity: number;
+@Output() submitted = new EventEmitter();
+
   constructor(private is: InventoryShopService) { }
 
   ngOnInit() {
 
   }
+onClick() {
+  this.submitted.emit(this.purchaseString);
+}
 
-  onPurchase() {
-      this.is.purchaseItemFromShop(this.id).subscribe((obj:Object) => {
-        console.log(obj);
-      });
-  }
 }

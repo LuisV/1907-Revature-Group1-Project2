@@ -8,7 +8,7 @@
         <td class="vertical-menu" valign="top">
             <!-- <a (click)="showHeroes()">Show Heroes</a> -->
             <a (click)="showHeroes()">Show Heroes</a>
-            <a (click)="showEquip()">Equip Heroes</a>
+            <a (click)="showEquip()">Inventory</a>
             <a (click)="showBattle()">Battle</a>
             <a (click)="showShop()">Shop</a>
         </td>
@@ -17,8 +17,8 @@
                 <app-roster-display></app-roster-display>
             </div>
             <div *ngIf="this.pss.getState() == 2">
-                <!-- put the tag for the show item component here -->
-            </div>
+                <app-inventory-list></app-inventory-list>
+              </div>
             <div *ngIf="this.pss.getState() == 3">
                 <app-battle></app-battle>
             </div>

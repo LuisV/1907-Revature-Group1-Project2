@@ -1,3 +1,4 @@
+import { Gladiator } from './gladiator';
 import { AuthenticateService } from './authenticate.service';
 import { Item } from './item';
 import { Injectable } from '@angular/core';
@@ -20,4 +21,16 @@ export class InventoryShopService {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     return this.http.put( url + 'shop/items/' + itemNum +"?userId=" + this.as.getUser().id, {headers, withCredentials: true}).pipe(map(resp => resp as Inventory));
   }
+
+  getInventoryByUser(userId: number) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.get( url + 'user/items?userId=' + this.as.getUser().id, {headers, withCredentials: true}).pipe(map(resp => resp as Inventory));
+
+  }
+  useAnItem( gladiatorId: number, itemId: number) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.delete( url + 'user/items/' +itemId + "?userId="+this.as.getUser().id+"&gladiatorId=2", {headers, withCredentials: true}).pipe(map(resp => resp as Gladiator));
+
+  }
+
 }
