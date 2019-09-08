@@ -70,6 +70,11 @@ export class LevelUpComponent implements OnInit {
       console.log(this.points);
     }
   }
+  
+  setLevelUp(lu) {
+    lu != lu;
+    return lu;
+  }
 
   submitChanges(gl: Gladiator){
     const hdrs = new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
@@ -82,16 +87,20 @@ export class LevelUpComponent implements OnInit {
                               {headers: hdrs})
     .subscribe(
       val => {
-        
+        // can't get the parent to reload when levelUp becomes false
+        // this.levelUp = false;
         this.levelUp = false;
+        console.log(this.levelUp);
+        this.setLevelUp(this.levelUp);
+
         console.log('PUT call successful value returned in body', val);
           // this.parent.ngOnInit();
           // attempt 1
-          /*
-          if (this.points === 0) {
-            location.reload();
-          }
-          */
+          
+        if (this.points === 0) {
+          location.reload();
+        }
+          
 
         // attempt 2
       // this.router.navigateByUrl('/gladiator', {skipLocationChange: true}).then(() => this.router.navigate(["roster"])); 

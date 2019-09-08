@@ -2,7 +2,7 @@ import { CharacterService } from './character.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -13,6 +13,7 @@ import { RosterDisplayComponent } from './roster-display/roster-display.componen
 import { CharacterListComponent } from './character-list/character-list.component';
 import { CharacterItemComponent } from './character-list/character-item/character-item.component';
 import { LevelUpComponent } from './level-up/level-up.component';
+import { CharacterCreateComponent } from './character-list/character-create/character-create.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +24,12 @@ import { LevelUpComponent } from './level-up/level-up.component';
     RosterDisplayComponent,
     CharacterListComponent,
     CharacterItemComponent,
-    LevelUpComponent
+    LevelUpComponent,
+    CharacterCreateComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule
   ],

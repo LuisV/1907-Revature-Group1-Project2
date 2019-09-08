@@ -44,6 +44,15 @@ export class RosterDisplayComponent implements OnInit {
     // this.makeBox();
   }
 
+  setLevelUp(lu) {
+    lu = !lu;
+    return lu;
+  }
+
+  getLevelUp() {
+    return this.levelUp;
+  }
+
   selectGladiator(gid) {
     console.log('selectGladiator(' + gid + ') called');
     this.selectedGladiator = this.gladiators.filter(obj => {

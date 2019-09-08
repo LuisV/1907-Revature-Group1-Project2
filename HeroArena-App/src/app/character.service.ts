@@ -31,4 +31,12 @@ export class CharacterService {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     return this.http.get(url + 'character/all', {headers, withCredentials: true}).pipe(map(resp => resp as Character[]));
   }
+  updateCharacter(ch: Character) {
+    const headers = new HttpHeaders({ Accept: 'application/json', 'Content-Type': 'application/json'});
+    return this.http.post(url + 'character', ch, {headers, withCredentials: true}).pipe(map(resp => resp as Character));
+  }
+  createCharacter(ch: Character) {
+    const headers = new HttpHeaders({ Accept: 'application/json', 'Content-Type': 'application/json'});
+    return this.http.put(url + 'character', ch, {headers, withCredentials: true}).pipe(map(resp => resp as Character));
+  }
 }
