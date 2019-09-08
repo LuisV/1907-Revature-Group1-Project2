@@ -7,16 +7,16 @@ INSERT INTO users (id, username, password, role)
 
 --Characters
 INSERT INTO character (id, name, description, base_strength, base_dexterity, base_vitality, base_health, rarity)
-    SELECT gladiator_seq.nextVal,
+    SELECT character_seq.nextVal,
            'King Cobra','The most feared king in all of Egypt. Rules with an iron fist!',  6, 4, 0, 14, 'Rare' FROM dual;
 
 INSERT INTO character (id, name, description, base_strength, base_dexterity, base_vitality, base_health, rarity)
-    SELECT gladiator_seq.nextVal,
+    SELECT character_seq.nextVal,
            'Shadow Lord','You wont see him coming. Attacks from the void!',  5, 6, 0, 10, 'Rare' FROM dual;
            
 
 INSERT INTO character (id, name, description, base_strength, base_dexterity, base_vitality, base_health, rarity)
-    SELECT gladiator_seq.nextVal,
+    SELECT character_seq.nextVal,
            'Iron Giant','Big Giant guy made of Iron! What more could you want?',  7, 2, 0, 18, 'Epic' FROM dual;
 
 -- Gladiators
