@@ -1,4 +1,4 @@
-<app-shop-item *ngFor= "let item of shop"
+<app-shop-item  (submitted)="onPurchase(item.id)" *ngFor= "let item of shop"
   [id]= item.id
   [name]= item.name
   [description]= item.description

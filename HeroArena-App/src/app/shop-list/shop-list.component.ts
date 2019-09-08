@@ -18,5 +18,9 @@ export class ShopListComponent implements OnInit {
       console.log( this.shop );
     });
   }
-
+  onPurchase(itemId: number) {
+    this.is.purchaseItemFromShop(itemId).subscribe((obj:Object) => {
+      console.log(obj);
+    });
+}
 }
