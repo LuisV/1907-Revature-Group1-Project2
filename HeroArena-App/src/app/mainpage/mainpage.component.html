@@ -10,16 +10,20 @@
             <a (click)="showHeroes()">Show Heroes</a>
             <a (click)="showEquip()">Equip Heroes</a>
             <a (click)="showBattle()">Battle</a>
+            <a (click)="showShop()">Shop</a>
         </td>
         <td style = "margin: auto">
             <div *ngIf="this.pss.getState() == 1">
                 <app-roster-display></app-roster-display>
             </div>
             <div *ngIf="this.pss.getState() == 2">
-
+                <!-- put the tag for the show item component here -->
             </div>
             <div *ngIf="this.pss.getState() == 3">
                 <app-battle></app-battle>
+            </div>
+            <div *ngIf="this.pss.getState() == 3">
+                <!-- put the tag for the show shop component here -->
             </div>
         </td>
     </tr>

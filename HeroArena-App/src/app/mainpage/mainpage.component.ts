@@ -16,12 +16,20 @@ export class MainpageComponent implements OnInit {
   }
 
   showHeroes() {
-    console.log('showHeroes() called');
+    //console.log('showHeroes() called');
     //this.rs.getGladiators();
     this.pss.setState(1);
+  }
+  
+  showEquip(){
+    this.pss.setState(2);
   }
 
   showBattle(){
     this.pss.setState(3);
+  }
+
+  showShop(){
+    this.pss.setState(4);
   }
 }
