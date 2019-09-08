@@ -39,4 +39,9 @@ export class CharacterService {
     const headers = new HttpHeaders({ Accept: 'application/json', 'Content-Type': 'application/json'});
     return this.http.put(url + 'character', ch, {headers, withCredentials: true}).pipe(map(resp => resp as Character));
   }
+  deleteCharacter(ch: Character){
+    const options = { headers: new HttpHeaders({ Accept: 'application/json', 'Content-Type': 'application/json'}), body: ch,
+    withCredentials: true };
+    return this.http.delete(url + 'character', options);
+  }
 }

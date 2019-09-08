@@ -18,5 +18,7 @@ export class CharacterListComponent implements OnInit {
       this.chars = obj;
     });
   }
-
+  handleSubmit(){
+   this.ngOnInit();
+  }
 }
