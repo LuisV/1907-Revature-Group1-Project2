@@ -73,6 +73,7 @@ public class GladiatorController {
 	@ResponseBody
 	public void updateGladiator(@RequestBody Gladiator g) {
 		System.out.println("calling updateGladiator in GladiatorController");
+
 		g.reconfigureHealth();
 		gs.updateGladiator(g);
 	}
