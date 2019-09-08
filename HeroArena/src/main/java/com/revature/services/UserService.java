@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.revature.beans.User;
 import com.revature.data.UserDAO;
 
+import java.util.Set;
+
 @Service
 public class UserService {
 	@Autowired
@@ -37,4 +39,6 @@ public class UserService {
 	public User getUser(Integer id){
 		return ud.getUser(id);
 	}
+	public Set<User> getAllUsers(){return ud.getAllUsers();}
+	public User editUser(User u){return ud.editUser(u);}
 }

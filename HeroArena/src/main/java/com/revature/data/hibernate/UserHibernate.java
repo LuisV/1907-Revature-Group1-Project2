@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.revature.beans.Character;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -80,5 +81,36 @@ public class UserHibernate implements UserDAO {
 		gladSet.addAll(gladList);
 		s.close();
 		return gladSet;
+	}
+
+	@Override
+	public Set<User> getAllUsers() {
+		System.out.println("calling getAllUsers");
+		Session s = hu.getSession();
+		String query = "from User";
+		Query<User> q = s.createQuery(query, User.class);
+		Set<User> allUserss =  new HashSet<>(q.getResultList());
+
+		s.close();
+		return allUserss;
+	}
+
+	@Override
+	public User editUser(User u) {
+		Session s = hu.getSession();
+		Transaction t = null;
+		try{
+			t= s.beginTransaction();
+			s.update(u);
+			t.commit();
+		} catch (Exception e){
+			if(t != null)
+				t.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+		}
+
+		return u;
 	}
 }
