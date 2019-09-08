@@ -1,3 +1,4 @@
+import { InventoryShopService } from './inventory-shop.service';
 import { CharacterService } from './character.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,8 @@ import { CharacterCreateComponent } from './character-list/character-create/char
 import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from './user.service';
 import { UserItemComponent } from './user-list/user-item/user-item.component';
+import { ShopListComponent } from './shop-list/shop-list.component';
+import { ShopItemComponent } from './shop-list/shop-item/shop-item.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { UserItemComponent } from './user-list/user-item/user-item.component';
     LevelUpComponent,
     CharacterCreateComponent,
     UserListComponent,
-    UserItemComponent
+    UserItemComponent,
+    ShopListComponent,
+    ShopItemComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,7 @@ import { UserItemComponent } from './user-list/user-item/user-item.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [RosterService, UserService, CharacterService, HTMLCanvasElement],
+  providers: [RosterService, UserService, CharacterService, InventoryShopService, HTMLCanvasElement],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

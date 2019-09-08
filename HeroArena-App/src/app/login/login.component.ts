@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       if (userObj != null) {
         this.authent.setUser(userObj);
 
-        if (this.authent.getUser().banned == 1) {
+        if (this.authent.getUser().banned === 1) {
           this.errorString = 'You are banned.';
           this.authent.getUser().id = -1;
         }
