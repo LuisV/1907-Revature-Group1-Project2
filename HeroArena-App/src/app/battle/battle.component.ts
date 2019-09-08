@@ -37,7 +37,7 @@ export class BattleComponent implements OnInit {
   private playerimagex = new Array<number>(2);
   private playerimagey = new Array<number>(2);
 
-
+  private enterReleased = true;
   private keys = new Set();
 
   makeCanvas(canvas: HTMLCanvasElement) {
@@ -305,7 +305,10 @@ export class BattleComponent implements OnInit {
 
     if (event.key === " ") {
       //if (!this.playerDamaging[0])
+      if (this.enterReleased){
+        this.enterReleased = false;
         this.damagePlayer(<HTMLCanvasElement>document.getElementById('player'), (<HTMLCanvasElement>document.getElementById('player')).getContext('2d'), 0, 1);
+      }
     }
 
     //console.log(this.keys);
@@ -323,6 +326,10 @@ export class BattleComponent implements OnInit {
     }
     if (event.key === "ArrowRight") {
       this.keys.delete("ArrowRight");
+    }
+
+    if (event.key === " ") {
+      this.enterReleased = true;
     }
     //console.log(this.keys);
   }
