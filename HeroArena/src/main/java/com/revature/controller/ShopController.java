@@ -33,12 +33,15 @@ public class ShopController
     private CharacterService charServ;
     @Autowired
     private GladiatorService gladServ;
+    @Autowired
+    private UserService userServ;
 
     @PutMapping(value="/shop/items/{item}")
-    public ResponseEntity<UserItemStock> purchaseItem(@PathVariable("item") Integer itemId, HttpSession session)
+    public ResponseEntity<UserItemStock> purchaseItem(@PathVariable("item") Integer itemId, @RequestParam Integer userId, HttpSession session)
     {
         log.trace("Attempting to purchase an item.");
-        User user = (User) session.getAttribute("user");
+        //User user = (User) session.getAttribute("user");
+        User user = userServ.getUser(userId);
         if (user == null)
             return ResponseEntity.status(403).build();
 
@@ -60,9 +63,10 @@ public class ShopController
 
     @PutMapping(value="/shop/gladiator",
 				produces="application/json")
-    public ResponseEntity<String> purchaseGladiator(HttpSession session)
+    public ResponseEntity<String> purchaseGladiator(@RequestParam Integer userId, HttpSession session)
     {
-        User user = (User) session.getAttribute("user");
+        //User user = (User) session.getAttribute("user");
+        User user = userServ.getUser(userId);
         if (user == null)
             return ResponseEntity.status(403).build();
 

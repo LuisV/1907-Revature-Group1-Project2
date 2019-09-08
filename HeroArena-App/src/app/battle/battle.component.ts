@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { PagestateService } from '../pagestate.service';
+import { BattleService } from '../battle.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class BattleComponent implements OnInit {
   private playerHealthContext: CanvasRenderingContext2D;
   private enemyHealthContext: CanvasRenderingContext2D;
 
-  constructor(private pss: PagestateService) {
+  constructor(private pss: PagestateService, private bs: BattleService) {
   }
 
   private width = 1100;
@@ -36,7 +37,7 @@ export class BattleComponent implements OnInit {
   private playerimagex = new Array<number>(2);
   private playerimagey = new Array<number>(2);
 
-
+  private enterReleased = true;
   private keys = new Set();
 
   makeCanvas(canvas: HTMLCanvasElement) {
@@ -122,6 +123,15 @@ export class BattleComponent implements OnInit {
 
     this.playerimagex[1] = 0;
     this.playerimagey[1] = -650;
+
+    
+    //this.bs.getPlayerGladiator().subscribe((userObj: Object) => {
+
+    //});
+
+    //this.bs.getOpponentGladiator().subscribe((userObj: Object) => {
+      
+    //});
 
     (<HTMLCanvasElement>document.getElementById('canvasId')).focus();
 
@@ -294,7 +304,11 @@ export class BattleComponent implements OnInit {
     }
 
     if (event.key === " ") {
-      this.damagePlayer(<HTMLCanvasElement>document.getElementById('player'), (<HTMLCanvasElement>document.getElementById('player')).getContext('2d'), 0, 1);
+      //if (!this.playerDamaging[0])
+      if (this.enterReleased){
+        this.enterReleased = false;
+        this.damagePlayer(<HTMLCanvasElement>document.getElementById('player'), (<HTMLCanvasElement>document.getElementById('player')).getContext('2d'), 0, 1);
+      }
     }
 
     //console.log(this.keys);
@@ -312,6 +326,10 @@ export class BattleComponent implements OnInit {
     }
     if (event.key === "ArrowRight") {
       this.keys.delete("ArrowRight");
+    }
+
+    if (event.key === " ") {
+      this.enterReleased = true;
     }
     //console.log(this.keys);
   }

@@ -26,6 +26,7 @@ public class UserService {
 		newUser.setUsername(username);
 		newUser.setPassword(password);
 		newUser.setRole(1);
+		newUser.setBanned(0);
 
 		int key = ud.addUser(newUser);
 		newUser.setId(key);

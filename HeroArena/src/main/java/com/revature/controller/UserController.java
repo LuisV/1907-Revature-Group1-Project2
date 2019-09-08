@@ -37,9 +37,10 @@ public class UserController {
 	}
 
 	@GetMapping(value="/user/items")
-	public ResponseEntity<Set<UserItemStock>> getItems(HttpSession session)
+	public ResponseEntity<Set<UserItemStock>> getItems(@RequestParam Integer userId, HttpSession session)
 	{
-		User user = (User) session.getAttribute("user");
+		//User user = (User) session.getAttribute("user");
+		User user = userServ.getUser(userId);
 		if (user == null)
 		    return ResponseEntity.status(403).build();
 
@@ -50,9 +51,10 @@ public class UserController {
 	}
 
 	@DeleteMapping(value="/user/items/{item}")
-	public ResponseEntity<Gladiator> useItem(@PathVariable("item") Integer itemId, @RequestParam Integer gladiatorId, HttpSession session)
+	public ResponseEntity<Gladiator> useItem(@PathVariable("item") Integer itemId, @RequestParam Integer gladiatorId, @RequestParam Integer userId, HttpSession session)
 	{
-		User user = (User) session.getAttribute("user");
+		//User user = (User) session.getAttribute("user");
+		User user = userServ.getUser(userId);
 		if (user == null)
 			return ResponseEntity.status(403).build();
 
