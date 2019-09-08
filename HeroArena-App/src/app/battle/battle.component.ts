@@ -304,12 +304,8 @@ export class BattleComponent implements OnInit {
     }
 
     if (event.key === " ") {
-<<<<<<< HEAD
       //if (!this.playerDamaging[0])
         this.damagePlayer(<HTMLCanvasElement>document.getElementById('player'), (<HTMLCanvasElement>document.getElementById('player')).getContext('2d'), 0, 1);
-=======
-      this.damagePlayer(<HTMLCanvasElement>document.getElementById('player'), (<HTMLCanvasElement>document.getElementById('player')).getContext('2d'), 0, 1);
->>>>>>> 276b625965f45e00fd8839b060686c88312fd4c5
     }
 
     //console.log(this.keys);
