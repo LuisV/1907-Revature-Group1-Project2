@@ -80,7 +80,7 @@ public class CharacterHibernate implements CharacterDAO {
         } finally {
             s.close();
         }
-         c.setId(i);
+
         return c;
     }
 

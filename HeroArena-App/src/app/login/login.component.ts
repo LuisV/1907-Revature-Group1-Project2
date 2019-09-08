@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
   }
 
   logout() {
-    var user = new User();
-    user.id = -1;
+    var user = new User(-1, '', '', 0, 0);
+
     this.pss.setState(1);
     this.authent.setUser(user);
   }

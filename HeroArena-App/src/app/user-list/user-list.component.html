@@ -1,0 +1,11 @@
+<div  stlye= "width: 100%" class ="justify-content-center">
+  <app-user-item *ngFor=" let user of users"
+  [id]="user.id"
+  [username]="user.username"
+  [banned] = "user.banned"
+  [role]= "user.role"
+  [password]="user.password"
+  >
+
+  </app-user-item>
+</div>

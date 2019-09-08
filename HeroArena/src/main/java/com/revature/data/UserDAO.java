@@ -11,4 +11,6 @@ public interface UserDAO {
 	public User banUser(User u);
 	public User getUser(Integer id);
 	public Set<Gladiator> getRoster(User u);
+	public Set<User> getAllUsers();
+	public User editUser(User u);
 }

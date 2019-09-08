@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from './user';
 import { map } from 'rxjs/operators';
 
-var user = new User();
-user.id = -1;
+var user = new User(-1, '', '', 0, 0);
 
 const baseURL = 'http://localhost:8080/HeroArena/';
 //const baseURL = 'http://18.221.9.229:8080/HeroArena/';

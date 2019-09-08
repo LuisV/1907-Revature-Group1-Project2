@@ -1,6 +1,7 @@
 import { CharacterService } from './../../character.service';
-import { Component, OnInit, Input } from '@angular/core';
+import {Output, EventEmitter, Component, OnInit, Input } from '@angular/core';
 import { Character } from 'src/app/character';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-character-create',
@@ -17,6 +18,7 @@ export class CharacterCreateComponent implements OnInit {
   @Input() public health: number;
   @Input() public rarity: string;
   @Input() public vitality: number;
+  @Output() submitted = new EventEmitter();
 
   constructor( private cs: CharacterService) { }
 
@@ -24,13 +26,14 @@ export class CharacterCreateComponent implements OnInit {
 
   }
 
-  onSubmit() {
+  onSubmit(charForm: NgForm) {
     const ch = new Character(this.id, this.name, this.description,
       this.strength, this.dexterity, this.vitality, this.health, this.rarity);
     console.log(ch);
     this.cs.createCharacter(ch).subscribe((obj: Object) => {
     console.log(obj);
-
+    this.submitted.emit('Submit!');
+    charForm.reset();
   });
   }
 
