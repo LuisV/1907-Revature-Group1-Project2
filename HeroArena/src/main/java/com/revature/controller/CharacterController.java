@@ -32,6 +32,7 @@ public class CharacterController {
 
     @PutMapping
     public ResponseEntity<Character> addCharacter( @RequestBody Character c){
+        System.out.println(c);
         return ResponseEntity.ok(cs.addCharacter(c));
     }
 

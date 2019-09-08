@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -17,22 +18,37 @@ import com.revature.utils.HibernateUtil;
 
 @Component
 public class GladiatorHibernate implements GladiatorDAO {
+	private Logger log = Logger.getLogger(GladiatorHibernate.class);
 	@Autowired
 	private HibernateUtil hu;
 	
 	@Override
-	public int addGladiator(Gladiator g) {
-		/*
-		Session s = hu.getSession();
-		Transaction t = null;
-		Integer i = 0;
-		t = s.beginTransaction();
-		i = (Integer) s.save(g);
-		t.commit();
-		
-		return i;
-		*/
-		return 0;
+	public Integer addGladiator(Gladiator g) {
+		log.trace("Adding gladiator to database");
+		log.trace(" > " + g);
+
+		Integer id = null;
+		Session sess = hu.getSession();
+		Transaction tx = null;
+		try
+		{
+			tx = sess.beginTransaction();
+			id = (Integer) sess.save(g);
+			tx.commit();
+			log.trace(" > Gladiator successfully added! data=" + g);
+			log.trace(g + "   ----- id=" + id);
+		} catch (Exception e)
+		{
+			log.warn("Failed to add gladiator to database");
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally
+		{
+			sess.close();
+		}
+
+		return id;
 	}
 
 	// not testing atm
@@ -76,6 +92,23 @@ public class GladiatorHibernate implements GladiatorDAO {
 		gladSet.addAll(gladList);
 		s.close();
 		return gladSet;
+	}
+
+	@Override
+	public Set<Gladiator> getGladiatorsNotOwnedBy(User user)
+	{
+		log.trace("Getting all gladiators not owned by a given user");
+		log.trace(" > " + user);
+
+		String qStr = "from Gladiator g where g.player.id != :userId";
+		Session s = hu.getSession();
+		Query<Gladiator> query = s.createQuery(qStr, Gladiator.class);
+		query.setParameter("userId", user.getId());
+		Set<Gladiator> results = new HashSet<Gladiator>(query.list());
+
+		s.close();
+
+		return results;
 	}
 
 	@Override

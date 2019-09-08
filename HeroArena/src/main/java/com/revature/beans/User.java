@@ -12,6 +12,7 @@ public class User {
 	private Integer id;
 	private String username;
 	private String password;
+	private Integer banned;
 	private Integer role;
 
 	public User() {
@@ -63,6 +64,14 @@ public class User {
 	public void setRole(Integer role)
 	{
 		this.role = role;
+	}
+
+	public Integer getBanned() {
+		return banned;
+	}
+
+	public void setBanned(Integer banned) {
+		this.banned = banned;
 	}
 
 	@Override

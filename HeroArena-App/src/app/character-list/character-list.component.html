@@ -1,7 +1,7 @@
 
 <div class = "card-deck justify-content-center" >
-  <app-character-create></app-character-create>
-  <app-character-item *ngFor=" let char of chars;"
+  <app-character-create (submitted)=handleSubmit()></app-character-create>
+  <app-character-item (submitted)=handleSubmit() *ngFor=" let char of chars;"
   [id]="char.id"
   [name]="char.name"
   [description]="char.description"
