@@ -30,6 +30,8 @@ public class GladiatorController {
 
 	@Autowired
 	private GladiatorService gs;
+	@Autowired
+	private UserService userServ;
 
 	@Autowired
 	private UserService us;
@@ -57,9 +59,10 @@ public class GladiatorController {
 
 	@GetMapping("/gladiator/opponents")
     @ResponseBody
-    public ResponseEntity<Set<Gladiator>> getAllOpponents(HttpSession session)
+    public ResponseEntity<Set<Gladiator>> getAllOpponents(@RequestParam Integer userId, HttpSession session)
     {
-    	User user = (User) session.getAttribute("user");
+    	//User user = (User) session.getAttribute("user");
+		User user = userServ.getUser(userId);
     	if (user == null)
 			return ResponseEntity.status(403).build();
 
