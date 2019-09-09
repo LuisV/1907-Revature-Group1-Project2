@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { AuthenticateService } from './authenticate.service';
 
-const baseURL = 'http://localhost:8080/HeroArena/';
-//const baseURL = 'http://18.221.9.229:8080/HeroArena/';
+//const baseURL = 'http://localhost:8080/HeroArena/';
+const baseURL = 'http://18.221.9.229:8080/HeroArena/';
 
 @Injectable({
   providedIn: 'root'

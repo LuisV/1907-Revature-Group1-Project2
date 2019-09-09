@@ -6,16 +6,9 @@ import { longStackSupport } from 'q';
 import { AuthenticateService } from './authenticate.service';
 
 
-//@Injectable({
- // providedIn: 'root'
-//})
+const url = 'http://18.221.9.229:8080/HeroArena/';
 
-// Need to be able to take in a value at '2'
-//const url = 'http://localhost:8080/HeroArena/user/roster/2';
-const url = 'http://localhost:8080/HeroArena/';
-
-const baseUrl = 'http://localhost:8080/HeroArena/user/roster/';
-//const baseUrl = 'http://localhost:8080/HeroArena/user/roster/2';
+//const url = 'http://localhost:8080/HeroArena/';
 
 let userId = 0;
 

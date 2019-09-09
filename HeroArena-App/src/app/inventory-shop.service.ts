@@ -7,7 +7,8 @@ import { map } from 'rxjs/operators';
 import { Inventory } from './inventory';
 import { User } from './user';
 
-const url = 'http://localhost:8080/HeroArena/';
+//const url = 'http://localhost:8080/HeroArena/';
+const url = 'http://18.221.9.229:8080/HeroArena/';
 
 export class InventoryShopService {
 
