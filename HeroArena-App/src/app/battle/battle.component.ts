@@ -92,6 +92,7 @@ export class BattleComponent implements OnInit {
 
   drawPlayer(canvas: HTMLCanvasElement, playerContext, index) {
     //console.log(this.playerimagex + ", " + this.playerimagey);
+    if (this.bs.getPlayersChosen()){
     playerContext.clearRect(0, 0, canvas.width, canvas.height);
     playerContext.drawImage(this.playerImage, this.playerimagex[index], this.playerimagey[index]);
     canvas.style.top = this.playery[index] + "px";
@@ -108,6 +109,7 @@ export class BattleComponent implements OnInit {
 
     if (this.pss.getState() == 3)
       window.requestAnimationFrame(() => this.drawPlayer(canvas, playerContext, index));
+    }
   }
 
   ngOnInit() { }
@@ -323,13 +325,17 @@ export class BattleComponent implements OnInit {
 
         if (this.playerHealth[0] <= 0){
           this.battleLose = true;
-          this.playerHealth[1] = this.playerTotalHealth[1];
+          this.battleWin = false;
+          //this.playerHealth[0] = this.playerTotalHealth[0];
+          //this.playerHealth[1] = this.playerTotalHealth[1];
           this.bs.setPlayersChosen(null);
           this.bs.setPlayerGladiator(null);
         }
         else if (this.playerHealth[1] <= 0){
           this.battleWin = true;
-          this.playerHealth[0] = this.playerTotalHealth[0];
+          this.battleLose = false;
+          //this.playerHealth[0] = this.playerTotalHealth[0];
+          //this.playerHealth[1] = this.playerTotalHealth[1];
           this.bs.setPlayersChosen(null);
           this.bs.setPlayerGladiator(null);
         }
@@ -403,7 +409,7 @@ export class BattleComponent implements OnInit {
 
     if (event.key === " ") {
       //if (!this.playerDamaging[0])
-      if (this.enterReleased) {
+      if (this.enterReleased && this.bs.getPlayersChosen()) {
         this.enterReleased = false;
         this.damagePlayer(<HTMLCanvasElement>document.getElementById('player'), (<HTMLCanvasElement>document.getElementById('player')).getContext('2d'), 0, 1);
       }
