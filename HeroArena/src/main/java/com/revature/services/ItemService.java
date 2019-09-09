@@ -86,6 +86,7 @@ public class ItemService
             {
                 int maxHealth = target.getMaxHealth();
                 int health = target.getCurrentHealth() + Math.round(maxHealth * (item.getHealthOffset() / 100.0f));
+                log.trace(" > Adding up to " + health + " HP to gladiator.");
                 health = Math.min(maxHealth, health);
 
                 target.setCurrentHealth(health);

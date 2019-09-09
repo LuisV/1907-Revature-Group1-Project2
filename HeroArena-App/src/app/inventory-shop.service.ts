@@ -29,7 +29,7 @@ export class InventoryShopService {
   }
   useAnItem( gladiatorId: number, itemId: number) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    return this.http.delete( url + 'user/items/' +itemId + "?userId="+this.as.getUser().id+"&gladiatorId=2", {headers, withCredentials: true}).pipe(map(resp => resp as Gladiator));
+    return this.http.delete( url + 'user/items/' +itemId + '?userId='+this.as.getUser().id+'&gladiatorId=' + gladiatorId, {headers, withCredentials: true}).pipe(map(resp => resp as Gladiator));
 
   }
 
