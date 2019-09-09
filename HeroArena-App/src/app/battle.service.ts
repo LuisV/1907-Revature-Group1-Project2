@@ -34,6 +34,10 @@ export class BattleService {
     return this.playerGladiator;
   }
 
+  getOpponentGladiator(){
+    return this.opponentGladiator;
+  }
+
   setOpponentGladiator(gladiator: Gladiator){
     this.opponentGladiator = gladiator;
   }
