@@ -94,18 +94,20 @@ export class BattleComponent implements OnInit {
     //console.log(this.playerimagex + ", " + this.playerimagey);
     if (this.bs.getPlayersChosen()){
     playerContext.clearRect(0, 0, canvas.width, canvas.height);
-    playerContext.drawImage(this.playerImage, this.playerimagex[index], this.playerimagey[index]);
-    canvas.style.top = this.playery[index] + "px";
-    canvas.style.left = this.playerx[index] + "px";
 
     switch (index) {
       case 0:
+        playerContext.drawImage(this.playerImage, this.playerimagex[index], this.playerimagey[index]);
         this.movePlayerZero();
         break;
       default:
+        playerContext.drawImage(this.enemyImage, this.playerimagex[index], this.playerimagey[index]);
         this.aggro(canvas, playerContext, 0, index);
         break;
     }
+
+    canvas.style.top = this.playery[index] + "px";
+    canvas.style.left = this.playerx[index] + "px";
 
     if (this.pss.getState() == 3)
       window.requestAnimationFrame(() => this.drawPlayer(canvas, playerContext, index));
@@ -147,8 +149,8 @@ export class BattleComponent implements OnInit {
 
   startBattle() {
 
-    this.playerImage.src = 'assets/shadowlord.png';
     this.enemyImage.src = 'assets/shadowlord.png';
+    this.playerImage.src = 'assets/glad2.png';
 
     this.playerx[0] = 550;
     this.playery[0] = 400;
