@@ -1,3 +1,5 @@
+<div *ngIf="levelUp">
+
 <p>{{points}} points remaining</p>
 
 <div>
@@ -18,9 +20,8 @@
     <input type="button" value="-" id="vitalityMinusButton" (click)="(this.subtractPoints(this.levelUpGladiator, 'vitality'))">
 </div>
 
+<br>
+<button type="submit" class="btn btn-primary emp-btn" id="submitbtn" (click)="submitChanges(this.levelUpGladiator)">Submit</button>
 
-
-
-
-
-<input type="button" value="Submit"  (click)='submitChanges(this.levelUpGladiator)' ng-disabled='!this.levelUp'> 
+<!-- <input type="button" value="Submit"  (click)='submitChanges(this.levelUpGladiator)' ng-disabled='!this.levelUp'> -->
+</div>

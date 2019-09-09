@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { PagestateService } from '../pagestate.service';
 import { BattleService } from '../battle.service';
+import { RosterService } from '../roster.service';
+import { Gladiator } from '../gladiator';
 
 
 @Component({
@@ -18,8 +20,13 @@ export class BattleComponent implements OnInit {
   private playerHealthContext: CanvasRenderingContext2D;
   private enemyHealthContext: CanvasRenderingContext2D;
 
-  constructor(private pss: PagestateService, private bs: BattleService) {
+  constructor(private pss: PagestateService, private bs: BattleService, private rs: RosterService) {
   }
+
+  private battleWin = false;
+  private battleLose = false;
+
+  private enemyGladiators: any = [];
 
   private width = 1100;
   private height = 600;
@@ -31,6 +38,8 @@ export class BattleComponent implements OnInit {
   private playerspeed = new Array<number>(2);
   private playerTotalHealth = new Array<number>(2);
   private playerHealth = new Array<number>(2);
+  private playerStrength = new Array<number>(2);
+  private playerDexterity = new Array<number>(2);
   private playerDamage = new Array<number>(2);
   private playerDamaging = new Array<boolean>(2);
 
@@ -39,6 +48,8 @@ export class BattleComponent implements OnInit {
 
   private enterReleased = true;
   private keys = new Set();
+
+  selectedGladiator = '';
 
   makeCanvas(canvas: HTMLCanvasElement) {
     this.context = canvas.getContext('2d');
@@ -81,6 +92,7 @@ export class BattleComponent implements OnInit {
 
   drawPlayer(canvas: HTMLCanvasElement, playerContext, index) {
     //console.log(this.playerimagex + ", " + this.playerimagey);
+    if (this.bs.getPlayersChosen()){
     playerContext.clearRect(0, 0, canvas.width, canvas.height);
     playerContext.drawImage(this.playerImage, this.playerimagex[index], this.playerimagey[index]);
     canvas.style.top = this.playery[index] + "px";
@@ -97,40 +109,100 @@ export class BattleComponent implements OnInit {
 
     if (this.pss.getState() == 3)
       window.requestAnimationFrame(() => this.drawPlayer(canvas, playerContext, index));
+    }
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  getEnemyGladiators() {
+    this.bs.getOpponentGladiators().subscribe((userObj: Object) => {
+      console.log(userObj);
+      this.enemyGladiators = userObj;
+
+      this.bs.setPlayerGladiator(this.rs.getSelectedGladiator());
+    })
+  }
+
+  selectGladiator(gid) {
+    console.log('selectGladiator(' + gid + ') called');
+    this.selectedGladiator = this.enemyGladiators.filter(obj => {
+      return obj.id === gid;
+    })[0];
+    console.log(this.selectedGladiator);
+    this.rs.setSelectedGladiator(this.selectedGladiator);
+    console.log(this.selectedGladiator['name']);
+  }
+
+  initBattle() {
+    this.bs.setOpponentGladiator(this.rs.getSelectedGladiator());
+    this.bs.setPlayersChosen(true);
+    //console.log(this.rs.getSelectedGladiator());
+    //console.log(this.bs.getOpponentGladiator());
+    //console.log(this.bs.getPlayersChosen());
+    //console.log((<HTMLCanvasElement>document.getElementById('canvasId')));
+
+    if ((<HTMLCanvasElement>document.getElementById('canvasId')) != null)
+      this.startBattle();
+  }
+
+  startBattle() {
+
     this.playerImage.src = 'assets/shadowlord.png';
     this.enemyImage.src = 'assets/shadowlord.png';
 
     this.playerx[0] = 550;
     this.playery[0] = 400;
     this.playerspeed[0] = 5;
-    this.playerTotalHealth[0] = 200;
-    this.playerHealth[0] = 200;
-    this.playerDamage[0] = 10;
 
     this.playerimagex[0] = 0;
     this.playerimagey[0] = -520;
 
-
     this.playerx[1] = 550;
     this.playery[1] = -50;
     this.playerspeed[1] = 4;
-    this.playerTotalHealth[1] = 200;
-    this.playerHealth[1] = 200;
-    this.playerDamage[1] = 10;
 
     this.playerimagex[1] = 0;
     this.playerimagey[1] = -650;
 
-    
+    this.playerTotalHealth[0] = 200;
+    this.playerHealth[0] = 20;
+    this.playerDamage[0] = 2;
+    this.playerStrength[0] = 5;
+    this.playerDexterity[0] = 5;
+
+    this.playerTotalHealth[1] = 200;
+    this.playerHealth[1] = 20;
+    this.playerDamage[1] = 2;
+    this.playerStrength[1] = 5;
+    this.playerDexterity[1] = 5;
+
+    if (this.bs.getPlayerGladiator != null) {
+      this.playerTotalHealth[0] = this.bs.getPlayerGladiator().maxHealth;
+      this.playerHealth[0] = this.bs.getPlayerGladiator().currentHealth;
+      this.playerStrength[0] = this.bs.getPlayerGladiator().strength;
+      this.playerDexterity[0] = this.bs.getPlayerGladiator().dexterity;
+    }
+    else {
+      console.log("Failed to load player");
+    }
+
+    if (this.bs.getOpponentGladiator != null) {
+      this.playerTotalHealth[1] = this.bs.getOpponentGladiator().maxHealth;
+      this.playerHealth[1] = this.bs.getOpponentGladiator().currentHealth;
+      this.playerStrength[1] = this.bs.getPlayerGladiator().strength;
+      this.playerDexterity[1] = this.bs.getPlayerGladiator().dexterity;
+    }
+    else {
+      console.log("Failed to load opponent");
+    }
+
+
     //this.bs.getPlayerGladiator().subscribe((userObj: Object) => {
 
     //});
 
     //this.bs.getOpponentGladiator().subscribe((userObj: Object) => {
-      
+
     //});
 
     (<HTMLCanvasElement>document.getElementById('canvasId')).focus();
@@ -240,7 +312,34 @@ export class BattleComponent implements OnInit {
       let ydif = this.playery[attackerIndex] - this.playery[defenderIndex];
 
       if ((Math.abs(ydif) + Math.abs(xdif)) <= 40) {
-        this.playerHealth[defenderIndex] -= this.playerDamage[attackerIndex];
+        let hitRoll = Math.random();
+        if ((hitRoll * 20 + this.playerDexterity[attackerIndex] / 2 - this.playerDexterity[defenderIndex] / 2 > 10) || hitRoll == 20) {
+          if (hitRoll == 20)
+            this.playerHealth[defenderIndex] -= (Math.random() * 2 * this.playerStrength[attackerIndex]);
+          else
+            this.playerHealth[defenderIndex] -= (Math.random() * this.playerStrength[attackerIndex]);
+        }
+        else if(hitRoll == 1){
+          this.playerHealth[attackerIndex] -= (Math.random() * this.playerStrength[defenderIndex]);
+        }
+
+        if (this.playerHealth[0] <= 0){
+          this.battleLose = true;
+          this.battleWin = false;
+          //this.playerHealth[0] = this.playerTotalHealth[0];
+          //this.playerHealth[1] = this.playerTotalHealth[1];
+          this.bs.setPlayersChosen(null);
+          this.bs.setPlayerGladiator(null);
+        }
+        else if (this.playerHealth[1] <= 0){
+          this.battleWin = true;
+          this.battleLose = false;
+          //this.playerHealth[0] = this.playerTotalHealth[0];
+          //this.playerHealth[1] = this.playerTotalHealth[1];
+          this.bs.setPlayersChosen(null);
+          this.bs.setPlayerGladiator(null);
+        }
+        //this.playerHealth[defenderIndex] -= this.playerDamage[attackerIndex];
       }
 
       this.playerimagey[attackerIndex] = originalY;
@@ -251,6 +350,11 @@ export class BattleComponent implements OnInit {
     }
 
     this.waitDamage(canvas, playerContext, attackerIndex, defenderIndex, originalY, i);
+  }
+
+  resetWinLose(){
+    this.battleWin = false;
+    this.battleLose = false;
   }
 
   damagePlayer(canvas, playerContext, attackerIndex, defenderIndex) {
@@ -305,7 +409,7 @@ export class BattleComponent implements OnInit {
 
     if (event.key === " ") {
       //if (!this.playerDamaging[0])
-      if (this.enterReleased){
+      if (this.enterReleased && this.bs.getPlayersChosen()) {
         this.enterReleased = false;
         this.damagePlayer(<HTMLCanvasElement>document.getElementById('player'), (<HTMLCanvasElement>document.getElementById('player')).getContext('2d'), 0, 1);
       }

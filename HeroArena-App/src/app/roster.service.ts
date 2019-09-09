@@ -24,6 +24,7 @@ export class RosterService {
   constructor(private http: HttpClient, private auth: AuthenticateService) { }
 
   gladiators: Array<Gladiator> = [];
+  private selectedGladiator: Gladiator;
 
 
   userId = this.auth.getUser()['id'];
@@ -63,6 +64,13 @@ export class RosterService {
     return this.gladiators;
   }
 
+  setSelectedGladiator(gladiator){
+    this.selectedGladiator = gladiator;
+  }
+
+  getSelectedGladiator(){
+    return this.selectedGladiator;
+  }
 
   getUserGladiators(userID) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});

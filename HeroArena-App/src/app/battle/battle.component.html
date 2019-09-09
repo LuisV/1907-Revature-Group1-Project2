@@ -1,8 +1,61 @@
-<div id="stack">
-    <canvas id="canvasId" width="1100px" height="600px" tabindex="1" (keydown)="onKeydown($event)" (keyup)="onKeyup($event)"></canvas>
+<div id="battleContainer">
+    <div *ngIf="battleWin" id="container">
+        <h1>You Win!</h1>
+        <br>
+        <div>You Gain experience!</div>
+        <div>
+            <button type="submit" class="btn btn-primary emp-btn" id="submitbtn" (click)="resetWinLose()">Cool!</button>
+        </div>
+    </div>
+    <div *ngIf="battleLose" id="container">
+        <h1>You Lose!</h1>
+        <br>
+        <div>You Gain consolation experience...</div>
+        <div>
+            <button type="submit" class="btn btn-primary emp-btn" id="submitbtn" (click)="resetWinLose()">Okay...</button>
+        </div>
+    </div>
+    <div *ngIf="!this.bs.getPlayersChosen() && this.bs.getPlayerGladiator() == null">
+        <app-roster-display></app-roster-display>
+    </div>
+    <div *ngIf="!this.bs.getPlayersChosen() && this.bs.getPlayerGladiator() != null">
 
-    <canvas id="enemy" width="60px" height="60px"></canvas>
-    <canvas id="player" width="60px" height="60px"></canvas>
-    <canvas id="enemyHealth" width="60px" height="5px"></canvas>
-    <canvas id="playerHealth" width="60px" height="5px"></canvas>
+        <div id="container">
+            <h1>Select an Opponent</h1>
+            <br>
+
+            <div>
+                <ul class="roster">
+
+                    <li class="roster" *ngFor="let g of enemyGladiators" (click)="selectGladiator(g.id)">{{ g.name }}
+                    </li>
+                </ul>
+            </div>
+            <div align="center" vertical-align="top" *ngIf="selectedGladiator">
+
+                <div>{{ selectedGladiator.name }}</div>
+                <div>Level {{ selectedGladiator.level }}</div>
+                <div>{{ selectedGladiator.currentHealth }} / {{ selectedGladiator.maxHealth }}</div>
+                <div>STR: {{ selectedGladiator.strength }}</div>
+                <div>DEX: {{ selectedGladiator.dexterity }}</div>
+                <div>VIT: {{ selectedGladiator.vitality }}</div>
+
+                <br>
+                <button type="submit" class="btn btn-primary emp-btn" id="submitbtn" (click)="initBattle()">Start
+                    Battle!</button>
+
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!battleWin && !battleLose">
+        <div id="stack">
+            <canvas id="canvasId" width="1100px" height="600px" tabindex="1" (keydown)="onKeydown($event)"
+                (keyup)="onKeyup($event)"></canvas>
+
+            <canvas id="enemy" width="60px" height="60px"></canvas>
+            <canvas id="player" width="60px" height="60px"></canvas>
+            <canvas id="enemyHealth" width="60px" height="5px"></canvas>
+            <canvas id="playerHealth" width="60px" height="5px"></canvas>
+        </div>
+    </div>
 </div>
