@@ -1,31 +1,57 @@
-<table style="width: 100%; height: 100%; margin: auto">
-    <tr>
-        <td>
-           <br> <br>
-        </td>
-    </tr>
-    <tr>
-        <td class="vertical-menu" valign="top">
-            <!-- <a (click)="showHeroes()">Show Heroes</a> -->
-            <a (click)="showBattle()">Show Heroes</a>
-            <!-- <a (click)="showHeroes()">Show Heroes</a> -->
-            <a (click)="showEquip()">Equip Heroes</a>
-            <!-- <a (click)="showBattle()">Show Heroes</a> -->
-            <a (click)="showShop()">Shop</a>
-        </td>
-        <td style = "margin: auto">
-            <div *ngIf="this.pss.getState() == 1">
-                <app-roster-display></app-roster-display>
-            </div>
-            <div *ngIf="this.pss.getState() == 2">
-                <app-inventory-list></app-inventory-list>
-              </div>
-            <div *ngIf="this.pss.getState() == 3">
-                <app-battle></app-battle>
-            </div>
-            <div *ngIf="this.pss.getState() == 4">
-               <app-shop-list></app-shop-list>
-            </div>
-        </td>
-    </tr>
-</table>
+<div *ngIf="this.as.getUser().role == 1">
+    <table style="width: 100%; height: 100%; margin: auto">
+        <tr>
+            <td>
+                <br> <br>
+            </td>
+        </tr>
+        <tr>
+            <td class="vertical-menu" valign="top">
+                <!-- <a (click)="showHeroes()">Show Heroes</a> -->
+                <a (click)="showBattle()">Show Heroes</a>
+                <!-- <a (click)="showHeroes()">Show Heroes</a> -->
+                <a (click)="showEquip()">Equip Heroes</a>
+                <!-- <a (click)="showBattle()">Show Heroes</a> -->
+                <a (click)="showShop()">Shop</a>
+            </td>
+            <td style="margin: auto">
+                <div *ngIf="this.pss.getState() == 1">
+                    <app-roster-display></app-roster-display>
+                </div>
+                <div *ngIf="this.pss.getState() == 2">
+                    <app-inventory-list></app-inventory-list>
+                </div>
+                <div *ngIf="this.pss.getState() == 3">
+                    <app-battle></app-battle>
+                </div>
+                <div *ngIf="this.pss.getState() == 4">
+                    <app-shop-list></app-shop-list>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div *ngIf="this.as.getUser().role == 0">
+    <table style="width: 100%; height: 100%; margin: auto">
+        <tr>
+            <td>
+                <br> <br>
+            </td>
+        </tr>
+        <tr>
+            <td class="vertical-menu" valign="top">
+                <a (click)="showManageUsers()">Manage Users</a>
+                <a (click)="showManageChars()">Manage Characters</a>
+            </td>
+            <td style="margin: auto">
+                <div *ngIf="this.pss.getState() == 5">
+                    <app-user-list></app-user-list>
+                </div>
+                <div *ngIf="this.pss.getState() == 6">
+                    <app-character-list></app-character-list>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
