@@ -2,8 +2,8 @@
     <div>
         <ul class="roster" >
             <!-- <li class="roster" *ngFor="let g of gladiators" (click)="selectGladiator(gid)"><span class="badge">{{ g.id }}</span>{{ g.name }}</li> -->
-            <li class="roster" *ngFor="let g of gladiators" (click)="selectGladiator(g.id)"><span class="badge">{{ g.id }}</span>{{ g.name }}</li>
-
+            <li class="roster" *ngFor="let g of gladiators" (click)="selectGladiator(g.id)">{{ g.name }}</li>
+            <!-- <span class="badge">{{ g.id }}</span> was before the </li> in the last line-->
         </ul>
     </div>
     <!-- <div style="margin-left:auto;" align="center" vertical-align="top" *ngIf="selectedGladiator"> -->
@@ -17,7 +17,10 @@
         <div>DEX: {{ selectedGladiator.dexterity }}</div>
         <div>VIT: {{ selectedGladiator.vitality }}</div>
 
-        </div>
+        <br>
+        <button type="submit" class="btn btn-primary emp-btn" id="submitbtn" (click)="this.bc.getEnemyGladiators()">Battle!</button>
+        
+    </div>
     <div align="center" *ngIf="!levelUp"></div>
 
 <!--
@@ -28,5 +31,6 @@
         <app-level-up [levelUp]='levelUp'></app-level-up>
 
     </div>
+
 </div>
 

@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { PagestateService } from '../pagestate.service';
 import { BattleService } from '../battle.service';
+import { RosterService } from '../roster.service';
+import { Gladiator } from '../gladiator';
 
 
 @Component({
@@ -18,8 +20,10 @@ export class BattleComponent implements OnInit {
   private playerHealthContext: CanvasRenderingContext2D;
   private enemyHealthContext: CanvasRenderingContext2D;
 
-  constructor(private pss: PagestateService, private bs: BattleService) {
+  constructor(private pss: PagestateService, private bs: BattleService, private rs: RosterService) {
   }
+
+  private enemyGladiators: any = [];
 
   private width = 1100;
   private height = 600;
@@ -39,6 +43,8 @@ export class BattleComponent implements OnInit {
 
   private enterReleased = true;
   private keys = new Set();
+
+  selectedGladiator = '';
 
   makeCanvas(canvas: HTMLCanvasElement) {
     this.context = canvas.getContext('2d');
@@ -99,7 +105,28 @@ export class BattleComponent implements OnInit {
       window.requestAnimationFrame(() => this.drawPlayer(canvas, playerContext, index));
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+  
+  getEnemyGladiators(){
+    this.bs.getOpponentGladiators().subscribe((userObj: Object) => {
+      console.log(userObj);
+      this.enemyGladiators = userObj;
+
+      this.bs.setPlayerGladiator(this.rs.getSelectedGladiator());
+    })
+  }
+
+  selectGladiator(gid) {
+    console.log('selectGladiator(' + gid + ') called');
+    this.selectedGladiator = this.enemyGladiators.filter(obj => {
+        return obj.id === gid;
+    })[0];
+    console.log(this.selectedGladiator);
+    this.rs.setSelectedGladiator(this.selectedGladiator);
+    console.log(this.selectedGladiator['name']);
+  }
+
+  startBattle(){
     this.playerImage.src = 'assets/shadowlord.png';
     this.enemyImage.src = 'assets/shadowlord.png';
 
@@ -123,15 +150,6 @@ export class BattleComponent implements OnInit {
 
     this.playerimagex[1] = 0;
     this.playerimagey[1] = -650;
-
-    
-    //this.bs.getPlayerGladiator().subscribe((userObj: Object) => {
-
-    //});
-
-    //this.bs.getOpponentGladiator().subscribe((userObj: Object) => {
-      
-    //});
 
     (<HTMLCanvasElement>document.getElementById('canvasId')).focus();
 

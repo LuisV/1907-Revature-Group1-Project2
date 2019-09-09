@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RosterService } from '../roster.service';
 import { AuthenticateService } from '../authenticate.service';
+import { BattleComponent } from '../battle/battle.component';
 
 import { Gladiator } from '../gladiator';
 
@@ -17,7 +18,9 @@ function makeGladiatorBox() {
 */
 export class RosterDisplayComponent implements OnInit {
 
-  constructor(private rs: RosterService, private as: AuthenticateService) { }
+  constructor(private rs: RosterService, private as: AuthenticateService, private bc: BattleComponent) { }
+
+  //private bc: BattleComponent;
 
   levelUp = false;
 
@@ -59,6 +62,7 @@ export class RosterDisplayComponent implements OnInit {
         return obj.id === gid;
     })[0];
     console.log(this.selectedGladiator);
+    this.rs.setSelectedGladiator(this.selectedGladiator);
     console.log(this.selectedGladiator['name']);
     this.levelUp = this.determineLevelUp(this.selectedGladiator);
   }

@@ -48,13 +48,19 @@ public class GladiatorController {
 		User u = us.getUser(Integer.parseInt(id));
 		return gs.getGladiatorsByUser(u.getId());
 	}
+	
+	@ResponseBody
+	@PostMapping(value="/opponents")
+	public Set<Gladiator> getGladiatorsByUser(User user) {
+		return gs.getAllGladiatorsNotOwnedBy(user);
+	}
 
 	@GetMapping("all")
 	@ResponseBody
 	public Set<Gladiator> getAllGladiators() {
 		return gs.getAllGladiators();
 	}
-
+	
 	@GetMapping("/gladiator/opponents")
     @ResponseBody
     public ResponseEntity<Set<Gladiator>> getAllOpponents(HttpSession session)

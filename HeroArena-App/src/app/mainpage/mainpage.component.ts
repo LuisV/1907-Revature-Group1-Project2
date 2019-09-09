@@ -13,6 +13,7 @@ export class MainpageComponent implements OnInit {
   constructor(private rs: RosterService, private pss: PagestateService) { }
 
   ngOnInit() {
+    this.pss.setState(0);
   }
 
   showHeroes() {
