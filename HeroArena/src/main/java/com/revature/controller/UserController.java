@@ -53,12 +53,11 @@ public class UserController {
 	@DeleteMapping(value="/user/items/{item}")
 	public ResponseEntity<Gladiator> useItem(@PathVariable("item") Integer itemId, @RequestParam Integer gladiatorId, @RequestParam Integer userId, HttpSession session)
 	{
+        log.trace("Attempting to use an item");
 		//User user = (User) session.getAttribute("user");
 		User user = userServ.getUser(userId);
 		if (user == null)
 			return ResponseEntity.status(403).build();
-
-		log.trace("Attempting to use an item");
 
 		Gladiator glad = gladServ.getGladiatorById(gladiatorId);
 		if (glad == null || itemId == null)
