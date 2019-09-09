@@ -21,6 +21,7 @@ import { UserItemComponent } from './user-list/user-item/user-item.component';
 import { ShopListComponent } from './shop-list/shop-list.component';
 import { ShopItemComponent } from './shop-list/shop-item/shop-item.component';
 import { InventoryListComponent } from './inventory-list/inventory-list.component';
+import { GladiatorSelectComponent } from './gladiator-select/gladiator-select.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { InventoryListComponent } from './inventory-list/inventory-list.componen
     UserItemComponent,
     ShopListComponent,
     ShopItemComponent,
-    InventoryListComponent
+    InventoryListComponent,
+    GladiatorSelectComponent
   ],
   imports: [
     BrowserModule,
