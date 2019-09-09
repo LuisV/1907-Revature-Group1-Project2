@@ -20,18 +20,22 @@ export class MainpageComponent implements OnInit {
   showHeroes() {
     //console.log('showHeroes() called');
     //this.rs.getGladiators();
+    window.document.querySelector('body').style.overflow = 'visible';
     this.pss.setState(1);
   }
-  
+
   showEquip(){
+    window.document.querySelector('body').style.overflow = 'visible';
     this.pss.setState(2);
   }
 
   showBattle(){
+    window.document.querySelector('body').style.overflow = 'hidden';
     this.pss.setState(3);
   }
 
   showShop(){
+    window.document.querySelector('body').style.overflow = 'visible';
     this.pss.setState(4);
   }
 
