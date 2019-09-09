@@ -181,6 +181,15 @@ export class BattleComponent implements OnInit {
       console.log("Failed to load opponent");
     }
 
+    
+    //this.bs.getPlayerGladiator().subscribe((userObj: Object) => {
+
+    //});
+
+    //this.bs.getOpponentGladiator().subscribe((userObj: Object) => {
+      
+    //});
+
     (<HTMLCanvasElement>document.getElementById('canvasId')).focus();
 
     const canvas = <HTMLCanvasElement>document.getElementById('canvasId');

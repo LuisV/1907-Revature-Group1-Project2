@@ -18,13 +18,13 @@
                 <app-roster-display></app-roster-display>
             </div>
             <div *ngIf="this.pss.getState() == 2">
-                <!-- put the tag for the show item component here -->
-            </div>
+                <app-inventory-list></app-inventory-list>
+              </div>
             <div *ngIf="this.pss.getState() == 3">
                 <app-battle></app-battle>
             </div>
             <div *ngIf="this.pss.getState() == 4">
-                <!-- put the tag for the show shop component here -->
+               <app-shop-list></app-shop-list>
             </div>
         </td>
     </tr>
