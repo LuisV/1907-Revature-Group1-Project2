@@ -1,3 +1,21 @@
+<div class="card" style="width: 25rem; margin-bottom: 12px">
+  <!--img class="card-img-top" src="https://vignette.wikia.nocookie.net/renryuu/images/4/4b/Red_Ogre.png/revision/latest/scale-to-width-down/168?cb=20160703132326" alt="Card image cap"-->
+  <form>
+  <div class="card-body">
+    <div>
+        <i class="mdi mdi-account-question" aria-hidden="true"></i>
+      <h2>Random Hero</h2>
+      <p>Add a new hero to your roster. Random chance to receive a character of Common, Rare, or Epic rarity.</p>
+    </div>
+  </div>
+  <div class="card-body ">
+  <button (click)="onBuyCharacter()">Purchase from shop</button>
+  </div>
+
+  </form>
+
+</div>
+
 <app-shop-item  (submitted)="onPurchase(item.id)" *ngFor= "let item of shop"
   [id]= item.id
   [name]= item.name
