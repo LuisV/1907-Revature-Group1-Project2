@@ -23,6 +23,9 @@ export class BattleComponent implements OnInit {
   constructor(private pss: PagestateService, private bs: BattleService, private rs: RosterService) {
   }
 
+  private battleWin = false;
+  private battleLose = false;
+
   private enemyGladiators: any = [];
 
   private width = 1100;
@@ -35,6 +38,8 @@ export class BattleComponent implements OnInit {
   private playerspeed = new Array<number>(2);
   private playerTotalHealth = new Array<number>(2);
   private playerHealth = new Array<number>(2);
+  private playerStrength = new Array<number>(2);
+  private playerDexterity = new Array<number>(2);
   private playerDamage = new Array<number>(2);
   private playerDamaging = new Array<boolean>(2);
 
@@ -158,36 +163,44 @@ export class BattleComponent implements OnInit {
     this.playerimagey[1] = -650;
 
     this.playerTotalHealth[0] = 200;
-    this.playerHealth[0] = 200;
-    this.playerDamage[0] = 10;
+    this.playerHealth[0] = 20;
+    this.playerDamage[0] = 2;
+    this.playerStrength[0] = 5;
+    this.playerDexterity[0] = 5;
 
     this.playerTotalHealth[1] = 200;
-    this.playerHealth[1] = 200;
-    this.playerDamage[1] = 10;
+    this.playerHealth[1] = 20;
+    this.playerDamage[1] = 2;
+    this.playerStrength[1] = 5;
+    this.playerDexterity[1] = 5;
 
     if (this.bs.getPlayerGladiator != null) {
       this.playerTotalHealth[0] = this.bs.getPlayerGladiator().maxHealth;
       this.playerHealth[0] = this.bs.getPlayerGladiator().currentHealth;
+      this.playerStrength[0] = this.bs.getPlayerGladiator().strength;
+      this.playerDexterity[0] = this.bs.getPlayerGladiator().dexterity;
     }
-    else{
+    else {
       console.log("Failed to load player");
     }
 
     if (this.bs.getOpponentGladiator != null) {
       this.playerTotalHealth[1] = this.bs.getOpponentGladiator().maxHealth;
       this.playerHealth[1] = this.bs.getOpponentGladiator().currentHealth;
+      this.playerStrength[1] = this.bs.getPlayerGladiator().strength;
+      this.playerDexterity[1] = this.bs.getPlayerGladiator().dexterity;
     }
-    else{
+    else {
       console.log("Failed to load opponent");
     }
 
-    
+
     //this.bs.getPlayerGladiator().subscribe((userObj: Object) => {
 
     //});
 
     //this.bs.getOpponentGladiator().subscribe((userObj: Object) => {
-      
+
     //});
 
     (<HTMLCanvasElement>document.getElementById('canvasId')).focus();
@@ -297,7 +310,26 @@ export class BattleComponent implements OnInit {
       let ydif = this.playery[attackerIndex] - this.playery[defenderIndex];
 
       if ((Math.abs(ydif) + Math.abs(xdif)) <= 40) {
-        this.playerHealth[defenderIndex] -= this.playerDamage[attackerIndex];
+        let hitRoll = Math.random();
+        if ((hitRoll * 20 + this.playerDexterity[attackerIndex] / 2 - this.playerDexterity[defenderIndex] / 2 > 10) || hitRoll == 20) {
+          if (hitRoll == 20)
+            this.playerHealth[defenderIndex] -= (Math.random() * 2 * this.playerStrength[attackerIndex]);
+          else
+            this.playerHealth[defenderIndex] -= (Math.random() * this.playerStrength[attackerIndex]);
+        }
+        else if(hitRoll == 1){
+          this.playerHealth[attackerIndex] -= (Math.random() * this.playerStrength[defenderIndex]);
+        }
+
+        if (this.playerHealth[0] <= 0){
+          this.battleLose = true;
+          this.playerHealth[1] = this.playerTotalHealth[1];
+        }
+        else if (this.playerHealth[1] <= 0){
+          this.battleWin = true;
+          this.playerHealth[0] = this.playerTotalHealth[0];
+        }
+        //this.playerHealth[defenderIndex] -= this.playerDamage[attackerIndex];
       }
 
       this.playerimagey[attackerIndex] = originalY;

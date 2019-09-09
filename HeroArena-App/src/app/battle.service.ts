@@ -46,5 +46,6 @@ export class BattleService {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
 
     return this.http.get(baseURL + 'gladiator/opponents', {headers, withCredentials: true}).pipe(map(resp => resp as Gladiator[]));
+    //return this.http.post(baseURL + 'opponents', 'user=' + this.as.getUser(), {headers : headers, withCredentials: true}).pipe(map(resp => resp as Gladiator[]));
   }
 }
