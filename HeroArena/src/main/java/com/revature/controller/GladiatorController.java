@@ -53,8 +53,13 @@ public class GladiatorController {
 	
 	@ResponseBody
 	@PostMapping(value="/opponents")
-	public Set<Gladiator> getGladiatorsByUser(User user) {
-		return gs.getAllGladiatorsNotOwnedBy(user);
+	public ResponseEntity<Set<Gladiator>> getGladiatorsNotOwnedByUser(String userID) {
+
+		User user = userServ.getUser(Integer.parseInt(userID));
+    	if (user == null)
+			return ResponseEntity.status(403).build();
+		
+    	return ResponseEntity.ok(gs.getAllGladiatorsNotOwnedBy(user));
 	}
 
 	@GetMapping("all")

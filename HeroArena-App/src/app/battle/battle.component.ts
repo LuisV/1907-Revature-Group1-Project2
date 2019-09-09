@@ -324,10 +324,14 @@ export class BattleComponent implements OnInit {
         if (this.playerHealth[0] <= 0){
           this.battleLose = true;
           this.playerHealth[1] = this.playerTotalHealth[1];
+          this.bs.setPlayersChosen(null);
+          this.bs.setPlayerGladiator(null);
         }
         else if (this.playerHealth[1] <= 0){
           this.battleWin = true;
           this.playerHealth[0] = this.playerTotalHealth[0];
+          this.bs.setPlayersChosen(null);
+          this.bs.setPlayerGladiator(null);
         }
         //this.playerHealth[defenderIndex] -= this.playerDamage[attackerIndex];
       }
@@ -340,6 +344,11 @@ export class BattleComponent implements OnInit {
     }
 
     this.waitDamage(canvas, playerContext, attackerIndex, defenderIndex, originalY, i);
+  }
+
+  resetWinLose(){
+    this.battleWin = false;
+    this.battleLose = false;
   }
 
   damagePlayer(canvas, playerContext, attackerIndex, defenderIndex) {
