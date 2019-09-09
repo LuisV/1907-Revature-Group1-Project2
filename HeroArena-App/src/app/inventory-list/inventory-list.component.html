@@ -1,8 +1,19 @@
-<app-shop-item (submitted)="handleUse(item.item.id)" *ngFor= "let item of inventory"
-  [id]= item.item.id
-  [name]= item.item.name
-  [description]= item.item.description
-  [price] = item.item.price
-  [quantity] = item.amount
-  [purchaseString]= "'Use'"
-></app-shop-item>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <app-shop-item (submitted)="displayTargetSelector(item.item.id)" *ngFor= "let item of inventory"
+      [id]= item.item.id
+      [name]= item.item.name
+      [description]= item.item.description
+      [price] = item.item.price
+      [quantity] = item.amount
+      [purchaseString]= "'Use'">
+      </app-shop-item>
+    </div>
+    <div class="col">
+      <ng-container *ngIf="currItem">
+        <app-gladiator-select (targeted)="applyItemToTarget($event)"></app-gladiator-select>
+      </ng-container>
+    </div>
+  </div>
+</div>
