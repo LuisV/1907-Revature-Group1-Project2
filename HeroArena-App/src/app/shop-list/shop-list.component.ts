@@ -22,5 +22,10 @@ export class ShopListComponent implements OnInit {
     this.is.purchaseItemFromShop(itemId).subscribe((obj:Object) => {
       console.log(obj);
     });
-}
+  }
+  onBuyCharacter() {
+    this.is.purchaseCharacterFromShop().subscribe((obj:Object) => {
+      console.log(obj);
+    });
+  }
 }

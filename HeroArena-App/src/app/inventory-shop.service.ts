@@ -33,4 +33,9 @@ export class InventoryShopService {
 
   }
 
+  purchaseCharacterFromShop() {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.put( url + 'shop/gladiator?userId=' + this.as.getUser().id, {headers, withCredentials: true}).pipe(map(resp => resp as Object));
+  }
+
 }
