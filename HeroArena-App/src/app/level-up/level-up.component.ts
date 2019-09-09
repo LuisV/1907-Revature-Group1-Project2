@@ -8,7 +8,7 @@ import { Gladiator } from '../gladiator';
 import { RosterService } from '../roster.service';
 
 
-const baseURL = 'http://localhost:8080/HeroArena/';
+const baseURL = 'http://18.221.9.229:8080/HeroArena/';
 
 
 @Component({
@@ -70,7 +70,7 @@ export class LevelUpComponent implements OnInit {
       console.log(this.points);
     }
   }
-  
+
   setLevelUp(lu) {
     lu != lu;
     return lu;
@@ -103,7 +103,7 @@ export class LevelUpComponent implements OnInit {
           */
 
         // attempt 2
-      // this.router.navigateByUrl('/gladiator', {skipLocationChange: true}).then(() => this.router.navigate(["roster"])); 
+      // this.router.navigateByUrl('/gladiator', {skipLocationChange: true}).then(() => this.router.navigate(["roster"]));
       },
       response => {
           console.log('PUT call in error', response);
